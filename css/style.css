@@ -1186,7 +1186,12 @@ h1, h2, h3, h4, h5, h6 {
     .blog_right_sidebar .newsletter_widget {
       text-align: center; }
       .blog_right_sidebar .newsletter_widget .form-group {
-        margin-bottom: 8px; }
+        margin-bottom: 8px;
+      display: flex;
+      }
+      .blog_right_sidebar .newsletter_widget .form-group .input-group{
+      display: flex;
+      }
       .blog_right_sidebar .newsletter_widget .input-group-prepend {
         margin-right: -1px; }
       .blog_right_sidebar .newsletter_widget .input-group-text {
