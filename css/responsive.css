@@ -19,10 +19,25 @@
         margin: auto;
 
     }
+    .blog_area_content_b {
+        display: block;
+        margin: auto;
+    }
     .banner_content img {
         padding: 0;
         border-radius: 15px;
         width: -webkit-fill-available;
+    }
+    .blog-post{
+        padding:0 20px;
+    }
+
+    .blog_area_content {
+        display: block;
+    }
+    .blog_area_content .blog_left_sidebar{
+        display: flex;
+        justify-content: center;
     }
 }
 @media (max-width:1000px){

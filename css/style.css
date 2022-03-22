@@ -446,6 +446,7 @@ h1, h2, h3, h4, h5, h6 {
       color: #222222;
       margin-bottom: 15px;
       text-transform: uppercase;
+      line-height: normal;
   }
 
   .main_title p {
@@ -1298,23 +1299,26 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .blog_right_sidebar .search_widget .input-group .btn-default {
-      position: absolute;
-      right: 20px;
+      position: relative;
+      left: -100%;
       background: transparent;
       border: 0px;
       box-shadow: none;
       font-size: 14px;
-      color: #fff;
+      color: rgb(255, 255, 255);
       padding: 0px;
       top: 50%;
-      transform: translateY(-50%);
-      z-index: 1; }
+      transform: translate(-100%,-80%);
+      z-index: 1;}
 
     .input-group-btn{
       position: absolute;
       transform: translate(327px,-14px);
     }
 
+    .single_sidebar_widget .input-group input:focus{
+     outline: none;
+    }
 
     .post_item{
       display: flex;
