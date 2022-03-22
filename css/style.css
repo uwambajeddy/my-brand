@@ -1051,8 +1051,6 @@ h1, h2, h3, h4, h5, h6 {
       max-width: 360px;
     }
 
-  .blog_info {
-    padding-top: 30px; }
     
     .blog_info .blog_meta li a {
       font: 300 14px/20px "Roboto", sans-serif;
@@ -1187,7 +1185,7 @@ h1, h2, h3, h4, h5, h6 {
       text-align: center; }
       .blog_right_sidebar .newsletter_widget .form-group {
         margin-bottom: 8px;
-      display: flex;
+        display: flex;
       }
       .blog_right_sidebar .newsletter_widget .form-group .input-group{
       display: flex;
@@ -1337,3 +1335,7 @@ h1, h2, h3, h4, h5, h6 {
           line-height: 0px;
       }
       
+      .blog_meta{
+        display: flex;
+        justify-content: space-between;
+      }
