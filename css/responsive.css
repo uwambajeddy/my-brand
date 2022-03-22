@@ -2,4 +2,50 @@
      .header_area .container{
         padding: 0 50px;
     }
+    .home_banner_area .container .media{
+        width: 90%;
+    }
+}
+@media (max-width:1200px){
+     .header_area .container{
+        padding: 0 50px;
+    }
+    .home_banner_area .container .media{
+        transform: translate(-50%, 11%);
+    }
+    .home_banner_area .container .media .banner_content{
+        display: block;
+        width: 60%;
+        margin: auto;
+
+    }
+    .banner_content img {
+        padding: 0;
+        border-radius: 15px;
+        width: -webkit-fill-available;
+    }
+}
+@media (max-width:1000px){
+     .welcome_inner{
+         display: block;
+     }
+     .welcome_text {
+        width: 100%;
+        padding: 0;
+    }
+    .footer_inner {
+        grid-template-columns: auto auto;
+    }
+    .f_widget{
+        padding: 20px 20px;
+    }
+    .news_widget {
+        padding: 20px 20px;
+    }
+}
+@media (max-width:580px){
+    
+    .footer_inner {
+        grid-template-columns: auto ;
+    }
 }
