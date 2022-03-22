@@ -262,7 +262,7 @@ h1, h2, h3, h4, h5, h6 {
         border-radius: 10px;
         background: #e8e8e8; }
         .tools_expert .skill_main .skill_item .progress .progress-bar {
-          width: 70%;
+          width: 0%;
           transition: width .6s ease;
           height: 10px;
           border-radius: 5px;
