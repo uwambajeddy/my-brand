@@ -71,7 +71,9 @@
     }
 }
 @media (max-width:820px){
-    
+    .header_area {
+        background: black;
+    }
     .navbar-nav {
         display: flex;
         flex-direction: column;
