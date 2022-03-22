@@ -983,7 +983,9 @@ h1, h2, h3, h4, h5, h6 {
     .tags .tag_btn + .tag_btn {
       margin-left: 2px; }
   
-  /*========= blog_categorie_area css ===========*/
+ /*---------------------------------------------------- */
+  /*----------------------------------------------------*/
+
   .blog_categorie_area {
     padding-top: 80px;
     padding-bottom: 80px; }
@@ -1029,7 +1031,9 @@ h1, h2, h3, h4, h5, h6 {
       background-image: -ms-linear-gradient(0deg, #766dff 0%, #88f3ff 100%);
       opacity: 0.851; }
   
-  /*============ blog_left_sidebar css ==============*/
+  /*---------------------------------------------------- */
+  /*----------------------------------------------------*/
+
   .blog_item {
     margin-bottom: 40px;
   display: flex; }
@@ -1342,3 +1346,32 @@ h1, h2, h3, h4, h5, h6 {
         display: flex;
         justify-content: space-between;
       }
+
+      /*---------------------------------------------------- */
+  /*----------------------------------------------------*/
+
+  .icon-bar{
+    height: 3px;
+    width: 30px;
+    background: white;
+    position: absolute;
+
+  }
+  
+
+  .icon-bar-a{
+    margin-top:-10px;
+    transition: all 0.5s ease-in-out;
+  }
+  .icon-bar-b{
+    margin-top:10px;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .navbar-toggler{
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 60px;
+    display: none;
+  }
