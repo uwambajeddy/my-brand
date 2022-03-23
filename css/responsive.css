@@ -63,6 +63,9 @@
     .footer_inner {
         grid-template-columns: auto ;
     }
+    .blog_item_b {
+        padding: 0 15px;
+    }
 }
 @media (min-width:820px){
     .navbar-nav {
