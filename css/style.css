@@ -83,17 +83,15 @@ h1, h2, h3, h4, h5, h6 {
 
   .home_banner_area{
     background: -webkit-linear-gradient(239deg, #766dff 0%, #88f3ff 100%);
-    height: 80vh;
     margin-bottom: 270px;
   }
 
   .media {
     width: -webkit-fill-available;
-    position: absolute;
-    top: 50%;
+    position: relative;
     max-width: 1600px;
     left: 50%;
-    transform: translate(-50%, -40%);
+    transform: translate(-50%, 18%);
     background: white;
     border-radius: 15px;
     box-shadow: 0 19px 39px #00000038
@@ -264,7 +262,7 @@ h1, h2, h3, h4, h5, h6 {
         border-radius: 10px;
         background: #e8e8e8; }
         .tools_expert .skill_main .skill_item .progress .progress-bar {
-          width: 70%;
+          width: 0%;
           transition: width .6s ease;
           height: 10px;
           border-radius: 5px;
@@ -448,6 +446,7 @@ h1, h2, h3, h4, h5, h6 {
       color: #222222;
       margin-bottom: 15px;
       text-transform: uppercase;
+      line-height: normal;
   }
 
   .main_title p {
@@ -701,7 +700,8 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 400px;
 }
 .footer_inner{
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto auto;
   justify-content: space-evenly;
 }
 
@@ -726,7 +726,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .home_banner_area_lil .container .media{
-  top: 30%;
+    transform: translate(-50%, 40%);
 }
 
 .home_banner_area_lil  .banner_content h2 {
@@ -983,7 +983,9 @@ h1, h2, h3, h4, h5, h6 {
     .tags .tag_btn + .tag_btn {
       margin-left: 2px; }
   
-  /*========= blog_categorie_area css ===========*/
+ /*---------------------------------------------------- */
+  /*----------------------------------------------------*/
+
   .blog_categorie_area {
     padding-top: 80px;
     padding-bottom: 80px; }
@@ -1029,7 +1031,9 @@ h1, h2, h3, h4, h5, h6 {
       background-image: -ms-linear-gradient(0deg, #766dff 0%, #88f3ff 100%);
       opacity: 0.851; }
   
-  /*============ blog_left_sidebar css ==============*/
+  /*---------------------------------------------------- */
+  /*----------------------------------------------------*/
+
   .blog_item {
     margin-bottom: 40px;
   display: flex; }
@@ -1051,8 +1055,6 @@ h1, h2, h3, h4, h5, h6 {
       max-width: 360px;
     }
 
-  .blog_info {
-    padding-top: 30px; }
     
     .blog_info .blog_meta li a {
       font: 300 14px/20px "Roboto", sans-serif;
@@ -1186,7 +1188,12 @@ h1, h2, h3, h4, h5, h6 {
     .blog_right_sidebar .newsletter_widget {
       text-align: center; }
       .blog_right_sidebar .newsletter_widget .form-group {
-        margin-bottom: 8px; }
+        margin-bottom: 8px;
+        display: flex;
+      }
+      .blog_right_sidebar .newsletter_widget .form-group .input-group{
+      display: flex;
+      }
       .blog_right_sidebar .newsletter_widget .input-group-prepend {
         margin-right: -1px; }
       .blog_right_sidebar .newsletter_widget .input-group-text {
@@ -1296,23 +1303,26 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .blog_right_sidebar .search_widget .input-group .btn-default {
-      position: absolute;
-      right: 20px;
+      position: relative;
+      left: -100%;
       background: transparent;
       border: 0px;
       box-shadow: none;
       font-size: 14px;
-      color: #fff;
+      color: rgb(255, 255, 255);
       padding: 0px;
       top: 50%;
-      transform: translateY(-50%);
-      z-index: 1; }
+      transform: translate(-100%,-80%);
+      z-index: 1;}
 
     .input-group-btn{
       position: absolute;
       transform: translate(327px,-14px);
     }
 
+    .single_sidebar_widget .input-group input:focus{
+     outline: none;
+    }
 
     .post_item{
       display: flex;
@@ -1332,3 +1342,36 @@ h1, h2, h3, h4, h5, h6 {
           line-height: 0px;
       }
       
+      .blog_meta{
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /*---------------------------------------------------- */
+  /*----------------------------------------------------*/
+
+  .icon-bar{
+    height: 3px;
+    width: 30px;
+    background: white;
+    position: absolute;
+
+  }
+  
+
+  .icon-bar-a{
+    margin-top:-10px;
+    transition: all 0.5s ease-in-out;
+  }
+  .icon-bar-b{
+    margin-top:10px;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .navbar-toggler{
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 60px;
+    display: none;
+  }
