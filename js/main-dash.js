@@ -9,7 +9,6 @@ const modal_update = document.querySelectorAll(".update_btn");
 
 toggler.addEventListener("click",()=>{
     if(menu.style.marginLeft == "-258px"){
-
         menu.style.marginLeft = "0px";
     }else{
         menu.style.marginLeft = "-258px";
