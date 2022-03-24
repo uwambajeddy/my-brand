@@ -181,7 +181,7 @@ h1, h2, h3, h4, h5, h6 {
     .table_column{
         padding: 10px;
         border-left: 1px solid #0000001f;
-        width: 150px;
+        width: 134px;
         display: flex;
         justify-content: center;
         align-items: center;
