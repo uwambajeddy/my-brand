@@ -101,6 +101,17 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
     }
 
+    .add_btn{
+            background: #4D83FF;
+            text-align: center;
+            padding: 11px 0;
+            width: 156px;
+            margin: 0 0 10px 0;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+    }
+
     /*---------------------------------------------------- */
     /*----------------------------------------------------*/
     
