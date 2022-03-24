@@ -43,6 +43,8 @@ h1, h2, h3, h4, h5, h6 {
       background: white;
       min-width: 220px;
       padding: 20px;
+      margin-left: 0px;
+      transition: all 0.5s ease-in-out;
   }
   .main .container{
       display: flex;
@@ -113,7 +115,7 @@ h1, h2, h3, h4, h5, h6 {
         height: 80px;
         min-width: 1115px;
     }
-
+    
     .main_info{
             display: flex;
             align-items: center;
@@ -123,19 +125,19 @@ h1, h2, h3, h4, h5, h6 {
             
         }
         
-    .main_info .lnr-license{
-        color: red;
-    }
-    .main_info .lnr-rocket{
-        color: rgb(255, 187, 0);
-    }
-    .main_info .lnr-bubble{
-        color: rgb(255, 0, 255);
-    }
-    .main_info .lnr-pushpin{
-        color: rgb(0, 179, 0);
-    }
-    .main_info .lnr-envelope{
+        .main_info .lnr-license{
+            color: red;
+        }
+        .main_info .lnr-rocket{
+            color: rgb(255, 187, 0);
+        }
+        .main_info .lnr-bubble{
+            color: rgb(255, 0, 255);
+        }
+        .main_info .lnr-pushpin{
+            color: rgb(0, 179, 0);
+        }
+        .main_info .lnr-envelope{
         color: rgb(255, 0, 85);
     }
 
@@ -157,14 +159,14 @@ h1, h2, h3, h4, h5, h6 {
     }
     /*---------------------------------------------------- */
     /*----------------------------------------------------*/
-
+    
     .main_content{
         background-color: white;
         margin: 20px 0;
         padding: 20px;
         min-width: 1075px;
     }
-
+    
     .main_table{
         min-height: 50vh;
         border: 1px solid #0000001f;
@@ -177,24 +179,24 @@ h1, h2, h3, h4, h5, h6 {
     }
     .table_column{
         padding: 10px;
-    border-left: 1px solid #0000001f;
-    width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+        border-left: 1px solid #0000001f;
+        width: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .table_column img{
         height: 50px;
         width: 50px;
     }
-
+    
     .row_dark{
         background: #00000014;
     }
     .row_header {
         color: black;
     }
-
+    
     .mod_btn{
         padding: 5px 10px;
         box-shadow: 0 0 5px black;
@@ -204,10 +206,47 @@ h1, h2, h3, h4, h5, h6 {
         cursor: pointer;
         display: flex;
     }
-
+    
     .update_btn{
         background-color: #01af01;
     }
     .delete_btn{background: #ff2b2b;
         margin-left: 5px;
     }
+    /*---------------------------------------------------- */
+    /*----------------------------------------------------*/
+
+    .icon-bar{
+        height: 3px;
+        width: 30px;
+        background: rgb(0, 0, 0);
+        position: absolute;
+    
+      }
+
+      .main_title{
+          display: flex;
+      }
+      .main_title .main_text{
+         margin-top: 50px;
+      }
+      
+    
+      .icon-bar-a{
+        margin-top:10px;
+      }
+      .icon-bar-b{
+        margin-top:20px;
+      }
+    
+      .navbar-toggler{
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+      }
+
