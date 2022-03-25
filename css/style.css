@@ -1386,6 +1386,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 60px; }
     .single-post-area .arrow {
       color: white;
+      margin-top: 13px;
   }
     .single-post-area .navigation-area p {
       margin-bottom: 0px;
@@ -1400,12 +1401,13 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;}
       .single-post-area .navigation-area .nav-left .thumb {
         margin-right: 20px;
+        width: 50px;
         background: #000; }
         .single-post-area .navigation-area .nav-left .thumb img {
           transition: all 300ms linear 0s; }
           .single-post-area .navigation-area .nav-left .lnr {
         margin-left: 20px;
-        opacity: 0;
+        color: white;
         transition: all 300ms linear 0s; }
         .single-post-area .navigation-area .nav-left:hover .lnr {
           opacity: 1; }
@@ -1427,7 +1429,7 @@ h1, h2, h3, h4, h5, h6 {
           transition: all 300ms linear 0s; }
           .single-post-area .navigation-area .nav-right .lnr {
             margin-right: 20px;
-        opacity: 0;
+            color: white;
         transition: all 300ms linear 0s; }
         .single-post-area .navigation-area .nav-right:hover .lnr {
           opacity: 1; }
@@ -1474,7 +1476,7 @@ h1, h2, h3, h4, h5, h6 {
                 .single-comment{
                   padding: 10px 0;
                 }
-                .comments-area .submit_btn{
+                .comment-form form .submit_btn{
                   background: #766dff;
     padding: 10px 20px;
     color: white;
