@@ -37,8 +37,8 @@ modal_block.addEventListener("click",()=>{
 
 modal_add.addEventListener("click",()=>{
     if(modal.style.top == "-500px"){
-        modal_block.style.display ="block";
         modal.style.top = "50%";
+        modal_block.style.display ="block";
     }else{
         modal.style.top = "-500px";
         modal_block.style.display ="none";
