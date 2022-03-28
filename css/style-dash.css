@@ -276,16 +276,16 @@ h1, h2, h3, h4, h5, h6 {
     }
     .model_block{
         position: absolute;
-    content: "";
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    background-color: rgb(0 0 0 / 45%);
-    transition: all 0.5s ease-in-out;
-    height: 100vh;
-    width: 100%;
-    z-index: 1;
-    display: none;
+        content: "";
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-color: rgb(0 0 0 / 45%);
+        transition: all 0.5s ease-in-out;
+        height: 100vh;
+        width: 100%;
+        z-index: 1;
+        display: none;
     }
     .modal_banner_area::before{
         content: "";
@@ -297,56 +297,100 @@ h1, h2, h3, h4, h5, h6 {
     .modal_banner_area h2{
         text-align: center;
     }
-
+    
     .contact_form{
-    padding: 40px;
-    width:  -webkit-fill-available;
-  }
-  .contact_form .form-group {
-    margin-bottom: 10px; }
-    .contact_form .form-group .form-control {
-      padding: 9px 0;
-      font-size: 13px;
-      line-height: 26px;
-      color: #999;
-      border: 1px solid #eeeeee;
-      font-family: "Roboto", sans-serif;
-      width: 100%;
-      border-radius: 0px;
+        padding: 40px;
+        width:  -webkit-fill-available;
     }
-      .contact_form .form-group .form-control:focus {
+    .contact_form .form-group {
+        margin-bottom: 10px; }
+    .contact_form .form-group .form-control {
+        padding: 9px 0;
+        font-size: 13px;
+        line-height: 26px;
+        color: #999;
+        border: 1px solid #eeeeee;
+        font-family: "Roboto", sans-serif;
+        width: 100%;
+        border-radius: 0px;
+    }
+    .contact_form .form-group .form-control:focus {
         box-shadow: none;
         outline: none; }
         .contact_form .form-group .form-control.placeholder {
-          color: #999; }
-          .contact_form .form-group .form-control:-moz-placeholder {
+            color: #999; }
+            .contact_form .form-group .form-control:-moz-placeholder {
             color: #999; }
             .contact_form .form-group .form-control::-moz-placeholder {
-              color: #999; }
-              .contact_form .form-group .form-control::-webkit-input-placeholder {
-        color: #999; }
+                color: #999; }
+                .contact_form .form-group .form-control::-webkit-input-placeholder {
+                    color: #999; }
     .contact_form .form-group textarea {
-      resize: none; }
-      .contact_form .form-group textarea.form-control {
-        height: 140px;
-        width: 100%
-      }
-      .contact_form_text{
+        resize: none; }
+        .contact_form .form-group textarea.form-control {
+            height: 140px;
+            width: 100%
+        }
+        .contact_form_text{
+            
+            padding: 0 5px;
+        }
+        .contact_form_message{
+            
+            padding: 0 5px;
+        }
+        .contact_form .submit_btn {
+            margin-top: 20px;
+            cursor: pointer;
+            width: 100%;
+            padding: 15px 0;
+            border: none;
+            color: white;
+            background: #007ae3;
+            box-shadow: 0 2px 5px #00000054;
+            
+        }
+        /*---------------------------------------------------- */
+        /*----------------------------------------------------*/
+
+
+        .tables_flex{
+            display: flex;
+            width: 100%;
+        }
+
+        .tables_flex .main_content {
+            min-width: auto;
+            flex: 1;
+            margin: 0 20px;
+        }
+
+
+        .profile_widget{
+            text-align: center;
+            width: 400px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .profile_widget h4{
+            color: black ;
+        }
+        .single_sidebar_widget{
+            padding: 0 80px;
+        }
+
+        .single_sidebar_widget .social_icon{
+            display: flex;
+            justify-content: center;
+            font-size: 25px;
+        }
         
-        padding: 0 5px;
-      }
-      .contact_form_message{
+        .single_sidebar_widget .social_icon a{
+            padding: 5px;
+            color: rgb(34, 34, 34);
+        }
         
-        padding: 0 5px;
-      }
-      .contact_form .submit_btn {
-        margin-top: 20px;
-    cursor: pointer;
-    width: 100%;
-    padding: 15px 0;
-    border: none;
-    color: white;
-    background: #007ae3;
-    box-shadow: 0 2px 5px #00000054;
-    
-      }
+
+        
