@@ -181,17 +181,14 @@ h1, h2, h3, h4, h5, h6 {
     
     .main_table{
         min-height: 50vh;
-        border: 1px solid #0000001f;
     }
     .table_row{
         display: flex;
         justify-content: space-between;
-        border-right: 1px solid #0000001f;
-        border-bottom: 1px solid #0000001f;
     }
     .table_column{
         padding: 10px 0;
-        border-left: 1px solid #0000001f;
+       
         width: 200px;
         display: flex;
         justify-content: center;
@@ -207,6 +204,7 @@ h1, h2, h3, h4, h5, h6 {
     }
     .row_header {
         color: black;
+        border-top: 1px solid #0000001f;
     }
     
     .mod_btn{

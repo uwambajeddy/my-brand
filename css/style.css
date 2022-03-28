@@ -1529,8 +1529,9 @@ h1, h2, h3, h4, h5, h6 {
               .comment-form .email {
                 padding-left: 0px; } }
           .comment-form .form-control {
-            padding: 8px 20px;
-            background: #fff;
+            padding: 5px 0;
+            background: rgb(255, 255, 255);
+            margin: 5px 0;
             border: none;
             border-radius: 0px;
             width: 100%;
@@ -1539,6 +1540,7 @@ h1, h2, h3, h4, h5, h6 {
             border: 1px solid transparent; }
             .comment-form .form-control:focus {
               box-shadow: none;
+              outline: none; 
               border: 1px solid #eee; }
           .comment-form textarea.form-control {
             height: 140px;
