@@ -38,4 +38,7 @@ navbar.addEventListener("click",()=>{
     }
    
 
-})
+});
+
+localStorage.setItem("oldpassword","andela");
+localStorage.setItem("email","uwambajeddy@gmail.com");
