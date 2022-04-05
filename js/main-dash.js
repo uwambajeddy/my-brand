@@ -45,3 +45,9 @@ modal_add.addEventListener("click",()=>{
     }
    
 });
+
+logout.addEventListener("click",e=>{
+    e.preventDefault();
+    localStorage.setItem("isLoggedIn","false");
+    location.assign("../login.html");
+    });
