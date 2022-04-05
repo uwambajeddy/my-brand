@@ -1,5 +1,12 @@
 const contactform = document.querySelector(".contact_form");
 
+if(localStorage.getItem("email") == null){
+
+    localStorage.setItem("email","uwambajeddy@gmail.com");
+    localStorage.setItem("oldpassword","andela");
+
+}
+
 contactform.addEventListener('submit',(e)=>{
     e.preventDefault();
 
