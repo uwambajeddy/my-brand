@@ -1,5 +1,4 @@
 const maincontent = document.querySelector(".main_content");
-const logout = document.querySelector(".logout_btn");
 
 maincontent.innerHTML = `<form class="contact_form" action="#" method="post">
 <div class="contact_form_text">
