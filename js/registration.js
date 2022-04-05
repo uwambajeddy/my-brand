@@ -4,6 +4,8 @@ if(localStorage.getItem("email") == null){
 
     localStorage.setItem("email","uwambajeddy@gmail.com");
     localStorage.setItem("oldpassword","andela");
+    localStorage.setItem("name","admin");
+    localStorage.setItem("name","admin");
 
 }
 
