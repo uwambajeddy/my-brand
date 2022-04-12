@@ -18,7 +18,7 @@
           <!--================Main Area =================-->
          <div class="main">
              <div class="container">
-             <!--================Menu Banner Area =================-->
+             <!--=============modal Banner Area =================-->
              <section class="menu_banner_area">
                  <div class="user-icon">
                      <img src="../img/personal.jpg" alt="">
@@ -26,8 +26,8 @@
                  </div>
                  <div class="navbar-nav">
                     <ul class="list basic_info">
-                        <li><a href="#" class="active"><i class="lnr lnr-chart-bars"></i><p> Dashboard</p></a></li>
-                        <li><a href="./blogs.html"><i class="lnr lnr-license"></i> <p>Blogs</p></a></li>
+                        <li><a href="./index.html" ><i class="lnr lnr-chart-bars"></i><p> Dashboard</p></a></li>
+                        <li><a class="active" href="./blogs.html"><i class="lnr lnr-license"></i> <p>Blogs</p></a></li>
                         <li><a href="./projects.html"><i class="lnr lnr-rocket"></i> <p>Projects</p></a></li>
                         <li><a href="./comments.html"><i class="lnr lnr-bubble"></i><p> Comments</p></a></li>
                         <li><a href="./subscribers.html"><i class="lnr lnr-pushpin"></i><p> Subscribers</p></a></li>
@@ -48,21 +48,14 @@
                         <span class="icon-bar icon-bar-b"></span>
                     </button>
                     <span class="main_text">
-					<h2>Welcome back,</h2>
-        			<p>Your Portfolio analytics dashboard.</p>
+					<h2>Blogs</h2>
+                    
                 </span>
         		</div>
-                <div class="main_header">
-                    <ul class="list main_info">
-                        <li><a href="#" class=""><i class="lnr lnr-chart-bars"></i><span> <p> Total likes</p> <p>45</p></span></a></li>
-                        <li><a href="#"><i class="lnr lnr-license"></i> <span> <p>Blogs</p> <p>45</p></span></a></li>
-                        <li><a href="#"><i class="lnr lnr-rocket"></i> <span> <p>Projects</p> <p>45</p></span></a></li>
-                        <li><a href="#"><i class="lnr lnr-bubble"></i><span> <p> Total Comments</p> <p>45</p></span></a></li>
-                        <li><a href="#"><i class="lnr lnr-pushpin"></i><span> <p> Subscribers</p> <p>45</p></span></a></li>
-                        <li><a href="#"><i class="lnr lnr-envelope"></i> <span> <p>Messages</p> <p>45</p></span></a></li>
-                    </ul>
-                </div>
 				<div class="main_content">
+                    <div class="add_btn">
+                        <i class="lnr lnr-checkmark-circle"></i> Add blog
+                    </div>
                     <div class="main_table">
                         <div class="table_row row_header">
                             <div class="table_column">Image</div>
@@ -120,10 +113,39 @@
             </div>
          </div>
            <!--================Main Area =================-->
+           <!--================Modal Banner Area =================-->
+           <div class="model_block">
+
+           </div>
+           <section class="modal_banner_area">
+               <h2>Add Blog</h2>
+            <form class="contact_form" action="#" method="post">
+                <div class="contact_form_text">
+                    <div class="form-group">
+                        <input type="file" class="form-control" id="image" name="image" >
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                    </div>
+                    <div class="form-group">
+                        <input type="date" class="form-control" id="date" name="date" placeholder="date">
+                    </div>
+                </div>
+
+                <div class="contact_form_message">
+                    <div class="form-group">
+                        <textarea class="form-control" name="body" id="body" rows="1" placeholder="Body"></textarea>
+                    </div>
+                    <button type="submit" value="submit" class="btn submit_btn">Add</button>
+                </div>
+                
+            </form>
+        </section>
+        <!--================Modal Banner Area =================-->
 
 		 <!--  JavaScript -->
-         <script src="../js/session.js"></script>
 		 <script src="../js/main-dash.js"></script>
+         <script src="../js/session.js"></script>
 		 <!--  JavaScript -->
     </body>
 	

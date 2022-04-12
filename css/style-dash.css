@@ -74,6 +74,7 @@ h1, h2, h3, h4, h5, h6 {
     .basic_info li a {
         display: flex;
         transition: all 0.5s ease-in-out;
+        color: #555555;;
     }
     .basic_info li a:hover {
         color: #004dfd;
@@ -86,7 +87,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .active{
-        color: #004dfd;
+        color: #004dfd !important;
     }
 
 
@@ -98,6 +99,17 @@ h1, h2, h3, h4, h5, h6 {
     }
     .logout_btn a{
     color: white;
+    }
+
+    .add_btn{
+            background: #4D83FF;
+            text-align: center;
+            padding: 11px 0;
+            width: 156px;
+            margin: 0 0 10px 0;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
     }
 
     /*---------------------------------------------------- */
@@ -169,18 +181,15 @@ h1, h2, h3, h4, h5, h6 {
     
     .main_table{
         min-height: 50vh;
-        border: 1px solid #0000001f;
     }
     .table_row{
         display: flex;
         justify-content: space-between;
-        border-right: 1px solid #0000001f;
-        border-bottom: 1px solid #0000001f;
     }
     .table_column{
-        padding: 10px;
-        border-left: 1px solid #0000001f;
-        width: 150px;
+        padding: 10px 0;
+       
+        width: 200px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -195,10 +204,11 @@ h1, h2, h3, h4, h5, h6 {
     }
     .row_header {
         color: black;
+        border-top: 1px solid #0000001f;
     }
     
     .mod_btn{
-        padding: 5px 10px;
+        padding: 5px;
         box-shadow: 0 0 5px black;
         color: white;
         box-shadow: 0 0 5px #939393;
@@ -215,7 +225,7 @@ h1, h2, h3, h4, h5, h6 {
     }
     /*---------------------------------------------------- */
     /*----------------------------------------------------*/
-
+    
     .icon-bar{
         height: 3px;
         width: 30px;
@@ -231,22 +241,156 @@ h1, h2, h3, h4, h5, h6 {
          margin-top: 50px;
       }
       
-    
+      
       .icon-bar-a{
-        margin-top:10px;
+          margin-top:10px;
       }
       .icon-bar-b{
-        margin-top:20px;
-      }
-    
-      .navbar-toggler{
-        background: none;
-        border: none;
-        cursor: pointer;
-        width: 50px;
+          margin-top:20px;
+        }
+        
+        .navbar-toggler{
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 50px;
         height: 50px;
         position: absolute;
         display: flex;
         flex-direction: column;
-      }
+    }
+    
 
+    /*---------------------------------------------------- */
+    /*----------------------------------------------------*/
+    .modal_banner_area{
+        position: absolute;
+        top: -500px;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-color: white;
+        box-shadow: 0 0 40px #0000005e;
+        transition: all 0.5s ease-in-out;
+        min-width: 400px;
+        z-index: 2;
+    }
+    .model_block{
+        position: absolute;
+        content: "";
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-color: rgb(0 0 0 / 45%);
+        transition: all 0.5s ease-in-out;
+        height: 100vh;
+        width: 100%;
+        z-index: 1;
+        display: none;
+    }
+    .modal_banner_area::before{
+        content: "";
+        height: 100vh;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.219);
+        z-index: -1;
+    }
+    .modal_banner_area h2{
+        text-align: center;
+    }
+    
+    .contact_form{
+        padding: 40px;
+        width:  -webkit-fill-available;
+    }
+    .contact_form .form-group {
+        margin-bottom: 10px; }
+    .contact_form .form-group .form-control {
+        padding: 9px 0;
+        font-size: 13px;
+        line-height: 26px;
+        color: #999;
+        border: 1px solid #eeeeee;
+        font-family: "Roboto", sans-serif;
+        width: 100%;
+        border-radius: 0px;
+    }
+    .contact_form .form-group .form-control:focus {
+        box-shadow: none;
+        outline: none; }
+        .contact_form .form-group .form-control.placeholder {
+            color: #999; }
+            .contact_form .form-group .form-control:-moz-placeholder {
+            color: #999; }
+            .contact_form .form-group .form-control::-moz-placeholder {
+                color: #999; }
+                .contact_form .form-group .form-control::-webkit-input-placeholder {
+                    color: #999; }
+    .contact_form .form-group textarea {
+        resize: none; }
+        .contact_form .form-group textarea.form-control {
+            height: 140px;
+            width: 100%
+        }
+        .contact_form_text{
+            
+            padding: 0 5px;
+        }
+        .contact_form_message{
+            
+            padding: 0 5px;
+        }
+        .contact_form .submit_btn {
+            margin-top: 20px;
+            cursor: pointer;
+            width: 100%;
+            padding: 15px 0;
+            border: none;
+            color: white;
+            background: #007ae3;
+            box-shadow: 0 2px 5px #00000054;
+            
+        }
+        /*---------------------------------------------------- */
+        /*----------------------------------------------------*/
+
+
+        .tables_flex{
+            display: flex;
+            width: 100%;
+        }
+
+        .tables_flex .main_content {
+            min-width: auto;
+            flex: 1;
+            margin: 0 20px;
+        }
+
+
+        .profile_widget{
+            text-align: center;
+            width: 400px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .profile_widget h4{
+            color: black ;
+        }
+        .single_sidebar_widget{
+            padding: 0 80px;
+        }
+
+        .single_sidebar_widget .social_icon{
+            display: flex;
+            justify-content: center;
+            font-size: 25px;
+        }
+        
+        .single_sidebar_widget .social_icon a{
+            padding: 5px;
+            color: rgb(34, 34, 34);
+        }
+        
+
+        

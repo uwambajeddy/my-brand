@@ -38,4 +38,4 @@ navbar.addEventListener("click",()=>{
     }
    
 
-})
+});
