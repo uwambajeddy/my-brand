@@ -11,7 +11,7 @@ const sendEmail = async options => {
   });
 
   const mailOptions = {
-    from: 'Uwambaje eddy <info@uwambajeddy.herokuapp.com>',
+    from: 'Uwambaje eddy <info@uwambajeeddy.herokuapp.com>',
     to: options.email,
     subject: options.subject,
     text: options.message
