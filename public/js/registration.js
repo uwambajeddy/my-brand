@@ -21,7 +21,7 @@ contactform.addEventListener('submit',(e)=>{
         return alert("Please fill empty fields !!")
     }
     if(  email !== localStorage.getItem("email") || password !== localStorage.getItem("oldpassword")){
-        return alert("Sorry password or email is wrong")
+        return alert("Sorry password or email is wrong");
     }
 
     localStorage.setItem("isLoggedIn","true")

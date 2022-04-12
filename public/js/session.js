@@ -1,3 +1,3 @@
 if(localStorage.getItem("isLoggedIn") === "false"){
-    location.assign("../login.html")
+    location.assign("../login.html");
 }

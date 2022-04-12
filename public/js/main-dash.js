@@ -16,11 +16,15 @@ toggler.addEventListener("click",()=>{
     }
    
 });
+
+
 logout.addEventListener("click",e=>{
     e.preventDefault();
     localStorage.setItem("isLoggedIn","false");
     location.reload();
     });
+
+    
 
     if(modal_block){
 

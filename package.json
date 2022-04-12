@@ -1,0 +1,64 @@
+{
+  "name": "mybrand",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "start:dev": "NODE_ENV=development nodemon server.js",
+    "start:prod": "NODE_ENV=production nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uwambajeddy/my-brand"
+  },
+  "author": "eddy uwambaje",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uwambajeddy/my-brand/issues"
+  },
+  "homepage": "https://github.com/uwambajeddy/my-brand#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "axios": "^0.18.1",
+    "bcrypt-nodejs": "0.0.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "ejs": "^2.3.2",
+    "express": "^4.16.4",
+    "express-rate-limit": "^3.5.3",
+    "express-session": "^1.11.3",
+    "helmet": "^3.23.3",
+    "html-to-text": "^5.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.10",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.4",
+    "nodemailer": "^6.7.2",
+    "swagger-jsdoc": "^6.2.0",
+    "swagger-ui-express": "^4.3.0",
+    "swagger2openapi": "^7.0.8",
+    "validator": "^13.7.0",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "parcel": "^2.0.1",
+    "prettier": "^1.17.0"
+  },
+  "engines": {
+    "node": "^14.18.1",
+    "npm": "6.14.15"
+  }
+}
