@@ -28,7 +28,7 @@ const swaggerOptions = {
       contact: {
         name: 'Eddy Uwambaje'
       },
-      servers: ['http://localhost:3000']
+      servers: [`${process.env.NODE_ENV === 'development' ? 'http://localhost:3000' :'' }`]
     }
   },
   apis: [`${__dirname}/routers/*.js`]
