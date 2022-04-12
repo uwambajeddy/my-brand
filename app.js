@@ -28,7 +28,13 @@ const swaggerOptions = {
       contact: {
         name: 'Eddy Uwambaje'
       },
-      servers: [`${process.env.NODE_ENV === 'development' ? 'http://localhost:3000' :'' }`]
+      servers: [
+        `${
+          process.env.NODE_ENV === 'development'
+            ? 'http://localhost:3000'
+            : 'https://uwambajeeddy.herokuapp.com/'
+        }`
+      ]
     }
   },
   apis: [`${__dirname}/routers/*.js`]
