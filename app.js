@@ -1,22 +1,29 @@
-const express = require('express');
+import express, { json as _json } from 'express';
+import morgan from 'morgan';
+import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+import xss from 'xss-clean';
+import { join } from 'path';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import compression from 'compression';
+import { serve, setup } from 'swagger-ui-express';
+import swaggerJsDoc from 'swagger-jsdoc';
+import messageRouter from './routers/messageRouter.js';
+import userRouter from './routers/userRouter.js';
+import blogsRouter from './routers/blogsRouter.js';
+import globalErrorHandler from './controllers/errorController.js';
+import AppError from './util/AppError.js';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath( import.meta.url );
+const __dirname = dirname(__filename);
+
+const { urlencoded, json } = bodyParser;
 
 const app = express();
-const morgan = require('morgan');
-const rateLimit = require('express-rate-limit');
-const helmet = require('helmet');
-const xss = require('xss-clean');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const compression = require('compression');
-const swaggerUi = require('swagger-ui-express');
-const swaggerJsDoc = require('swagger-jsdoc');
-const messageRouter = require('./routers/messageRouter');
-const userRouter = require('./routers/userRouter');
-const blogsRouter = require('./routers/blogsRouter');
-const globalErrorHandler = require('./controllers/errorController');
-const AppError = require('./util/AppError');
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -41,29 +48,26 @@ const swaggerOptions = {
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/api-docs/v1', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use('/api-docs/v1', serve, setup(swaggerDocs));
 
 app.use(cors());
 app.options('*', cors());
 app.enable('trust proxy');
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(urlencoded({ extended: false }));
 
-app.use(bodyParser.json());
+app.use(_json());
 
 app.use(helmet());
-app.use(express.json());
+app.use(json());
 app.use(cookieParser());
 app.use(xss());
 
 app.use(compression());
 
 app.set('view engine', 'ejs');
-app.set('views', [
-  path.join(__dirname, 'views'),
-  path.join(__dirname, 'views/admin')
-]);
-app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', [join(__dirname, 'views'), join(__dirname, 'views/admin')]);
+app.use(express.static(join(__dirname, 'public')));
 
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
@@ -86,4 +90,4 @@ app.all('*', (req, res, next) => {
 
 app.use(globalErrorHandler);
 
-module.exports = app;
+export default app;

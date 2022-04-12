@@ -1,10 +1,12 @@
-const multer = require('multer');
-const catchAsync = require('./../util/catchAsync');
-const User = require('../models/userModel');
-const AppError = require('../models/userModel');
+//const multer = require('multer');
+import catchAsync from '../util/catchAsync.js';
+import AppError from '../util/AppError.js';
+import userModel from '../models/userModel.js';
 
-exports.getAllUsers = catchAsync(async (req, res, next) => {
-  const users = await User.find({ active: true });
+const { find, findById, findByIdAndUpdate } = userModel;
+
+export const getAllUsers = catchAsync(async (req, res, next) => {
+  const users = await find({ active: true });
   if (!users) {
     return next(new AppError('No users yet', 404));
   }
@@ -17,8 +19,8 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getUser = catchAsync(async (req, res, next) => {
-  const user = await User.find({ _id: req.params.id, active: true });
+export const getUser = catchAsync(async (req, res, next) => {
+  const user = await find({ _id: req.params.id, active: true });
   if (!user || user.length === 0) {
     return next(new AppError('No user found with that ID', 404));
   }
@@ -31,13 +33,13 @@ exports.getUser = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.updateUser = catchAsync(async (req, res, next) => {
-  const email = await User.find({ email: req.body.email });
+export const updateUser = catchAsync(async (req, res, next) => {
+  const email = await find({ email: req.body.email });
   if (email) {
     return next(new AppError('The email already exists!!', 409));
   }
 
-  const user = await User.findById(req.user.id);
+  const user = await findById(req.user.id);
   user.name = req.body.name;
   user.email = req.body.email;
   await user.save({ validateBeforeSave: true });
@@ -48,8 +50,8 @@ exports.updateUser = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.deleteMe = catchAsync(async (req, res, next) => {
-  const user = await User.findByIdAndUpdate(req.user.id, { active: false });
+export const deleteMe = catchAsync(async (req, res, next) => {
+  const user = await findByIdAndUpdate(req.user.id, { active: false });
   if (!user) {
     return next(new AppError('No user found with that ID', 404));
   }

@@ -1,13 +1,16 @@
-const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
-const { promisify } = require('util');
-const catchAsync = require('./../util/catchAsync');
-const AppError = require('./../util/AppError');
-const User = require('../models/userModel');
-const sendEmail = require('./../util/email');
+import jsonwebtoken from 'jsonwebtoken';
+import { createHash } from 'crypto';
+import { promisify } from 'util';
+import catchAsync from '../util/catchAsync.js';
+import AppError from '../util/AppError.js';
+import sendEmail from '../util/email.js';
+import userModel from '../models/userModel.js';
+
+const { sign, verify } = jsonwebtoken;
+const { findOne, create, findById } = userModel;
 
 const signToken = id => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
+  return sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN
   });
 };
@@ -35,16 +38,16 @@ const createSendToken = (user, statusCode, res) => {
   });
 };
 
-exports.signup = catchAsync(async (req, res, next) => {
+export const signup = catchAsync(async (req, res, next) => {
   if (req.body.role && req.body.role === 'admin') {
-    const currentAdmin = await User.findOne({ role: 'admin' });
+    const currentAdmin = await findOne({ role: 'admin' });
 
     if (currentAdmin) {
       return next(new AppError('Admin already exists!', 403));
     }
   }
 
-  const newUser = await User.create({
+  const newUser = await create({
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
@@ -55,12 +58,12 @@ exports.signup = catchAsync(async (req, res, next) => {
   createSendToken(newUser, 201, res);
 });
 
-exports.login = catchAsync(async (req, res, next) => {
+export const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
   if (!password || !email) {
     return next(new AppError('Please fill empty fields!', 400));
   }
-  const user = await User.findOne({ email })
+  const user = await findOne({ email })
     .select('+password')
     .select('+active');
 
@@ -74,14 +77,14 @@ exports.login = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, res);
 });
 
-exports.logout = (req, res) => {
+export function logout(req, res) {
   res.cookie('jwt', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true
   });
   res.status(200).json({ status: 'success', data: null });
-};
-exports.protect = catchAsync(async (req, res, next) => {
+}
+export const protect = catchAsync(async (req, res, next) => {
   let token;
 
   if (
@@ -97,9 +100,9 @@ exports.protect = catchAsync(async (req, res, next) => {
       new AppError('You are not logged in! please login to get access', 401)
     );
   }
-  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  const decoded = await promisify(verify)(token, process.env.JWT_SECRET);
 
-  const currentUser = await User.findById(decoded.id);
+  const currentUser = await findById(decoded.id);
 
   if (currentUser.length === 0) {
     return next(
@@ -116,7 +119,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.restrictedTo = (...roles) => {
+export function restrictedTo(...roles) {
   return catchAsync(async (req, res, next) => {
     if (!roles.includes(req.user.role)) {
       return next(
@@ -125,10 +128,10 @@ exports.restrictedTo = (...roles) => {
     }
     next();
   });
-};
+}
 
-exports.forgotPassword = catchAsync(async (req, res, next) => {
-  const user = await User.findOne({ email: req.body.email });
+export const forgotPassword = catchAsync(async (req, res, next) => {
+  const user = await findOne({ email: req.body.email });
   if (!user) {
     return next(new AppError('There is no user with email address.', 404));
   }
@@ -165,13 +168,12 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   }
 });
 
-exports.resetPassword = catchAsync(async (req, res, next) => {
-  const hashedToken = crypto
-    .createHash('sha256')
+export const resetPassword = catchAsync(async (req, res, next) => {
+  const hashedToken = createHash('sha256')
     .update(req.params.token)
     .digest('hex');
 
-  const user = await User.findOne({
+  const user = await findOne({
     passwordResetToken: hashedToken,
     passwordResetExpires: { $gt: Date.now() }
   });
@@ -188,8 +190,8 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, res);
 });
 
-exports.updatePassword = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.user.id).select('+password');
+export const updatePassword = catchAsync(async (req, res, next) => {
+  const user = await findById(req.user.id).select('+password');
 
   if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
     return next(new AppError('Your current password is wrong.', 401));

@@ -1,12 +1,11 @@
-const express = require('express');
-const { protect, restrictedTo } = require('../controllers/authController');
-const {
+import express from 'express';
+import { protect, restrictedTo } from '../controllers/authController.js';
+import {
   getMessages,
   createMessage,
   getMessage,
-  deleteMessage,
-  updateMessage
-} = require('../controllers/messagesController');
+  deleteMessage
+} from '../controllers/messagesController.js';
 
 const router = express.Router();
 
@@ -20,4 +19,4 @@ router
   .get(protect, restrictedTo('admin'), getMessage)
   .delete(protect, restrictedTo('admin'), deleteMessage);
 
-module.exports = router;
+export default router;

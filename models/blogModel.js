@@ -1,6 +1,8 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const blogSchema = new mongoose.Schema(
+const { Schema, model } = mongoose;
+
+const blogSchema = new Schema(
   {
     title: {
       type: String,
@@ -17,13 +19,13 @@ const blogSchema = new mongoose.Schema(
     },
     likedBy: [
       {
-        type: mongoose.Schema.ObjectId,
+        type: Schema.ObjectId,
         ref: 'User'
       }
     ],
     comments: [
       {
-        type: mongoose.Schema.ObjectId,
+        type: Schema.ObjectId,
         ref: 'Comment'
       }
     ]
@@ -41,6 +43,6 @@ blogSchema.virtual('totalComments').get(function() {
   return this.comments.length;
 });
 
-const Blog = mongoose.model('Blog', blogSchema);
+const Blog = model('Blog', blogSchema);
 
-module.exports = Blog;
+export default Blog;

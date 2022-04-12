@@ -1,9 +1,11 @@
-const catchAsync = require('../util/catchAsync');
-const AppError = require('../util/AppError');
-const Message = require('./../models/messageModal');
+import catchAsync from '../util/catchAsync.js';
+import AppError from '../util/AppError.js';
+import messageModal from '../models/messageModal.js';
 
-exports.getMessages = catchAsync(async (req, res, next) => {
-  const messages = await Message.find();
+const { find, findById, deleteOne, create } = messageModal;
+
+export const getMessages = catchAsync(async (req, res, next) => {
+  const messages = await find();
   res.status(200).json({
     status: 'success',
     results: messages.length,
@@ -13,9 +15,9 @@ exports.getMessages = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getMessage = catchAsync(async (req, res, next) => {
+export const getMessage = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  const message = await Message.findById(id);
+  const message = await findById(id);
   res.status(200).json({
     status: 'success',
     data: {
@@ -24,9 +26,9 @@ exports.getMessage = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.deleteMessage = catchAsync(async (req, res, next) => {
+export const deleteMessage = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  const message = await Message.deleteOne({ _id: id });
+  const message = await deleteOne({ _id: id });
 
   if (!message) {
     return next(new AppError('No message found with that ID', 404));
@@ -37,8 +39,8 @@ exports.deleteMessage = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createMessage = catchAsync(async (req, res, next) => {
-  const message = await Message.create(req.body);
+export const createMessage = catchAsync(async (req, res, next) => {
+  const message = await create(req.body);
   res.status(201).json({
     status: 'success',
     data: {

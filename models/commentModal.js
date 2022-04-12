@@ -1,6 +1,8 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const CommentSchema = new mongoose.Schema({
+const { Schema, model } = mongoose;
+
+const CommentSchema = new Schema({
   comment: {
     type: String,
     required: [true, 'Comment section can not be empty! ']
@@ -10,15 +12,15 @@ const CommentSchema = new mongoose.Schema({
     default: Date.now()
   },
   user: {
-    type: mongoose.Schema.ObjectId,
+    type: Schema.ObjectId,
     ref: 'User'
   },
   blog: {
-    type: mongoose.Schema.ObjectId,
+    type: Schema.ObjectId,
     ref: 'Blog'
   }
 });
 
-const Comment = mongoose.model('Comment', CommentSchema);
+const Comment = model('Comment', CommentSchema);
 
-module.exports = Comment;
+export default Comment;

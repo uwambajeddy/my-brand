@@ -1,12 +1,12 @@
-const express = require('express');
-const { protect, restrictedTo } = require('../controllers/authController');
-const {
+import express from 'express';
+import { protect, restrictedTo } from '../controllers/authController.js';
+import {
   getBlogs,
   createBlog,
   getBlog,
   deleteBlog,
   updateBlog
-} = require('../controllers/blogsController');
+} from '../controllers/blogsController.js';
 
 const router = express.Router();
 
@@ -116,4 +116,4 @@ router
   .patch(protect, restrictedTo('admin'), updateBlog)
   .delete(protect, restrictedTo('admin'), deleteBlog);
 
-module.exports = router;
+export default router;

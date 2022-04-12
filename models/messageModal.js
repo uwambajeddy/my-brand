@@ -1,7 +1,11 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
+import mongoose from 'mongoose';
+import validator from 'validator';
 
-const messageSchema = new mongoose.Schema({
+const { isEmail } = validator;
+
+const { Schema, model } = mongoose;
+
+const messageSchema = new Schema({
   name: {
     type: String,
     required: [true, ' Please Provide your name!!']
@@ -9,7 +13,7 @@ const messageSchema = new mongoose.Schema({
   email: {
     type: String,
     required: [true, 'Please Provide your email!!'],
-    validate: [validator.isEmail, 'Please! provide valid email']
+    validate: [isEmail, 'Please! provide valid email']
   },
   subject: {
     type: String,
@@ -21,6 +25,6 @@ const messageSchema = new mongoose.Schema({
   }
 });
 
-const Message = mongoose.model('Message', messageSchema);
+const Message = model('Message', messageSchema);
 
-module.exports = Message;
+export default Message;

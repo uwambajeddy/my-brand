@@ -1,17 +1,28 @@
-/* eslint-disable prettier/prettier */
-const express = require('express');
+import express from 'express';
+import {
+  signup,
+  login,
+  protect,
+  forgotPassword,
+  resetPassword,
+  updatePassword,
+  logout
+} from '../controllers/authController.js';
+import {
+  getAllUsers,
+  getUser,
+  updateUser,
+  deleteMe
+} from '../controllers/userController.js';
 
 const router = express.Router();
-const { signup, login, protect, forgotPassword, resetPassword, updatePassword, logout } = require('../controllers/authController');
-const { getAllUsers, getUser, updateUser, deleteMe } = require('../controllers/userController');
 
-router.post("/signup",signup);
-router.post("/login",login);
-router.get("/logout",logout);
-router.get("/forgotpassword",forgotPassword);
-router.patch("/updatepassword", protect, updatePassword);
-router.patch("/resetpassword/:token",resetPassword);
-
+router.post('/signup', signup);
+router.post('/login', login);
+router.get('/logout', logout);
+router.get('/forgotpassword', forgotPassword);
+router.patch('/updatepassword', protect, updatePassword);
+router.patch('/resetpassword/:token', resetPassword);
 
 /**
  * @swagger
@@ -100,7 +111,8 @@ router.patch("/resetpassword/:token",resetPassword);
 
 router
   .route('/')
-  .get(getAllUsers).delete(protect,deleteMe);
+  .get(getAllUsers)
+  .delete(protect, deleteMe);
 
 /**
  * @swagger
@@ -161,7 +173,6 @@ router
 router
   .route('/:id')
   .get(getUser)
-  .patch(protect,updateUser);
- 
+  .patch(protect, updateUser);
 
-module.exports = router;
+export default router;

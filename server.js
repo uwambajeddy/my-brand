@@ -1,5 +1,7 @@
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+import moongose from 'mongoose';
+import { config } from 'dotenv';
+
+import app from './app.js';
 
 process.on('uncaughtException', err => {
   console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
@@ -7,21 +9,19 @@ process.on('uncaughtException', err => {
   process.exit(1);
 });
 
-dotenv.config({ path: './config.env' });
-
-const app = require('./app');
+config({ path: './config.env' });
 
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
   process.env.DATABASE_PASSWORD
 );
 
-if (process.env.NODE_ENV === 'development') {
-  mongoose
+if (process.env.NODE_ENV === 'production') {
+  moongose.connect(DB).then(() => console.log('DB connection successful !!'));
+} else {
+  moongose
     .connect('mongodb://localhost:27017/mybrand')
     .then(() => console.log('DB connection successful !'));
-} else {
-  mongoose.connect(DB).then(() => console.log('DB connection successful !!'));
 }
 
 process.on('unhandledRejection', err => {
