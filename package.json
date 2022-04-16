@@ -22,7 +22,7 @@
   "homepage": "https://github.com/uwambajeddy/my-brand#readme",
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
-    "axios": "^0.18.1",
+    "axios": "^0.21.2",
     "bcrypt-nodejs": "0.0.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
