@@ -1,0 +1,32 @@
+{
+    "mybrand": "1.0",
+    "info": {
+        "description": "Hi there, You can use the below end points to explore some of the website data.  You can find out more about My brand website at [https://uwambajeeddy.herokuapp.com](https://uwambajeeddy.herokuapp.com) .",
+        "version": "1.0.0",
+        "title": "Uwambaje Eddy Portfolio API",
+        "contact": {
+            "email": "uwambajeddy@gmail.com"
+        }
+    },
+    "host": "uwambajeeddy.herokuapp.com",
+    "basePath": "/api-docs/v1",
+    "tags": [{
+        "name": "users",
+        "description": "Everything about users",
+        "path":"/api-docs/v1/#/users"
+        }, {
+        "name": "blogs",
+        "description": "Everything about Blogs",
+        "path":"/api-docs/v1/#/blogs"
+        }, {
+        "name": "messages",
+        "description": "Everything about contact messages",
+        "path":"/api-docs/v1/#/messages"
+        }, {
+        "name": "authentication",
+        "description": "Operations about user authentication",
+        "path":"/api-docs/v1/#/authentication"
+        
+    }],
+    "schemes": ["https", "http"]
+}

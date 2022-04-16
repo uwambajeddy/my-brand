@@ -7,7 +7,6 @@ import sendEmail from '../util/email.js';
 import userModel from '../models/userModel.js';
 
 const { sign, verify } = jsonwebtoken;
-const { findOne, create, findById } = userModel;
 
 const signToken = id => {
   return sign({ id }, process.env.JWT_SECRET, {
@@ -26,7 +25,6 @@ const createSendToken = (user, statusCode, res) => {
   };
   res.cookie('jwt', token, cookieOptions);
 
-  // Remove password from output
   user.password = undefined;
 
   res.status(statusCode).json({
@@ -40,14 +38,14 @@ const createSendToken = (user, statusCode, res) => {
 
 export const signup = catchAsync(async (req, res, next) => {
   if (req.body.role && req.body.role === 'admin') {
-    const currentAdmin = await findOne({ role: 'admin' });
+    const currentAdmin = await userModel.findOne({ role: 'admin' });
 
     if (currentAdmin) {
       return next(new AppError('Admin already exists!', 403));
     }
   }
 
-  const newUser = await create({
+  const newUser = await userModel.create({
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
@@ -63,7 +61,8 @@ export const login = catchAsync(async (req, res, next) => {
   if (!password || !email) {
     return next(new AppError('Please fill empty fields!', 400));
   }
-  const user = await findOne({ email })
+  const user = await userModel
+    .findOne({ email })
     .select('+password')
     .select('+active');
 
@@ -102,7 +101,7 @@ export const protect = catchAsync(async (req, res, next) => {
   }
   const decoded = await promisify(verify)(token, process.env.JWT_SECRET);
 
-  const currentUser = await findById(decoded.id);
+  const currentUser = await userModel.findById(decoded.id);
 
   if (currentUser.length === 0) {
     return next(
@@ -131,7 +130,7 @@ export function restrictedTo(...roles) {
 }
 
 export const forgotPassword = catchAsync(async (req, res, next) => {
-  const user = await findOne({ email: req.body.email });
+  const user = await userModel.findOne({ email: req.body.email });
   if (!user) {
     return next(new AppError('There is no user with email address.', 404));
   }
@@ -173,7 +172,7 @@ export const resetPassword = catchAsync(async (req, res, next) => {
     .update(req.params.token)
     .digest('hex');
 
-  const user = await findOne({
+  const user = await userModel.findOne({
     passwordResetToken: hashedToken,
     passwordResetExpires: { $gt: Date.now() }
   });
@@ -191,7 +190,7 @@ export const resetPassword = catchAsync(async (req, res, next) => {
 });
 
 export const updatePassword = catchAsync(async (req, res, next) => {
-  const user = await findById(req.user.id).select('+password');
+  const user = await userModel.findById(req.user.id).select('+password');
 
   if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
     return next(new AppError('Your current password is wrong.', 401));

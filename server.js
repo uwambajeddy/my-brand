@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
 import moongose from 'mongoose';
 import { config } from 'dotenv';
 
@@ -15,20 +18,27 @@ const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
   process.env.DATABASE_PASSWORD
 );
+const DB_TEST = process.env.DATABASE_TEST.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
 
 if (process.env.NODE_ENV === 'production') {
-  moongose.connect(DB).then(() => console.log('DB connection successful !!'));
+  moongose.connect(DB).then(() => console.log('DB connected successful !!'));
+} else if (process.env.NODE_ENV === 'test') {
+  moongose
+    .connect(DB_TEST)
+    .then(() => console.log('Test DB connected successful !!'))
+    .catch(err => {
+      moongose
+        .connect('mongodb://localhost:27017/mybrand_test')
+        .then(() => console.log('Test DB connected successful !'));
+    });
 } else {
   moongose
     .connect('mongodb://localhost:27017/mybrand')
-    .then(() => console.log('DB connection successful !'));
+    .then(() => console.log('DB connected successful !'));
 }
-
-process.on('unhandledRejection', err => {
-  console.log('UNHANDLED REJECTION! 💥 Shutting down...');
-  console.log(err.name, err.message);
-  process.exit(1);
-});
 
 const port = process.env.PORT || 8000;
 

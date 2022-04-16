@@ -5,10 +5,41 @@ import {
   createBlog,
   getBlog,
   deleteBlog,
-  updateBlog
+  updateBlog,
+  handleLike,
+  deleteComment,
+  createComment,
+  approveComment,
+  getAllComments,
+  uploadBlogImage
 } from '../controllers/blogsController.js';
 
 const router = express.Router();
+
+router
+  .route('/:id')
+  .get(getBlog)
+  .patch(protect, uploadBlogImage, restrictedTo('admin'), updateBlog)
+  .delete(protect, restrictedTo('admin'), deleteBlog);
+
+router.route('/like/:id').get(protect, handleLike);
+
+router
+  .route('/comment/:id')
+  .get(getAllComments)
+  .post(protect, createComment);
+
+router
+  .route('/comment/approve/:id')
+  .get(protect, restrictedTo('admin'), approveComment);
+router
+  .route('/comment/delete/:id')
+  .delete(protect, restrictedTo('admin'), deleteComment);
+
+router
+  .route('/')
+  .get(getBlogs)
+  .post(protect, restrictedTo('admin'), uploadBlogImage, createBlog);
 
 /**
  * @swagger
@@ -49,12 +80,6 @@ const router = express.Router();
  *        '201':
  *          description: Successfully created blog
  */
-
-router
-  .route('/')
-  .get(getBlogs)
-  .post(protect, restrictedTo('admin'), createBlog);
-
 /**
  * @swagger
  * /api/v1/blogs/{id}:
@@ -110,10 +135,5 @@ router
  *        '200':
  *               description: Successfully updated blog
  */
-router
-  .route('/:id')
-  .get(getBlog)
-  .patch(protect, restrictedTo('admin'), updateBlog)
-  .delete(protect, restrictedTo('admin'), deleteBlog);
 
 export default router;

@@ -22,12 +22,6 @@ const blogSchema = new Schema(
         type: Schema.ObjectId,
         ref: 'User'
       }
-    ],
-    comments: [
-      {
-        type: Schema.ObjectId,
-        ref: 'Comment'
-      }
     ]
   },
   {
@@ -38,9 +32,6 @@ const blogSchema = new Schema(
 
 blogSchema.virtual('totalLikes').get(function() {
   return this.likedBy.length;
-});
-blogSchema.virtual('totalComments').get(function() {
-  return this.comments.length;
 });
 
 const Blog = model('Blog', blogSchema);

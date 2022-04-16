@@ -1,8 +1,10 @@
-/* import chai, { use, request } from 'chai';
+/* eslint-disable no-shadow */
+/* eslint-disable no-undef */
+import chai, { use, request } from 'chai';
+import chaiHttp from 'chai-http';
+import server from '../routers/userRouter.js';
 
 const { expect } = chai;
-import chaiHttp from 'chai-http';
-import server from '../server';
 
 use(chaiHttp);
 
@@ -18,7 +20,7 @@ describe('User workflow tests', () => {
     request(server)
       .post('/api/user/signup')
       .send(user)
-      .end((err, res) => {
+      .end((_err, res) => {
         // Asserts
         expect(res.status).to.be.equal(200);
         expect(res.body).to.be.a('object');
@@ -31,7 +33,7 @@ describe('User workflow tests', () => {
             email: 'mail@petersen.com',
             password: '123456'
           })
-          .end((err, res) => {
+          .end((_err, res) => {
             // Asserts
             expect(res.status).to.be.equal(200);
             expect(res.body.error).to.be.equal(null);
@@ -47,9 +49,9 @@ describe('User workflow tests', () => {
 
             request(server)
               .post('/api/blogs')
-              .set({ 'auth-token': token })
+              .set({ token: token })
               .send(blog)
-              .end((err, res) => {
+              .end((_err, res) => {
                 // Asserts
                 expect(res.status).to.be.equal(201);
                 expect(res.body).to.be.a('array');
@@ -64,7 +66,7 @@ describe('User workflow tests', () => {
                 // 4) Verify one blog in test DB
                 request(server)
                   .get('/api/blogs')
-                  .end((err, res) => {
+                  .end((_err, res) => {
                     // Asserts
                     expect(res.status).to.be.equal(200);
                     expect(res.body).to.be.a('array');
@@ -87,7 +89,7 @@ describe('User workflow tests', () => {
     request(server)
       .post('/api/user/register')
       .send(user)
-      .end((err, res) => {
+      .end((_err, res) => {
         // Asserts
         expect(res.status).to.be.equal(200);
         expect(res.body).to.be.a('object');
@@ -100,7 +102,7 @@ describe('User workflow tests', () => {
             email: 'mail@petersen.com',
             password: '123456'
           })
-          .end((err, res) => {
+          .end((_err, res) => {
             // Asserts
             expect(res.status).to.be.equal(200);
             expect(res.body.error).to.be.equal(null);
@@ -118,7 +120,7 @@ describe('User workflow tests', () => {
               .post('/api/blogs')
               .set({ 'auth-token': token })
               .send(blog)
-              .end((err, res) => {
+              .end((_err, res) => {
                 // Asserts
                 expect(res.status).to.be.equal(201);
                 expect(res.body).to.be.a('array');
@@ -134,7 +136,7 @@ describe('User workflow tests', () => {
                 request(server)
                   .delete(`/api/blogs/${savedBlog._id}`)
                   .set({ 'auth-token': token })
-                  .end((err, res) => {
+                  .end((_err, res) => {
                     // Asserts
                     expect(res.status).to.be.equal(200);
                     const actualVal = res.body.message;
@@ -158,7 +160,7 @@ describe('User workflow tests', () => {
     request(server)
       .post('/api/user/register')
       .send(user)
-      .end((err, res) => {
+      .end((_err, res) => {
         // Asserts
         expect(res.status).to.be.equal(400); //normal expect with no custom output message
         //expect(res.status,"Status is not 400 (NOT FOUND)").to.be.equal(400); //custom output message at fail
@@ -171,4 +173,3 @@ describe('User workflow tests', () => {
       });
   });
 });
- */

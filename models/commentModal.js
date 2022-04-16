@@ -18,6 +18,10 @@ const CommentSchema = new Schema({
   blog: {
     type: Schema.ObjectId,
     ref: 'Blog'
+  },
+  approve: {
+    type: Boolean,
+    default: false
   }
 });
 

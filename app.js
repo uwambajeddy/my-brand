@@ -12,6 +12,7 @@ import { serve, setup } from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
 import messageRouter from './routers/messageRouter.js';
 import userRouter from './routers/userRouter.js';
+import apiRouter from './routers/apiRouter.js';
 import blogsRouter from './routers/blogsRouter.js';
 import globalErrorHandler from './controllers/errorController.js';
 import AppError from './util/AppError.js';
@@ -31,9 +32,10 @@ const swaggerOptions = {
       version: '1.0.0',
       title: 'Uwambaje Eddy portfolio API',
       description:
-        'Hi there, You can use the below end points to explore some of the website data. <br> { Base URL: localhost:3000 }',
+        'Hi there, You can use the below end points to explore some of the website data.  You can find out more about My brand website at [https://uwambajeeddy.herokuapp.com](https://uwambajeeddy.herokuapp.com) ',
       contact: {
-        name: 'Eddy Uwambaje'
+        name: 'Eddy Uwambaje',
+        email: "uwambajeddy@gmail.com"
       },
       servers: [
         `${
@@ -80,6 +82,7 @@ const limit = rateLimit({
 app.use('/api', limit);
 
 // app.use('/', viewRoute);
+app.use('/api/', apiRouter);
 app.use('/api/v1/user/', userRouter);
 app.use('/api/v1/blogs/', blogsRouter);
 app.use('/api/v1/messages/', messageRouter);
