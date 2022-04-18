@@ -18,22 +18,13 @@ const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
   process.env.DATABASE_PASSWORD
 );
-const DB_TEST = process.env.DATABASE_TEST.replace(
-  '<PASSWORD>',
-  process.env.DATABASE_PASSWORD
-);
 
 if (process.env.NODE_ENV === 'production') {
   moongose.connect(DB).then(() => console.log('DB connected successful !!'));
 } else if (process.env.NODE_ENV === 'test') {
   moongose
-    .connect(DB_TEST)
-    .then(() => console.log('Test DB connected successful !!'))
-    .catch(err => {
-      moongose
-        .connect('mongodb://localhost:27017/mybrand_test')
-        .then(() => console.log('Test DB connected successful !'));
-    });
+    .connect('mongodb://localhost:27017/mybrand_test')
+    .then(() => console.log('Test DB connected successful !'));
 } else {
   moongose
     .connect('mongodb://localhost:27017/mybrand')

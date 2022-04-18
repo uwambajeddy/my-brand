@@ -1,10 +1,12 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-shadow */
 /* eslint-disable no-undef */
-import chai, { use, request } from 'chai';
+import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../routers/userRouter.js';
+import request from 'superagent';
+import server from '../app.js';
 
-const { expect } = chai;
+const { expect, use } = chai;
 
 use(chaiHttp);
 
@@ -15,10 +17,11 @@ describe('User workflow tests', () => {
       name: 'Peter Petersen',
       email: 'mail@petersen.com',
       password: '123456',
-      password_confirm: '123456'
+      password_confirm: '123456',
+      role: "admin"
     };
     request(server)
-      .post('/api/user/signup')
+      .post('/api/v1/user/signup')
       .send(user)
       .end((_err, res) => {
         // Asserts
@@ -28,7 +31,7 @@ describe('User workflow tests', () => {
 
         // 2) Login the user
         request(server)
-          .post('/api/user/login')
+          .post('/api/v1/user/login')
           .send({
             email: 'mail@petersen.com',
             password: '123456'
@@ -37,41 +40,37 @@ describe('User workflow tests', () => {
             // Asserts
             expect(res.status).to.be.equal(200);
             expect(res.body.error).to.be.equal(null);
-            const { token } = res.body.data;
+            const { token } = res.body.token;
 
             // 3) Create new blog
             const blog = {
               name: 'Test blog',
-              description: 'Test blog Description',
-              price: 100,
-              inStock: true
+              body: 'Test blog Description',
+              date: '2020-04-05'
             };
 
             request(server)
-              .post('/api/blogs')
-              .set({ token: token })
+              .post('/api/v1/server')
+              .set({ 'token': token })
               .send(blog)
               .end((_err, res) => {
                 // Asserts
                 expect(res.status).to.be.equal(201);
-                expect(res.body).to.be.a('array');
-                expect(res.body.length).to.be.eql(1);
+                expect(res.body).to.be.a('object');
 
                 const savedBlog = res.body[0];
                 expect(savedBlog.name).to.be.equal(blog.name);
-                expect(savedBlog.description).to.be.equal(blog.description);
-                expect(savedBlog.price).to.be.equal(blog.price);
-                expect(savedBlog.inStock).to.be.equal(blog.inStock);
+                expect(savedBlog.body).to.be.equal(blog.body);
+                expect(savedBlog.date).to.be.equal(blog.date);
 
                 // 4) Verify one blog in test DB
+                const blogId = savedBlog._id;
                 request(server)
-                  .get('/api/blogs')
+                  .get(`/api/v1/server/${blogId}`)
                   .end((_err, res) => {
                     // Asserts
                     expect(res.status).to.be.equal(200);
-                    expect(res.body).to.be.a('array');
-                    expect(res.body.length).to.be.eql(1);
-
+                    expect(res.body).to.be.a('object');
                     done();
                   });
               });
@@ -84,10 +83,11 @@ describe('User workflow tests', () => {
     const user = {
       name: 'Peter Petersen',
       email: 'mail@petersen.com',
-      password: '123456'
+      password: '123456',
+      role: "admin"
     };
     request(server)
-      .post('/api/user/register')
+      .post('/api/v1/user/signup')
       .send(user)
       .end((_err, res) => {
         // Asserts
@@ -97,7 +97,7 @@ describe('User workflow tests', () => {
 
         // 2) Login the user
         request(server)
-          .post('/api/user/login')
+          .post('/api/v1/user/login')
           .send({
             email: 'mail@petersen.com',
             password: '123456'
@@ -106,43 +106,35 @@ describe('User workflow tests', () => {
             // Asserts
             expect(res.status).to.be.equal(200);
             expect(res.body.error).to.be.equal(null);
-            const { token } = res.body.data;
+            const { token } = res.body.token;
 
             // 3) Create new blog
             const blog = {
-              name: 'Test blog',
-              description: 'Test blog Description',
-              price: 100,
-              inStock: true
+              title: 'Test blog',
+              body: 'Test blog Description',
+              date: '2022-04-01'
             };
 
             request(server)
-              .post('/api/blogs')
-              .set({ 'auth-token': token })
+              .post('/api/v1/server')
+              .set({ 'token': token })
               .send(blog)
               .end((_err, res) => {
                 // Asserts
                 expect(res.status).to.be.equal(201);
-                expect(res.body).to.be.a('array');
-                expect(res.body.length).to.be.eql(1);
+                expect(res.body).to.be.a('object');
 
                 const savedBlog = res.body[0];
                 expect(savedBlog.name).to.be.equal(blog.name);
-                expect(savedBlog.description).to.be.equal(blog.description);
-                expect(savedBlog.price).to.be.equal(blog.price);
-                expect(savedBlog.inStock).to.be.equal(blog.inStock);
+                expect(savedBlog.body).to.be.equal(blog.body);
+                expect(savedBlog.date).to.be.equal(blog.date);
 
                 // 4) Delete blog
                 request(server)
-                  .delete(`/api/blogs/${savedBlog._id}`)
-                  .set({ 'auth-token': token })
+                  .delete(`/api/v1/server/${savedBlog._id}`)
+                  .set({ 'token': token })
                   .end((_err, res) => {
-                    // Asserts
-                    expect(res.status).to.be.equal(200);
-                    const actualVal = res.body.message;
-                    expect(actualVal).to.be.equal(
-                      'blog was deleted successfully!'
-                    );
+                    expect(res.status).to.be.equal(204);
                     done();
                   });
               });
@@ -151,23 +143,21 @@ describe('User workflow tests', () => {
   });
 
   it('should register user with invalid input', done => {
-    // 1) Register new user with invalid inputs
+    // Register new user with invalid inputs
     const user = {
       name: 'Peter Petersen',
-      email: 'mail@petersen.com',
-      password: '123' //Faulty password - Joi/validation should catch this...
+      email: 'mail@petersen.c', //Faulty email validation should catch this...
+      password: '123'
     };
     request(server)
-      .post('/api/user/register')
+      .post('/api/v1/user/signup')
       .send(user)
       .end((_err, res) => {
-        // Asserts
-        expect(res.status).to.be.equal(400); //normal expect with no custom output message
-        //expect(res.status,"Status is not 400 (NOT FOUND)").to.be.equal(400); //custom output message at fail
+        expect(res.status).to.be.equal(400);
 
         expect(res.body).to.be.a('object');
-        expect(res.body.error).to.be.equal(
-          '"password" length must be at least 6 characters long'
+        expect(res.body.error.message).to.be.equal(
+          'Invalid input data. Please! provide valid email'
         );
         done();
       });
