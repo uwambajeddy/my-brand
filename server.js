@@ -21,11 +21,7 @@ const DB = process.env.DATABASE.replace(
 
 if (process.env.NODE_ENV === 'production') {
   moongose.connect(DB).then(() => console.log('DB connected successful !!'));
-} else if (process.env.NODE_ENV === 'test') {
-  moongose
-    .connect('mongodb://localhost:27017/mybrand_test')
-    .then(() => console.log('Test DB connected successful !'));
-} else {
+} else if (process.env.NODE_ENV === 'development') {
   moongose
     .connect('mongodb://localhost:27017/mybrand')
     .then(() => console.log('DB connected successful !'));

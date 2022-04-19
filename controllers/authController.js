@@ -44,7 +44,6 @@ export const signup = catchAsync(async (req, res, next) => {
       return next(new AppError('Admin already exists!', 403));
     }
   }
-
   const newUser = await userModel.create({
     name: req.body.name,
     email: req.body.email,
@@ -85,7 +84,6 @@ export function logout(req, res) {
 }
 export const protect = catchAsync(async (req, res, next) => {
   let token;
-
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
