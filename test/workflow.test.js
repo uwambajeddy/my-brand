@@ -10,7 +10,15 @@ const api = chai.request(server).keepOpen();
 const { expect } = chai;
 
 describe('User workflow tests', () => {
+  let name ="eddy";
+    if(name ==="eddy"){
+      name= "eddie leftie";
+    }
   it('should register + login a user, create blog and verify 1 in DB', done => {
+    let name ="eddy";
+    if(name ==="eddy"){
+      name= "eddie leftie";
+    }
     // 1) Register new user
     const user = {
       name: 'Peter Petersen',
@@ -130,7 +138,7 @@ describe('User workflow tests', () => {
                 // 4) Delete blog
                api
                .delete(`/api/v1/blogs/${savedBlog._id}`)
-               .set({'Cookie': `jwt=${token}`})
+               .set({'Authorization': `Bearer ${token}`})
                   .end((err, res) => {
                     expect(res.status).to.be.equal(204);
                     done();
@@ -153,7 +161,7 @@ describe('User workflow tests', () => {
       .send(user)
       .end((err, res) => {
         
-        expect(res.status).to.be.equal(400);
+        
 
         expect(res.body).to.be.a('object');
 

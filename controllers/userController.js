@@ -69,7 +69,7 @@ export const getMe = catchAsync(async (req, res, next) => {
 
 export const updateUser = catchAsync(async (req, res, next) => {
   const existingUser = await userModel.find({ email: req.body.email });
-  if (existingUser && req.body.email !== req.user.email) {
+  if (existingUser.length > 0) {
     return next(new AppError('The email already exists!!', 409));
   }
   const user = await userModel.findById(req.user.id);

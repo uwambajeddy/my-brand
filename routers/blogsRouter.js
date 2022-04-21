@@ -57,30 +57,33 @@ router
  *    post:
  *      summary: Use to create a blog
  *      consumes:
- *        - application/json
+ *        - multipart/form-data
  *      tags:
  *         - blogs
  *      parameters:
- *        - name: blog
- *          in: body
- *          description: Use to create a blog
- *          required:
- *              -title,
- *              -body
- *          schema:
- *            type: object
- *          properties:
- *               title:
- *                 type: string
- *               body:
- *                 type: string
- *               date:
- *                 type: date
+ *        - name: image
+ *          in: formData
+ *          description: Blog image
+ *          required: true
+ *          type: file
+ *        - name: title
+ *          in: formData
+ *          description: Blog title
+ *          required: true
+ *          type: string
+ *        - name: body
+ *          in: formData
+ *          description: Blog description
+ *          required: true
+ *          type: string
+ *        - name: date
+ *          in: formData
+ *          description: Blog date
+ *          type: string
  *      responses:
  *        '201':
  *          description: Successfully created blog
- */
-/**
+ *
  * @swagger
  * /api/v1/blogs/{id}:
  *    get:
@@ -101,39 +104,140 @@ router
  *          description: No blog with that id
  *
  * @swagger
+ * /api/v1/blogs/like/{id}:
+ *    get:
+ *      summary: Use to like/dislike a blog
+ *      tags:
+ *         - blogs
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          description:  This is the blog id
+ *          required: true
+ *      responses:
+ *        '200':
+ *          description: The blog description with like/dislike
+ *          content:
+ *             application/json
+ *        '404':
+ *          description: No blog with that id
+ *
+ * @swagger
+ * /api/v1/blogs/comment/{id}:
+ *    get:
+ *      summary: Use to request all comments per blog
+ *      tags:
+ *        - comments
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            description:  This is the blog id
+ *            required: true
+ *      responses:
+ *        '200':
+ *          description: The All blog comments description
+ *        '404':
+ *            description: Invilid id
+ *
+ * @swagger
+ * /api/v1/blogs/comment/{id}:
+ *    post:
+ *      summary: Use to comment on a blog
+ *      tags:
+ *        - comments
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          description:  This is the blog id
+ *          required: true
+ *        - name: comment
+ *          in: body
+ *          description: Use to create a comment
+ *          required:
+ *              -comment
+ *          schema:
+ *            type: object
+ *          properties:
+ *               comment:
+ *                 type: string
+ *          example:
+ *               comment: after reading this articles I found that I never got interested in software dev before.
+ *      responses:
+ *        '200':
+ *          description: comment sent successfully
+ *          content:
+ *             application/json
+ *        '404':
+ *          description: Invilid id
+ *
+ * @swagger
+ * /api/v1/blogs/approve/{id}:
+ *    post:
+ *      summary: Use to approve a comment
+ *      tags:
+ *         - comments
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          description:  This is the comment id
+ *          required: true
+ *      responses:
+ *        '200':
+ *          description: The  comment description with approve/disapprove
+ *          content:
+ *             application/json
+ *        '404':
+ *          description: No comment with that id
+ *
+ * @swagger
  * /api/v1/blogs/{id}:
  *    patch:
  *      summary: Use to update a blog
  *      tags:
  *         - blogs
  *      consumes:
- *        - application/json
+ *        - multipart/form-data
+ *      parameters:
+ *        - name: image
+ *          in: formData
+ *          description: Blog image
+ *          required: true
+ *          type: file
+ *        - name: title
+ *          in: formData
+ *          description: Blog title
+ *          required: true
+ *          type: string
+ *        - name: body
+ *          in: formData
+ *          description: Blog description
+ *          required: true
+ *          type: string
+ *        - name: date
+ *          in: formData
+ *          description: Blog date
+ *          type: string
+ *      responses:
+ *        '200':
+ *               description: Successfully updated blog
+ *
+ * @swagger
+ * /api/v1/blogs/{id}:
+ *    delete:
+ *      summary: Use to delete a blog
+ *      tags:
+ *         - blogs
  *      parameters:
  *        - name: id
  *          in: path
- *          description: Use to update a blog with id
+ *          description: Use to delete a blog with id
  *          required:
  *               -id
  *          schema:
  *               type: string
- *        - name: blog
- *          in: body
- *          description: Use to update a blog with id
- *          required:
- *              -title,
- *              -body
- *          schema:
- *              type: object
- *          properties:
- *               title:
- *                 type: string
- *               body:
- *                 type: string
- *               date:
- *                 type: date
  *      responses:
- *        '200':
- *               description: Successfully updated blog
+ *        '204':
+ *               description: Successfully deleted blog
  */
 
 export default router;

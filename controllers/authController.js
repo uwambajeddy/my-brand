@@ -41,7 +41,7 @@ export const signup = catchAsync(async (req, res, next) => {
     const currentAdmin = await userModel.findOne({ role: 'admin' });
 
     if (currentAdmin) {
-      return next(new AppError('Admin already exists!', 403));
+      return next(new AppError('Admin already exists!', 401));
     }
   }
   const newUser = await userModel.create({
@@ -82,6 +82,7 @@ export function logout(req, res) {
   });
   res.status(200).json({ status: 'success', data: null });
 }
+
 export const protect = catchAsync(async (req, res, next) => {
   let token;
   if (
@@ -190,7 +191,7 @@ export const resetPassword = catchAsync(async (req, res, next) => {
 export const updatePassword = catchAsync(async (req, res, next) => {
   const user = await userModel.findById(req.user.id).select('+password');
 
-  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+  if (!(await user.correctPassword(req.body.password_current, user.password))) {
     return next(new AppError('Your current password is wrong.', 401));
   }
 

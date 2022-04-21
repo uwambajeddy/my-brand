@@ -114,12 +114,11 @@ export const handleLike = catchAsync(async (req, res, next) => {
   if (!blog) {
     return next(new AppError('No Blog found with that ID', 404));
   }
-  if (!blog.likedBy.includes(req.user._id)) {
-    blog.likedBy.push(req.user._id);
+  if (!blog.likedBy.includes(req.user.id)) {
+    blog.likedBy.push(req.user.id);
     blog.save();
   } else {
-    const newLikes = blog.likedBy.filter(id => id === req.user.id);
-    blog.likedBy = newLikes;
+    blog.likedBy.pull(req.user.id);
     blog.save();
   }
 

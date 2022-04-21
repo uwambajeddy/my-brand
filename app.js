@@ -88,7 +88,7 @@ app.use('/api/v1/blogs/', blogsRouter);
 app.use('/api/v1/messages/', messageRouter);
 
 app.all('*', (req, res, next) => {
-  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+  next(new AppError(`Opps! can't find "${req.originalUrl}" on this server!`, 404));
 });
 
 app.use(globalErrorHandler);

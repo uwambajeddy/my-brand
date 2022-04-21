@@ -24,7 +24,7 @@ router.post('/signup', signup);
 router.post('/login', login);
 router.get('/logout', logout);
 
-router.get('/forgotpassword', forgotPassword);
+router.post('/forgotpassword', forgotPassword);
 router.patch('/resetpassword/:token', resetPassword);
 
 router.use(protect);
@@ -47,6 +47,35 @@ router.route('/:id').get(getUser);
  *    responses:
  *      '200':
  *        description: The All users description
+ */
+/**
+ * @swagger
+ * /api/v1/user/updateMe:
+ *  patch:
+ *    summary: Use to update user info
+ *    tags:
+ *         - users
+ *    consumes:
+ *        - multipart/form-data
+ *    parameters:
+ *        - name: image
+ *          in: formData
+ *          description: User image
+ *          required: true
+ *          type: file
+ *        - name: name
+ *          in: formData
+ *          description: User name
+ *          required: true
+ *          type: string
+ *        - name: email
+ *          in: formData
+ *          description: User email
+ *          required: true
+ *          type: string
+ *    responses:
+ *      '200':
+ *        description: user updated successfully
  */
 /**
  * @swagger
@@ -101,12 +130,18 @@ router.route('/:id').get(getUser);
  *          properties:
  *               name:
  *                 type: string
+ *                 example: Eddy Uwambaje
  *               email:
- *                 type: string
+ *                 type: strin
  *               password:
  *                 type: string
  *               password_confirm:
  *                 type: string
+ *          example:
+ *               name: Eddy Uwambaje
+ *               email: uwambajeddy@gmail.com
+ *               password: uwambajeddy
+ *               password_confirm: uwambajeddy
  *      responses:
  *        '201':
  *          description: Successfully created user
@@ -130,10 +165,13 @@ router.route('/:id').get(getUser);
  *          schema:
  *            type: object
  *          properties:
- *               name:
- *                 type: string
  *               email:
  *                 type: string
+ *               password:
+ *                 type: string
+ *          example:
+ *               email: uwambajeddy@gmail.com
+ *               password: uwambajeddy
  *      responses:
  *        '201':
  *          description: Successfully logged in user
@@ -141,8 +179,66 @@ router.route('/:id').get(getUser);
 
 /**
  * @swagger
+ * /api/v1/user/updatepassword:
+ *    patch:
+ *      summary: Use to update user password
+ *      tags:
+ *        - authentication
+ *      parameters:
+ *        - name: user
+ *          in: body
+ *          description: Use to update user password
+ *          required:
+ *              -password,
+ *              -password_confirm
+ *              -password_current
+ *          schema:
+ *            type: object
+ *          properties:
+ *               password:
+ *                 type: string
+ *               password_confirm:
+ *                 type: string
+ *               password_current:
+ *                 type: string
+ *          example:
+ *               password: uwambajeddy1
+ *               password_confirm: uwambajeddy1
+ *               password_current: uwambajeddy
+ *      responses:
+ *        '200':
+ *          description: Password successfully updated
+ *          content:
+ *             application/json
+ *
+ * @swagger
+ * /api/v1/user/forgotpassword:
+ *    post:
+ *      summary: Use to send reset password token
+ *      tags:
+ *        - authentication
+ *      parameters:
+ *        - name: user
+ *          in: body
+ *          description: Use to send reset password token
+ *          required:
+ *              -emain
+ *          schema:
+ *            type: object
+ *          properties:
+ *               email:
+ *                 type: string
+ *          example:
+ *               email: uwambajeddy@gmail.com
+ *      responses:
+ *        '200':
+ *          description: sent a reset token successfully
+ *          content:
+ *             application/json
+ *
+ * @swagger
  * /api/v1/user/resetpassword/{token}:
- *    get:
+ *    patch:
  *      summary: Use to reset user password
  *      tags:
  *        - authentication
@@ -151,6 +247,22 @@ router.route('/:id').get(getUser);
  *          name: token
  *          description:  This is the user token
  *          required: true
+ *        - name: user
+ *          in: body
+ *          description: Use to reset user password
+ *          required:
+ *              -password,
+ *              -password_confirm
+ *          schema:
+ *            type: object
+ *          properties:
+ *               password:
+ *                 type: string
+ *               password_confirm:
+ *                 type: string
+ *          example:
+ *               password: uwambajeddy
+ *               password_confirm: uwambajeddy
  *      responses:
  *        '200':
  *          description: Password successfully updated
@@ -158,41 +270,6 @@ router.route('/:id').get(getUser);
  *             application/json
  *        '404':
  *          description: Invilid token
- *
- * @swagger
- * /api/v1/user/{id}:
- *    patch:
- *      summary: Use to update a user
- *      tags:
- *         - users
- *      consumes:
- *        - application/json
- *      parameters:
- *        - name: id
- *          in: path
- *          description: Use to update a user with id
- *          required:
- *               -id
- *          schema:
- *               type: string
- *        - name: user
- *          in: body
- *          description: Use to update a user with id
- *          required:
- *              -title,
- *              -body
- *          schema:
- *              type: object
- *          properties:
- *               title:
- *                 type: string
- *               body:
- *                 type: string
- *               date:
- *                 type: date
- *      responses:
- *        '200':
- *               description: Successfully updated user
  */
 
 export default router;
