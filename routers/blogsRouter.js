@@ -22,7 +22,7 @@ router
   .patch(protect, uploadBlogImage, restrictedTo('admin'), updateBlog)
   .delete(protect, restrictedTo('admin'), deleteBlog);
 
-router.route('/like/:id').get(protect, handleLike);
+router.route('/like/:id').post(protect, handleLike);
 
 router
   .route('/comment/:id')
@@ -103,7 +103,7 @@ router
  *
  * @swagger
  * /api/v1/blogs/like/{id}:
- *    get:
+ *    post:
  *      summary: Use to like/dislike a blog
  *      tags:
  *         - blogs
@@ -188,6 +188,10 @@ router
  *      consumes:
  *        - multipart/form-data
  *      parameters:
+ *        - in: path
+ *          name: id
+ *          description:  This is the blog id
+ *          required: true
  *        - name: image
  *          in: formData
  *          description: Blog image

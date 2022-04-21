@@ -52,6 +52,9 @@ export const getBlogs = catchAsync(async (req, res, next) => {
 export const getBlog = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   let blog = await blogModel.findById(id);
+  if (!blog) {
+    return next(new AppError('No Blog found with that ID', 404));
+  }
   const comments = await commentModel.find({ blog: id });
   blog = blog.toJSON();
   blog.comments = comments;

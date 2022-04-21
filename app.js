@@ -23,7 +23,7 @@ import { dirname } from 'path';
 const __filename = fileURLToPath( import.meta.url );
 const __dirname = dirname(__filename);
 
-const { urlencoded, json } = bodyParser;
+const { urlencoded, json } = bodyParser; 
 
 const app = express();
 
@@ -38,13 +38,13 @@ const swaggerOptions = {
         name: 'Eddy Uwambaje',
         email: "uwambajeddy@gmail.com"
       },
-      servers: [
-        `${
+      server: [{
+        url:`${
           process.env.NODE_ENV === 'development'
             ? 'http://localhost:3000'
             : 'https://uwambajeeddy.herokuapp.com/'
         }`
-      ]
+      }]
     }
   },
   apis: [`${__dirname}/routers/*.js`]
