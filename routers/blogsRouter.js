@@ -100,8 +100,6 @@ router
  *          description: The blog description with id
  *          content:
  *             application/json
- *        '404':
- *          description: No blog with that id
  *
  * @swagger
  * /api/v1/blogs/like/{id}:
@@ -119,8 +117,6 @@ router
  *          description: The blog description with like/dislike
  *          content:
  *             application/json
- *        '404':
- *          description: No blog with that id
  *
  * @swagger
  * /api/v1/blogs/comment/{id}:
@@ -136,8 +132,6 @@ router
  *      responses:
  *        '200':
  *          description: The All blog comments description
- *        '404':
- *            description: Invilid id
  *
  * @swagger
  * /api/v1/blogs/comment/{id}:
@@ -167,12 +161,10 @@ router
  *          description: comment sent successfully
  *          content:
  *             application/json
- *        '404':
- *          description: Invilid id
  *
  * @swagger
- * /api/v1/blogs/approve/{id}:
- *    post:
+ * /api/v1/blogs/comment/approve/{id}:
+ *    get:
  *      summary: Use to approve a comment
  *      tags:
  *         - comments
@@ -186,8 +178,6 @@ router
  *          description: The  comment description with approve/disapprove
  *          content:
  *             application/json
- *        '404':
- *          description: No comment with that id
  *
  * @swagger
  * /api/v1/blogs/{id}:

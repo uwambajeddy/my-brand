@@ -86,8 +86,6 @@ export default router;
  *          description: The message description with id
  *          content:
  *             application/json
- *        '404':
- *          description: No message with that id
  *
  * @swagger
  * /api/v1/messages/{id}:

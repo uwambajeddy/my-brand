@@ -57,6 +57,7 @@ const sendErrorProd = (err, res, req) => {
       message: err.message
     });
   } else {
+    console.error('ERROR 💥', err);
     if (!req.originalUrl.includes('api')) {
       return res.status(500).render('error', {
         status: 'error',
@@ -65,7 +66,6 @@ const sendErrorProd = (err, res, req) => {
         message: 'Something went very wrong!'
       });
     }
-    console.error('ERROR 💥', err);
     res.status(500).json({
       status: 'error',
       message: 'Something went very wrong!'

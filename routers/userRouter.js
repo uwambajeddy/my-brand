@@ -268,8 +268,6 @@ router.route('/:id').get(getUser);
  *          description: Password successfully updated
  *          content:
  *             application/json
- *        '404':
- *          description: Invilid token
  */
 
 export default router;
