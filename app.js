@@ -13,6 +13,7 @@ import swaggerJsDoc from 'swagger-jsdoc';
 import messageRouter from './routers/messageRouter.js';
 import userRouter from './routers/userRouter.js';
 import apiRouter from './routers/apiRouter.js';
+import viewRouter from './routers/viewRouter.js';
 import blogsRouter from './routers/blogsRouter.js';
 import globalErrorHandler from './controllers/errorController.js';
 import AppError from './util/AppError.js';
@@ -81,7 +82,7 @@ const limit = rateLimit({
 
 app.use('/api', limit);
 
-// app.use('/', viewRoute);
+app.use('/', viewRouter);
 app.use('/api/', apiRouter);
 app.use('/api/v1/user/', userRouter);
 app.use('/api/v1/blogs/', blogsRouter);

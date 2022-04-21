@@ -1,4 +1,4 @@
-/<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
         <!-- Required meta tags -->
@@ -42,69 +42,36 @@
         </header>
         <!--================Header Menu Area =================-->
        
-		<!--================Home Banner Area =================-->
-		<section class="home_banner_area_lil">
+		<!--================login Banner Area =================-->
+		<section class="login_banner_area">
 			<div class="container">
-			<div class="media">
-                <div class="banner_content ">
-                    <h2>Projects</h2>
-                    <div class="page_link">
-                        <a href="/index.html" class="page_link_a">Home</a>
-                        <a href="/project.html">Projects</a>
+                <form class="contact_form" action="#" method="post">
+                    <h2>Signup</h2>
+                    <div class="contact_form_text">
+                        <div class="form-group form-group_icon">
+                            <i class="fa fa-user"></i>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group form-group_icon">
+                            <i class="fa fa-user"></i>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group form-group_icon">
+                            <i class="fa fa-lock"></i>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+                        </div>
+                        <div class="form-group form-group_icon">
+                            <i class="fa fa-lock"></i>
+                            <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Confirm your password">
+                        </div>
+                        <button type="submit" value="submit" class="btn submit_btn">Create</button>
                     </div>
-                </div>
-					 </div>
-				 
+                   <p>Already have an account? click <a href="/login">here</a></p>
+                    
+                </form>
 		 </div>
 	 </section>
-		<!--================Home Banner Area =================-->
-		
-		<!--================Home Gallery Area =================-->
-        <section class="home_gallery_area">
-        	<div class="container">
-        		<div class="main_title">
-        			<h2>My Latest Featured Projects</h2>
-        			<p>Who are in extremely love with eco friendly system.</p>
-        		</div>
-        		<div class="main_content">
-        			
-					<div class="h_gallery_item">
-						<div class="g_img_item">
-							<img class="img-fluid" src="img/gallery/project-1.jpg" alt="">
-							<a class="light" href="img/gallery/project-1.jpg"><img src="img/gallery/icon.png" alt=""></a>
-						</div>
-						<div class="g_item_text">
-							<h4>3D Helmet Design</h4>
-							<p>Client Project</p>
-						</div>
-					</div>
-					
-					<div class="h_gallery_item">
-						<div class="g_img_item">
-							<img class="img-fluid" src="img/gallery/project-1.jpg" alt="">
-							<a class="light" href="img/gallery/project-1.jpg"><img src="img/gallery/icon.png" alt=""></a>
-						</div>
-						<div class="g_item_text">
-							<h4>3D Helmet Design</h4>
-							<p>Client Project</p>
-						</div>
-					</div>
-					
-					<div class="h_gallery_item">
-						<div class="g_img_item">
-							<img class="img-fluid" src="img/gallery/project-1.jpg" alt="">
-							<a class="light" href="img/gallery/project-1.jpg"><img src="img/gallery/icon.png" alt=""></a>
-						</div>
-						<div class="g_item_text">
-							<h4>3D Helmet Design</h4>
-							<p>Client Project</p>
-						</div>
-					</div>
-					
-        		</div>
-        	</div>
-        </section>
-		<!--================End Home Gallery Area =================-->
+		<!--================login Banner Area =================-->
 		
 		  <!--================Footer Area =================-->
 		  <footer class="footer_area">
@@ -125,7 +92,7 @@
         					<div id="mc_embed_signup">
                                 <form target="_blank" action="#" method="get" class="subscribe_form relative">
                                 	<div class="Newsletter_form input-group">
-                                        <input name="EMAIL" placeholder="Enter email address"  type="email">
+                                        <input name="EMAIL" placeholder="Enter email address" id="email" type="email">
                                         <button class="btn sub-btn"><span class="lnr lnr-arrow-right"></span></button>		
                                     </div>				
                                     <div class="mt-10 info"></div>
@@ -151,6 +118,7 @@
 
 		 <!--  JavaScript -->
 		 <script src="./js/main.js"></script>
+		 <script src="./js/registration.js"></script>
 		 <!--  JavaScript -->
     </body>
 	
