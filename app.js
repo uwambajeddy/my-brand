@@ -29,6 +29,7 @@ const app = express();
 
 const swaggerOptions = {
   swaggerDefinition: {
+    swagger: "2.0",
     info: {
       version: '1.0.0',
       title: 'Uwambaje Eddy portfolio API',

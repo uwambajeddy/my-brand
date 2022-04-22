@@ -60,7 +60,7 @@ export default router;
  *                 type: string
  *               message:
  *                 type: string
-*          example:
+ *          example:
  *               name: Umuringa Lucille
  *               email: umuringalucille@gmail.com
  *               subject: Offer a web dev job
