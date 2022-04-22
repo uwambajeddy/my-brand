@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import ejs from 'ejs';
 
-export class Email {
+class Email {
   constructor(user, url) {
     this.to = user[0].email;
     this.firstName = user[0].first_name;
@@ -70,25 +70,4 @@ export class Email {
   }
 }
 
-const sendEmail = async options => {
-  const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
-    auth: {
-      user: process.env.EMAIL_USERNAME,
-      pass: process.env.EMAIL_PASSWORD
-    }
-  });
-
-  const mailOptions = {
-    from: 'Uwambaje Eddy <uwambajeddy@gmail.com>',
-    to: options.email,
-    subject: options.subject,
-    text: options.message
-    // html:
-  };
-
-  await transporter.sendMail(mailOptions);
-};
-
-export default sendEmail;
+export default Email;

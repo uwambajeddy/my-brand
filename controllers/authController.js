@@ -3,7 +3,7 @@ import { createHash } from 'crypto';
 import { promisify } from 'util';
 import catchAsync from '../util/catchAsync.js';
 import AppError from '../util/AppError.js';
-import sendEmail from '../util/email.js';
+import Email from '../util/email.js';
 import userModel from '../models/userModel.js';
 
 const { sign, verify } = jsonwebtoken;
@@ -51,6 +51,9 @@ export const signup = catchAsync(async (req, res, next) => {
     password_confirm: req.body.password_confirm,
     role: req.body.role
   });
+  const url = `${req.protocol}://${req.get('host')}/projects`;
+
+  await new Email(newUser, url).sendWelcome();
 
   createSendToken(newUser, 201, res);
 });
@@ -141,27 +144,18 @@ export const forgotPassword = catchAsync(async (req, res, next) => {
     'host'
   )}/api/v1/user/resetpassword/${resetToken}`;
 
-  const message = `Forgot your password? Submit a PATCH request with your new password and password_confirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
-
   try {
-    await sendEmail({
-      email: user.email,
-      subject: 'Your password reset token (valid for 10 min)',
-      message
-    });
-
+    await new Email(user, resetURL).sendPasswordReset();
     res.status(200).json({
       status: 'success',
-      message: 'Token sent to email!'
+      message: 'token send to Email'
     });
   } catch (err) {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });
-
     return next(
-      new AppError('There was an error sending the email. Try again later!'),
-      500
+      new AppError('There was an error sending email. Try again later.', 500)
     );
   }
 });
