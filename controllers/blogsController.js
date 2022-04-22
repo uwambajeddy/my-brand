@@ -157,7 +157,7 @@ export const handleLike = catchAsync(async (req, res, next) => {
 
 export const getAllComments = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  const comments = await commentModel.find({ blog: id });
+  const comments = await commentModel.find({ blog: id, approve: true });
   if (!comments) {
     return next(new AppError('No Comments found with that ID', 404));
   }
