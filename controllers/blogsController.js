@@ -1,4 +1,5 @@
 import multer from 'multer';
+import mongoose from 'mongoose';
 import catchAsync from '../util/catchAsync.js';
 import AppError from '../util/AppError.js';
 import blogModel from '../models/blogModel.js';
@@ -36,10 +37,15 @@ export const getBlogs = catchAsync(async (req, res, next) => {
         from: 'comments',
         as: 'comments',
         let: { blog: '$_id' },
-        pipeline: [{ $match: { $expr: { $eq: ['$blog', '$$blog'] } } }]
+        pipeline: [
+          {
+            $match: { $expr: { $eq: ['$blog', '$$blog'] }, approve: true }
+          }
+        ]
       }
     }
   ]);
+
   res.status(200).json({
     status: 'success',
     results: blogs.length,
@@ -51,16 +57,32 @@ export const getBlogs = catchAsync(async (req, res, next) => {
 
 export const getBlog = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  let blog = await blogModel.findById(id);
+  const blog = await blogModel.aggregate([
+    {
+      $match: { _id: mongoose.Types.ObjectId(id) }
+    },
+    {
+      $lookup: {
+        from: 'comments',
+        as: 'comments',
+        let: { blog: '$_id' },
+        pipeline: [
+          {
+            $match: {
+              $expr: { $eq: ['$blog', '$$blog'] },
+              approve: true
+            }
+          }
+        ]
+      }
+    }
+  ]);
   if (!blog) {
     return next(new AppError('No Blog found with that ID', 404));
   }
-  const comments = await commentModel.find({ blog: id });
-  blog = blog.toJSON();
-  blog.comments = comments;
+
   res.status(200).json({
     status: 'success',
-    totalComments: comments.length,
     data: {
       blog
     }
