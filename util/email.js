@@ -1,12 +1,17 @@
 import nodemailer from 'nodemailer';
 import ejs from 'ejs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath( import.meta.url );
+const __dirname = dirname(__filename);
 
 class Email {
   constructor(user, url) {
-    this.to = user[0].email;
-    this.firstName = user[0].first_name;
+    this.to = user.email;
+    this.firstName = user.name;
     this.url = url;
-    this.from = `My Brand <${process.env.EMAIL_FROM}>`;
+    this.from = `Eddy Uwambaje <${process.env.EMAIL_FROM}>`;
   }
 
   newTransport() {
