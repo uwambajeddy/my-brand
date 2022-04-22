@@ -44,11 +44,14 @@ export const signup = catchAsync(async (req, res, next) => {
       return next(new AppError('Admin already exists!', 401));
     }
   }
+
   const newUser = await userModel.create({
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
     password_confirm: req.body.password_confirm,
+    // eslint-disable-next-line prettier/prettier
+    image: `https://ui-avatars.com/api/?name=${req.body.name.replaceAll(" ", "%20")}`,
     role: req.body.role
   });
   const url = `${req.protocol}://${req.get('host')}/projects`;

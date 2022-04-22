@@ -20,10 +20,7 @@ const userSchema = new Schema({
     lowercase: true,
     validate: [isEmail, 'Please! provide valid email']
   },
-  image: {
-    type: String,
-    default: 'user_icon.jpg'
-  },
+  image: String,
   password: {
     type: String,
     required: [true, 'Please! provide password'],
