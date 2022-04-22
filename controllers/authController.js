@@ -51,7 +51,7 @@ export const signup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     password_confirm: req.body.password_confirm,
     // eslint-disable-next-line prettier/prettier
-    image: `https://ui-avatars.com/api/?name=${req.body.name.replaceAll(" ", "%20")}`,
+    image: `https://ui-avatars.com/api/?name=${req.body.name.replace(/ /g, "%20")}`,
     role: req.body.role
   });
   const url = `${req.protocol}://${req.get('host')}/projects`;
