@@ -2,6 +2,17 @@
 @import url("https://fonts.googleapis.com/css?family=Heebo:300,400,700,900|Roboto:300,400,500,700");
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: -webkit-linear-gradient(282deg, #b33dfd 0%, #0043ff 100%);
+  border-radius: 7px;
+}
+
 .list {
   list-style: none;
   margin: 0px;
@@ -853,7 +864,7 @@ h1, h2, h3, h4, h5, h6 {
   /*----------------------------------------------------*/
   
   .login_banner_area{
-    height: 100vh;
+    min-height: 900px;
     background: -webkit-linear-gradient(239deg, #766dff 0%, #88f3ff 100%);
   }
   .forgot-password{
@@ -871,7 +882,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 20px;
     max-width: 500px;
     transform: translate(-50%,-50%);
-    top: 50%;
+    top: 450px;
     left: 50%;
     background:#1000ff2b;
     position: absolute;
