@@ -10,10 +10,6 @@ const api = chai.request(server).keepOpen();
 const { expect } = chai;
 
 describe('User workflow tests', () => {
-  let name ="eddy";
-    if(name ==="eddy"){
-      name= "eddie leftie";
-    }
   it('should register + login a user, create blog and verify 1 in DB', done => {
     let name ="eddy";
     if(name ==="eddy"){
