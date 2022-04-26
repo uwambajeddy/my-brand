@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'production') {
   moongose
     .connect('mongodb://localhost:27017/mybrand')
     .then(() => console.log('DB connected successful !'));
-}
+} 
 
 const port = process.env.PORT || 8000;
 
