@@ -1,3 +1,4 @@
+import axios from 'axios';
 import catchAsync from '../util/catchAsync.js';
 
 export const homePage = catchAsync(async (req, res, next) => {
@@ -16,7 +17,12 @@ export const signupPage = catchAsync(async (req, res, next) => {
 });
 
 export const blogsPage = catchAsync(async (req, res, next) => {
-  res.status(200).render('blog');
+  const blogs = await axios.get(
+    'https://uwambajeeddy.herokuapp.com/api/v1/blogs'
+  );
+  res.status(200).render('blog', {
+    blogs: blogs.data.data.blogs
+  });
 });
 
 export const blogPage = catchAsync(async (req, res, next) => {
