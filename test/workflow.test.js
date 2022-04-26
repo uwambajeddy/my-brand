@@ -78,7 +78,7 @@ describe('User workflow tests', () => {
                 });
               });
             });
-  }).timeout(10000);
+  }).timeout(30000);
 
   it('should register + login a user, create blog and delete it from DB', done => {
     // 1) Register new user
@@ -142,7 +142,7 @@ describe('User workflow tests', () => {
               });
           });
       });
-  }).timeout(10000);
+  }).timeout(30000);
 
   it('should register user with invalid input', done => {
     // Register new user with invalid inputs
@@ -156,9 +156,6 @@ describe('User workflow tests', () => {
       .post('/api/v1/user/signup')
       .send(user)
       .end((err, res) => {
-        
-        
-
         expect(res.body).to.be.a('object');
 
         expect(res.body.message).to.be.equal(
@@ -166,5 +163,5 @@ describe('User workflow tests', () => {
         );
         done();
       });
-  }).timeout(10000);
+  }).timeout(30000);
 });

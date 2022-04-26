@@ -76,7 +76,7 @@ const sendErrorProd = (err, res, req) => {
 export default (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development' ||  process.env.NODE_ENV === 'test-fix' ) {
     sendErrorDev(err, res, req);
   } else if (
     process.env.NODE_ENV === 'production' ||
