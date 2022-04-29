@@ -77,7 +77,7 @@ describe('User workflow tests', () => {
             });
   }).timeout(30000);
 
-  it.skip('should register + login a user, create blog and delete it from DB', done => {
+  it('should register + login a user, create blog and delete it from DB', done => {
     // 1) Register new user
     const user = {
       name: 'Peter Petersen',
