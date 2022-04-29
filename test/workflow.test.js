@@ -17,7 +17,7 @@ describe('User workflow tests', () => {
       name: 'Peter Petersen',
       email: 'mail@petersen.com',
       password: '12345678',
-      password_confirm: '1234567',
+      password_confirm: '12345678',
       role: "admin"
     };
    api
