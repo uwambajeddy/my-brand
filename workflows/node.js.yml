@@ -1,0 +1,31 @@
+name: coverage badge
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install modules
+      run: yarn --prefer-offline
+
+    - name: Run unit tests with coverage
+      run: |
+        SUMMARY="$(c8 --r html -r text --all  -x 'public/**' -x 'coverage/**' --check-coverage npm test | tail -2 | head -1)"
+        TOKENS=($SUMMARY)
+        echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
+
+    - name: Create Coverage Badge
+      uses: schneegans/dynamic-badges-action@v1.1.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: 3fdf0de41ce67168c3891aad81435e07
+        filename: my-brand_coverage.json
+        label: coverage
+        message: ${{ env.COVERAGE }}
+        namedLogo: jest
+        color: blue
+        logoColor: lightblue
