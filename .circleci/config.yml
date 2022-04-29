@@ -13,7 +13,7 @@ jobs:
           command: npm install
       - run:
           name: Run Tests
-          command: npm run coverage
+          command: npm run test
 
 workflows:
   orb-free-workflow:
