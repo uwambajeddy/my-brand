@@ -1,31 +1,67 @@
-name: coverage badge
+name: CI
+
 on:
   push:
-    branches: [ master ]
+    branches: [main]
+  pull_request: {}
 
 jobs:
-  checks:
-    runs-on: ubuntu-20.04
+  test:
+    name: Node.js v${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [12, 14, 16]
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@main
 
-    - name: Install modules
-      run: npm i
+      - name: (env) setup node v${{ matrix.node }}
+        uses: actions/setup-node@main
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
 
-    - name: Run unit tests with coverage
-      run: |
-        SUMMARY="$(c8 --r html -r text --all  -x 'public/**' -x 'coverage/**' --check-coverage npm test | tail -3 | head -1)"
-        TOKENS=($SUMMARY)
-        echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
+      - name: (env) prepare
+        run: curl -L https://pnpm.js.org/pnpm.js | node - add --global pnpm
 
-    - name: Create Coverage Badge
-      uses: schneegans/dynamic-badges-action@v1.1.0
-      with:
-        auth: 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
-        gistID: 3fdf0de41ce67168c3891aad81435e07
-        filename: my-brand_coverage.json
-        label: coverage
-        message: ${{ env.COVERAGE }}
-        namedLogo: jest
-        color: blue
-        logoColor: lightblue
+      - name: (env) cache
+        id: cache
+        uses: actions/cache@main
+        with:
+          path: /tmp/pnpmstore
+          key: ${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-${{ matrix.node }}-
+
+      - name: (env) restore cache
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: lz4 -d /tmp/pnpmstore | tar -xf - ;
+
+      - name: Install
+        run: pnpm install
+
+      - name: (env) prepare cache
+        run: tar -cf - ~/.pnpm-store | lz4 > /tmp/pnpmstore
+
+      - name: Compiles
+        run: pnpm run build
+
+      - name: (coverage) Install
+        if: matrix.node >= 16
+        run: pnpm i -g c8
+
+      - name: Test
+        if: matrix.node < 16
+        run: npm test
+
+      - name: (coverage) Test
+        if: matrix.node >= 16
+        run: c8 --include=src pnpm test
+
+      - name: Check Types
+        run: pnpm run typecheck
+
+      - name: (coverage) Report
+        if: matrix.node >= 16
+        run: |-
+          c8 report --reporter=text-lcov > coverage.lcov
+          bash <(curl -s https://codecov.io/bash)
