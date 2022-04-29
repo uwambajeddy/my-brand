@@ -8,7 +8,7 @@
     "start": "node server.js",
     "start:dev": "NODE_ENV=development nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
-    "test": "NODE_ENV=test mocha --exit",
+    "test": "NODE_ENV=test-fix mocha --exit",
     "test-fix": "NODE_ENV=test-fix mocha --exit",
     "coverage": "c8 --r html -r text --all  -x 'public/**' -x 'coverage/**' --check-coverage npm test "
   },
