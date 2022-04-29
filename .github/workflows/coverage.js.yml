@@ -43,9 +43,6 @@ jobs:
       - name: (env) prepare cache
         run: tar -cf - ~/.pnpm-store | lz4 > /tmp/pnpmstore
 
-      - name: Compiles
-        run: pnpm run build
-
       - name: (coverage) Install
         if: matrix.node >= 16
         run: pnpm i -g c8
@@ -56,13 +53,10 @@ jobs:
 
       - name: (coverage) Test
         if: matrix.node >= 16
-        run: c8 --include=src pnpm test
-
-      - name: Check Types
-        run: pnpm run typecheck
+        run: pnpm coverage
 
       - name: (coverage) Report
         if: matrix.node >= 16
         run: |-
-          c8 report --reporter=text-lcov > coverage.lcov
+          c8 report --reporter=text-lcov npm test > coverage.lcov
           bash <(curl -s https://codecov.io/bash)
