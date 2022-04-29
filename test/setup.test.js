@@ -8,9 +8,12 @@ import userModel from '../models/userModel.js';
 
 config({ path: '.env' });
 
-moongose
-  .connect('mongodb://localhost:27017/mybrand_test')
-  .then(() => console.log('Test DB connected successful !'));
+const DB_TEST = process.env.DATABASE_TEST.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
+
+ moongose.connect(DB_TEST).then(() => console.log('Test DB connected successful !'));
 
 beforeEach(done => {
   userModel.deleteMany({}, function(err) {});
