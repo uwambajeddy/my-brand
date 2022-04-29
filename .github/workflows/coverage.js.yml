@@ -22,8 +22,8 @@ jobs:
       uses: schneegans/dynamic-badges-action@v1.1.0
       with:
         auth: ${{ secrets.GIST_SECRET }}
-        gistID: <your_gist_id>
-        filename: <your_repo>_coverage.json
+        gistID: 3fdf0de41ce67168c3891aad81435e07
+        filename: my-brand_coverage.json
         label: coverage
         message: ${{ env.COVERAGE }}
         namedLogo: jest
