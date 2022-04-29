@@ -11,7 +11,7 @@ const { expect } = chai;
 
 describe('User workflow tests', () => {
   
-  it.skip('should register + login a user, create blog and verify 1 in DB', done => {
+  it('should register + login a user, create blog and verify 1 in DB', done => {
     // 1) Register new user
     const user = {
       name: 'Peter Petersen',
