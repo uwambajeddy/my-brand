@@ -58,14 +58,14 @@ export const signup = catchAsync(async (req, res, next) => {
 
   if(process.env.NODE_ENV !== "test"){
     try{
-
+      
       await new Email(newUser, url).sendWelcome();
     }catch(err){
-      next();
+      console.log(err);
     }
   }
-
   createSendToken(newUser, 201, res);
+
 });
 
 export const login = catchAsync(async (req, res, next) => {
