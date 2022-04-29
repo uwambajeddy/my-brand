@@ -37,7 +37,11 @@ class Email {
   async send(template, subject) {
     // 1) Render HTML based on a ejs template
     const html = await ejs.renderFile(
+<<<<<<< HEAD
       `./../views/email/${template}.ejs`,
+=======
+      `${__dirname}/../views/email/${template}.ejs`,
+>>>>>>> cd59fe1d3274d874646ea1c0b7892ddb6c5692e9
       {
         firstName: this.firstName,
         url: this.url,

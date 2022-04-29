@@ -9,7 +9,6 @@ import {
   logout,
   restrictedTo
 } from '../controllers/authController.js';
-
 import {
   getAllUsers,
   getUser,
@@ -133,7 +132,11 @@ router.route('/:id').get(getUser);
  *                 type: string
  *                 example: Eddy Uwambaje
  *               email:
+<<<<<<< HEAD
  *                 type: string
+=======
+ *                 type: strin
+>>>>>>> cd59fe1d3274d874646ea1c0b7892ddb6c5692e9
  *               password:
  *                 type: string
  *               password_confirm:

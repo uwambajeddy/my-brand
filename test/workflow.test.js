@@ -165,5 +165,4 @@ describe('User workflow tests', () => {
         done();
       });
   }).timeout(30000);
-
 });

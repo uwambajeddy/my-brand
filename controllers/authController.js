@@ -56,9 +56,13 @@ export const signup = catchAsync(async (req, res, next) => {
   });
   const url = `${req.protocol}://${req.get('host')}/projects`;
 
+<<<<<<< HEAD
   if(process.env.NODE_ENV !== "test"){
     await new Email(newUser, url).sendWelcome();
   }
+=======
+  await new Email(newUser, url).sendWelcome();
+>>>>>>> cd59fe1d3274d874646ea1c0b7892ddb6c5692e9
 
   createSendToken(newUser, 201, res);
 });
