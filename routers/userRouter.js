@@ -9,7 +9,6 @@ import {
   logout,
   restrictedTo
 } from '../controllers/authController.js';
-
 import {
   getAllUsers,
   getUser,
