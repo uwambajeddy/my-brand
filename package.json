@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "@types/chai-http": "^4.2.0",
+    "c8": "^7.11.2",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
     "cross-env": "^7.0.3",
