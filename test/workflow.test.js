@@ -12,16 +12,12 @@ const { expect } = chai;
 describe('User workflow tests', () => {
   
   it('should register + login a user, create blog and verify 1 in DB', done => {
-    let name ="eddy";
-    if(name ==="eddy"){
-      name= "eddie leftie";
-    }
     // 1) Register new user
     const user = {
       name: 'Peter Petersen',
       email: 'mail@petersen.com',
       password: '12345678',
-      password_confirm: '12345678',
+      password_confirm: '1234567',
       role: "admin"
     };
    api
