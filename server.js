@@ -3,6 +3,11 @@
 /* eslint-disable import/no-named-as-default */
 import moongose from 'mongoose';
 import { config } from 'dotenv';
+import path from 'path';
+import {fileURLToPath} from 'url';
+const filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(filename);
 
 import app from './app.js';
 
@@ -12,7 +17,7 @@ process.on('uncaughtException', err => {
   process.exit(1);
 });
 
-config({ path: '.env' });
+config({ path: `${__dirname}/.env` });
 
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',

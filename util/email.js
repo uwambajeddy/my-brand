@@ -1,7 +1,11 @@
 import nodemailer from 'nodemailer';
 import ejs from 'ejs';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import path from 'path';
+import {fileURLToPath} from 'url';
+
+const filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(filename);
 
 class Email {
   constructor(user, url) {
@@ -37,7 +41,7 @@ class Email {
   async send(template, subject) {
     // 1) Render HTML based on a ejs template
     const html = await ejs.renderFile(
-      `./../views/email/${template}.ejs`,
+      `${__dirname}/../views/email/${template}.ejs`,
       {
         firstName: this.firstName,
         url: this.url,
