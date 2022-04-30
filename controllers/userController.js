@@ -1,32 +1,40 @@
 import multer from 'multer';
+import sharp from 'sharp';
 import catchAsync from '../util/catchAsync.js';
 import AppError from '../util/AppError.js';
 import userModel from '../models/userModel.js';
 
-const multerStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/img/users');
-  },
-  filename: (req, file, cb) => {
-    const ext = file.mimetype.split('/')[1];
-    cb(null, `user_${Date.now()}.${ext}`);
-  }
-});
+const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
   } else {
-    cb(new AppError('Not image,Please upload only image', 400), false);
+    cb(new AppError('Not an image! Please upload only images.', 400), false);
   }
 };
 
-const uploads = multer({
+const upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter
 });
 
-export const uploadUserImage = uploads.single('image');
+export const uploadUserImage = upload.single('image');
+
+export const resizeUserPhoto = catchAsync(async (req, res, next) => {
+  
+  if (!req.file) return next();
+
+  req.file.originalname = `user-${Date.now()}.jpeg`;
+  await sharp(req.file.buffer)
+    .resize(120, 120)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`public/img/users/${req.file.originalname}`);
+
+  next();
+});
+
 
 export const getAllUsers = catchAsync(async (req, res, next) => {
   const users = await userModel.find({ active: true });
@@ -69,13 +77,14 @@ export const getMe = catchAsync(async (req, res, next) => {
 
 export const updateUser = catchAsync(async (req, res, next) => {
   const existingUser = await userModel.find({ email: req.body.email });
-  if (existingUser.length > 0) {
+  if (existingUser.length > 0 && req.user.email !== req.body.email) {
     return next(new AppError('The email already exists!!', 409));
   }
   const user = await userModel.findById(req.user.id);
   user.name = req.body.name;
   user.email = req.body.email;
-  if (req.file) user.image = req.file.filename;
+  if (req.file) user.image = req.file.originalname;
+  
   await user.save({ validateBeforeSave: false });
 
   res.status(200).json({

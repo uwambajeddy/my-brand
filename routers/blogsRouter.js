@@ -11,7 +11,8 @@ import {
   createComment,
   approveComment,
   getAllComments,
-  uploadBlogImage
+  uploadBlogImage,
+  resizeBlogPhoto
 } from '../controllers/blogsController.js';
 
 const router = express.Router();
@@ -19,7 +20,7 @@ const router = express.Router();
 router
   .route('/:id')
   .get(getBlog)
-  .patch(protect, uploadBlogImage, restrictedTo('admin'), updateBlog)
+  .patch(protect, restrictedTo('admin'), uploadBlogImage, resizeBlogPhoto, updateBlog)
   .delete(protect, restrictedTo('admin'), deleteBlog);
 
 router.route('/like/:id').post(protect, handleLike);
@@ -39,7 +40,7 @@ router
 router
   .route('/')
   .get(getBlogs)
-  .post(protect, restrictedTo('admin'), uploadBlogImage, createBlog);
+  .post(protect, restrictedTo('admin'), uploadBlogImage, resizeBlogPhoto, createBlog);
 
 /**
  * @swagger

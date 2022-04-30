@@ -1,32 +1,38 @@
+import sharp from 'sharp';
 import multer from 'multer';
 import catchAsync from '../util/catchAsync.js';
 import AppError from '../util/AppError.js';
 import projectModel from '../models/projectModel.js';
 
-const multerStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/img/project');
-  },
-  filename: (req, file, cb) => {
-    const ext = file.mimetype.split('/')[1];
-    cb(null, `project_${Date.now()}.${ext}`);
-  }
-});
+const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
   } else {
-    cb(new AppError('Not image,Please upload only image', 400), false);
+    cb(new AppError('Not an image! Please upload only images.', 400), false);
   }
 };
 
-const uploads = multer({
+const upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter
 });
 
-export const uploadProjectImage = uploads.single('image');
+export const uploadProjectImage = upload.single('image');
+
+export const resizeProjectPhoto = catchAsync(async (req, res, next) => {
+  if (!req.file) return next();
+
+  req.file.originalname = `project-${Date.now()}.jpeg`;
+  await sharp(req.file.buffer)
+    .resize(340, 340)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`public/img/project/${req.file.originalname}`);
+
+  next();
+});
 
 export const getProjects = catchAsync(async (req, res, next) => {
   const projects = await projectModel.find();
@@ -69,7 +75,7 @@ export const deleteProject = catchAsync(async (req, res, next) => {
 });
 
 export const createProject = catchAsync(async (req, res, next) => {
-  if (req.file) req.body.image = req.file.filename;
+  if (req.file) req.body.image = req.file.originalname;
 
   const project = await projectModel.create(req.body);
   res.status(201).json({

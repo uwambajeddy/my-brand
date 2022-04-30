@@ -6,6 +6,7 @@ import {
   getProject,
   deleteProject,
   updateProject,
+  resizeProjectPhoto,
   uploadProjectImage
 } from '../controllers/projectsController.js';
 
@@ -14,13 +15,13 @@ const router = express.Router();
 router
   .route('/:id')
   .get(getProject)
-  .patch(protect, uploadProjectImage, restrictedTo('admin'), updateProject)
+  .patch(protect, restrictedTo('admin'), uploadProjectImage, resizeProjectPhoto, updateProject)
   .delete(protect, restrictedTo('admin'), deleteProject);
 
 router
   .route('/')
   .get(getProjects)
-  .post(protect, restrictedTo('admin'), uploadProjectImage, createProject);
+  .post(protect, restrictedTo('admin'), uploadProjectImage, resizeProjectPhoto, createProject);
 
 /**
  * @swagger

@@ -1,3 +1,4 @@
+import sharp from 'sharp';
 import multer from 'multer';
 import mongoose from 'mongoose';
 import catchAsync from '../util/catchAsync.js';
@@ -5,30 +6,35 @@ import AppError from '../util/AppError.js';
 import blogModel from '../models/blogModel.js';
 import commentModel from '../models/commentModal.js';
 
-const multerStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/img/blog');
-  },
-  filename: (req, file, cb) => {
-    const ext = file.mimetype.split('/')[1];
-    cb(null, `blog_${Date.now()}.${ext}`);
-  }
-});
+const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
   } else {
-    cb(new AppError('Not image,Please upload only image', 400), false);
+    cb(new AppError('Not an image! Please upload only images.', 400), false);
   }
 };
 
-const uploads = multer({
+const upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter
 });
 
-export const uploadBlogImage = uploads.single('image');
+export const uploadBlogImage = upload.single('image');
+
+export const resizeBlogPhoto = catchAsync(async (req, res, next) => {
+  if (!req.file) return next();
+
+  req.file.originalname = `blog-${Date.now()}.jpeg`;
+  await sharp(req.file.buffer)
+    .resize(750, 350)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`public/img/blog/${req.file.originalname}`);
+
+  next();
+});
 
 export const getBlogs = catchAsync(async (req, res, next) => {
   const blogs = await blogModel.aggregate([
@@ -103,7 +109,7 @@ export const deleteBlog = catchAsync(async (req, res, next) => {
 });
 
 export const createBlog = catchAsync(async (req, res, next) => {
-  if (req.file) req.body.image = req.file.filename;
+  if (req.file) req.body.image = req.file.originalname;
 
   const blog = await blogModel.create(req.body);
   res.status(201).json({
@@ -115,7 +121,7 @@ export const createBlog = catchAsync(async (req, res, next) => {
 });
 
 export const updateBlog = catchAsync(async (req, res, next) => {
-  if (req.file) req.body.image = req.file.filename;
+  if (req.file) req.body.image = req.file.originalname;
 
   const blog = await blogModel.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
