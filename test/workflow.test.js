@@ -141,6 +141,7 @@ describe('User workflow tests', () => {
       });
   }).timeout(30000);
 
+  
   it('should register user with invalid input', done => {
     // Register new user with invalid inputs
     const user = {
@@ -161,4 +162,6 @@ describe('User workflow tests', () => {
         done();
       });
   }).timeout(30000);
+
+  
 });
