@@ -26,19 +26,21 @@
                             <article class=" blog_item">
                                <div class="blog_item_a">
                                </div>
+                               <% 
+                               let date= `${blog.date}`.split(" ");%>
                                 <div class="blog_item_b">
                                     <div class="blog_post">
-                                        <img src="img/blog/main-blog/m-blog-5.jpg" alt="">
+                                        <img src="/img/blog/<%= blog.image%>" alt="">
                                         <div class="blog_info">
                                             <ul class="blog_meta list">
-                                                <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                                <li><a href="#">1.2M Likes<i class="lnr lnr-heart"></i></a></li>
-                                                <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
+                                                <li><a href="#"><%= date[0] %> <%= date[1] %> <%= date[2] %> <%= date[3] %><i class="lnr lnr-calendar-full"></i></a></li>
+                                                <li><a href="#"><%= blog.likedBy.length%> Like<%= blog.likedBy.length>1 ? "s": ""%><i class="lnr lnr-heart"></i></a></li>
+                                                <li><a href="#"><%= blog.comments.length%> Comment<%= blog.comments.length >1 ? "s": ""%><i class="lnr lnr-bubble"></i></a></li>
                                             </ul>
                                         </div>
                                         <div class="blog_details">
-                                            <a href="single-blog"><h2>Telescopes 101</h2></a>
-                                            <p>MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction.</p>
+                                            <h2><%= blog.title %></h2>
+                                            <p><%= blog.body %></p>
                                             
                                         </div>
                                     </div>
@@ -46,64 +48,58 @@
 									<div class="single-post-area">
 										<div class="navigation-area">
 												<div class=" nav-left ">
+                                                    <a href="#">
 													<div class="thumb">
 														<div class="arrow">
-															<a href="#"><span class="lnr lnr-arrow-left"></span></a>
+															<span class="lnr lnr-arrow-left"></span>
 														</div>
 													</div>
 													
 													<div class="detials">
 														<p>Prev Post</p>
-														<a href="#"><h4>Space The Final Frontier</h4></a>
+													    <h4>Space The Final Frontier</h4>
 													</div>
+                                                </a>
 												</div>
 												<div class="nav-right">
+                                                    <a href="#">
 													<div class="detials">
 														<p>Next Post</p>
-														<a href="#"><h4>Telescopes 101</h4></a>
+                                                        <h4>Telescopes 101</h4>
 													</div>
 													
 													<div class="thumb">
 														<div class="arrow">
-															<a href="#"><span class="lnr lnr-arrow-right"></span></a>
+															<span class="lnr lnr-arrow-right"></span>
 														</div>
-													</div>										
+													</div>	
+                                                </a>									
 												</div>	
 										</div>
 									</div>
 				
 				
 									<div class="comments-area">
-										<h4>05 Comments</h4>
+										<h4><%= blog.comments.length%> Comment<%= blog.comments.length >1 ? "s": ""%></h4>
 										<div class="comment-list">
+                                            <% blog.comments.map(comment =>{
+                                                let date= `${comment.date}`.split(" ");
+                                                %>
 											<div class="single-comment ">
 												<div class="user ">
 													<div class="thumb">
-														<img src="/img/blog/c5.jpg" alt="">
+														<img src="/img/users/<%= comment.user[0].image%>" alt="">
 													</div>
 													<div class="desc">
-														<h5><a href="#">Ina Hayes</a></h5>
-														<p class="date">December 4, 2017 at 3:12 pm </p>
+														<h5><%= comment.user[0].name%></h5>
+														<p class="date"> <%= date[2] %> <%= date[1] %>  <%= date[3] %> at <%= date[4].slice(0,-3) %></p>
 														<p class="comment">
-															Never say goodbye till the end comes!
+															<%= comment.comment%>
 														</p>
 													</div>
 												</div>
 											</div>
-											<div class="single-comment ">
-												<div class="user ">
-													<div class="thumb">
-														<img src="/img/blog/c5.jpg" alt="">
-													</div>
-													<div class="desc">
-														<h5><a href="#">Ina Hayes</a></h5>
-														<p class="date">December 4, 2017 at 3:12 pm </p>
-														<p class="comment">
-															Never say goodbye till the end comes!
-														</p>
-													</div>
-												</div>
-											</div>
+                                            <%})%>
 										</div>	                                             				
 									</div>
 									<div class="comment-form">
@@ -135,66 +131,7 @@
 
 
                     </div>
-                    <div class="blog_area_content_b">
-                        <div class="blog_right_sidebar">
-                            <aside class="single_sidebar_widget search_widget">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search Posts">
-                                    <span class="input-group-btn">
-                                        <button class="btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
-                                    </span>
-                                </div>
-                                <div class="br"></div>
-                            </aside>
-                            <aside class="single_sidebar_widget author_widget">
-                                <img class="author_img " src="img/blog/author.png" alt="">
-                                <h4>Eddy Uwambaje</h4>
-                                <p>Senior blog writer</p>
-                                <div class="social_icon">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-github"></i></a>
-                                    <a href="#"><i class="fa fa-behance"></i></a>
-                                </div>
-                                <p>Boot camps have its supporters andit sdetractors. Some people do not understand why you should have to spend money on boot camp when you can get. Boot camps have it's supporters andits detractors.</p>
-                                <div class="br"></div>
-                            </aside>
-                            <aside class="single_sidebar_widget popular_post_widget">
-                                <h3 class="widget_title">Popular Posts</h3>
-                                <div class=" post_item">
-                                    <img src="/img/blog/popular-post/post1.jpg" alt="post">
-                                    <div class="post_item_content">
-                                        <a href="blog-details"><h3>Space The Final Frontier</h3></a>
-                                        <p>02 Hours ago</p>
-                                    </div>
-                                </div>
-                                <div class="br"></div>
-                            </aside>
-                            <aside class="single_sidebar_widget ads_widget">
-                                <a href="#"><img src="img/blog/add.jpg" alt=""></a>
-                                <div class="br"></div>
-                            </aside>
-                           
-                            <aside class="single-sidebar-widget newsletter_widget">
-                                <h4 class="widget_title">Newsletter</h4>
-                                <p>
-                                Here, I focus on a range of items and features that we use in life without
-                                giving them a second thought.
-                                </p>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
-                                        </div>
-                                        <input type="text" class="form-control"placeholder="Enter email">
-                                    </div>
-                                    <a href="#" class="bbtns">Subcribe</a>
-                                </div>	
-                                <p class="text-bottom">You can unsubscribe at any time</p>	
-                                <div class="br"></div>							
-                            </aside>
-                        </div>
-                    </div>
+                    <%- include('_sidebar.ejs') %>
                 </div>
 				
             </div>

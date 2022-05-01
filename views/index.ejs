@@ -213,43 +213,26 @@
         		</div>
         		<div class="main_content">
 					
-					<div class="h_gallery_item">
-						<div class="g_img_item">
-							<img class="img-fluid" src="img/gallery/project-1.jpg" alt="">
-							<a class="light" href="img/gallery/project-1.jpg"><img src="img/gallery/icon.png" alt=""></a>
+					<% projects.map(project =>{%>
+        			
+						<div class="h_gallery_item">
+							<div class="g_img_item">
+								<img class="img-fluid" src="img/project/<%= project.image%>" alt="">
+							</div>
+							<div class="g_item_text">
+								<h4><%= project.title %></h4>
+								<a href="<%= project.link%>" class="main_btn">view project <i class="fa fa-long-arrow-right"></i></a>
+							</div>
 						</div>
-						<div class="g_item_text">
-							<h4>3D Helmet Design</h4>
-							<p>Client Project</p>
-						</div>
-					</div>
+						<% }) %>
 					
-					<div class="h_gallery_item">
-						<div class="g_img_item">
-							<img class="img-fluid" src="img/gallery/project-1.jpg" alt="">
-							<a class="light" href="img/gallery/project-1.jpg"><img src="img/gallery/icon.png" alt=""></a>
-						</div>
-						<div class="g_item_text">
-							<h4>3D Helmet Design</h4>
-							<p>Client Project</p>
-						</div>
-					</div>
-					
-					<div class="h_gallery_item">
-						<div class="g_img_item">
-							<img class="img-fluid" src="img/gallery/project-1.jpg" alt="">
-							<a class="light" href="img/gallery/project-1.jpg"><img src="img/gallery/icon.png" alt=""></a>
-						</div>
-						<div class="g_item_text">
-							<h4>3D Helmet Design</h4>
-							<p>Client Project</p>
-						</div>
-					</div>
 					
         		</div>
+				<% if(projects.length > 4){%>
 				<div class="more_btn">
-					<a class="main_btn" href="#">Load More Items</a>
+					<a class="main_btn" href="/projects">Load More Items</a>
         		</div>
+				<% }%>
         	</div>
         </section>
 		<!--================End Home Gallery Area =================-->

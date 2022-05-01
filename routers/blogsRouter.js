@@ -27,7 +27,7 @@ router.route('/like/:id').post(protect, handleLike);
 
 router
   .route('/comment/:id')
-  .get(getAllComments)
+  .get(protect, restrictedTo('admin'), getAllComments)
   .post(protect, createComment);
 
 router

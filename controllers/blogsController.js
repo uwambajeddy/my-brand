@@ -46,7 +46,34 @@ export const getBlogs = catchAsync(async (req, res, next) => {
         pipeline: [
           {
             $match: { $expr: { $eq: ['$blog', '$$blog'] }, approve: true }
+          },
+          {
+            $lookup: {
+            from: 'users',
+            as: 'user',
+            let: { user: '$_id' },
+            pipeline: [
+              {
+                $match: {
+                  $expr: { $eq: ['$user', '$$user'] }
+                }
+              },{
+                $unwind:"$user"
+             },
+             {
+                $lookup:{
+                   from:"users",
+                   localField:"user",
+                   foreignField:"_id",
+                   as:"user"
+                }
+              },
+              { $unset: 
+                [ "user.password", "user.role", "user.active", "user.email" ] 
+              }
+            ]
           }
+        }
         ]
       }
     }
@@ -78,6 +105,19 @@ export const getBlog = catchAsync(async (req, res, next) => {
               $expr: { $eq: ['$blog', '$$blog'] },
               approve: true
             }
+          },{
+            $unwind:"$user"
+         },
+         {
+            $lookup:{
+               from:"users",
+               localField:"user",
+               foreignField:"_id",
+               as:"user"
+            }
+          },
+          { $unset: 
+            [ "user.password", "user.role", "user.active", "user.email" ] 
           }
         ]
       }
@@ -163,7 +203,7 @@ export const handleLike = catchAsync(async (req, res, next) => {
 
 export const getAllComments = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  const comments = await commentModel.find({ blog: id, approve: true });
+  const comments = await commentModel.find({ blog: id});
   if (!comments) {
     return next(new AppError('No Comments found with that ID', 404));
   }
@@ -208,6 +248,10 @@ export const approveComment = catchAsync(async (req, res, next) => {
 });
 
 export const createComment = catchAsync(async (req, res, next) => {
+  const blog = await blogModel.findById(req.params.id);
+  if (!blog) {
+    return next(new AppError('No Blog found with that ID', 404));
+  }
   const comment = await commentModel.create({
     comment: req.body.comment,
     user: req.user._id,

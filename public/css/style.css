@@ -1138,6 +1138,9 @@ h1, h2, h3, h4, h5, h6 {
       border-radius: 45px;
       z-index: 0;
       background: #766dff; }
+      .rounded-circle{
+        border-radius: 50%;
+      }
       .blog_right_sidebar .search_widget .input-group .form-control.placeholder {
         color: #fff; }
         .blog_right_sidebar .search_widget .input-group .form-control:-moz-placeholder {
@@ -1173,6 +1176,9 @@ h1, h2, h3, h4, h5, h6 {
       justify-content: center;
       align-self: center;
       padding-left: 20px; }
+              .blog_right_sidebar .popular_post_widget .post_item .post_item_img {
+                width: 110px;
+               }
       .blog_right_sidebar .popular_post_widget .post_item .media-body h3 {
         font-size: 14px;
         line-height: 20px;
@@ -1417,6 +1423,8 @@ h1, h2, h3, h4, h5, h6 {
     .single-post-area .navigation-area .nav-left {
       text-align: left; 
     display: flex;}
+    .single-post-area .navigation-area .nav-left a {
+    display: flex;}
       .single-post-area .navigation-area .nav-left .thumb {
         margin-right: 20px;
         width: 50px;
@@ -1436,6 +1444,9 @@ h1, h2, h3, h4, h5, h6 {
           margin-bottom: 30px; } }
     .single-post-area .navigation-area .nav-right {
       text-align: right;
+      display: flex;
+     }
+    .single-post-area .navigation-area .nav-right a {
       display: flex;
      }
       .single-post-area .navigation-area .nav-right .thumb {
@@ -1501,6 +1512,8 @@ h1, h2, h3, h4, h5, h6 {
                 }
           .comments-area .thumb {
             margin-right: 20px; }
+          .comments-area .thumb img {
+            width: 65px; }
           .comments-area .date {
             font-size: 11px;
             color: #cccccc;
