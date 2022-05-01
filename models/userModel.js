@@ -45,6 +45,10 @@ const userSchema = new Schema({
     default: true,
     select: false
   },
+  subscrition: {
+    type: Boolean,
+    default: true
+  },
   role: {
     type: String,
     enum: ['user', 'admin'],

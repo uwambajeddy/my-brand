@@ -61,7 +61,11 @@ app.use(urlencoded({ extended: false }));
 
 app.use(_json());
 
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginEmbedderPolicy: false
+  })
+);
 app.use(json());
 app.use(cookieParser());
 app.use(xss());

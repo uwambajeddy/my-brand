@@ -5,6 +5,8 @@ import catchAsync from '../util/catchAsync.js';
 import AppError from '../util/AppError.js';
 import blogModel from '../models/blogModel.js';
 import commentModel from '../models/commentModal.js';
+import Email from '../util/email.js';
+import userModel from '../models/userModel.js';
 
 const multerStorage = multer.memoryStorage();
 
@@ -28,7 +30,7 @@ export const resizeBlogPhoto = catchAsync(async (req, res, next) => {
 
   req.file.originalname = `blog-${Date.now()}.jpeg`;
   await sharp(req.file.buffer)
-    .resize(750, 350)
+    .resize(630, 350)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
     .toFile(`public/img/blog/${req.file.originalname}`);
@@ -152,12 +154,29 @@ export const createBlog = catchAsync(async (req, res, next) => {
   if (req.file) req.body.image = req.file.originalname;
 
   const blog = await blogModel.create(req.body);
+  const users = await userModel.find({subscription: true});
+  const url = `${req.protocol}://${req.get('host')}/blog/${blog._id}`;
+  const rootDir = `${req.protocol}://${req.get('host')}`;
+  const message= {
+    image: blog.image,
+    title: blog.title,
+    body: blog.body
+  }
+  users.map(async user=>{
+    try{
+      await new Email(user, url,message,rootDir).sendNewPost();
+    }catch(err){
+      console.log(err);
+    }
+  })
+  
   res.status(201).json({
     status: 'success',
     data: {
       blog
     }
   });
+  
 });
 
 export const updateBlog = catchAsync(async (req, res, next) => {

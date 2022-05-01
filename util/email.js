@@ -8,10 +8,13 @@ const filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(filename);
 
 class Email {
-  constructor(user, url) {
+  constructor(user, url, message, rootDir) {
     this.to = user.email;
     this.firstName = user.name;
+    this.userId = user._id;
     this.url = url;
+    this.rootDir = rootDir;
+    this.message = message;
     this.from = `Eddy Uwambaje <${process.env.EMAIL_FROM}>`;
   }
 
@@ -38,13 +41,16 @@ class Email {
   }
 
   // Send the actual email
-  async send(template, subject) {
+  async send(template, subject, title) {
     // 1) Render HTML based on a ejs template
     const html = await ejs.renderFile(
       `${__dirname}/../views/email/${template}.ejs`,
       {
         firstName: this.firstName,
         url: this.url,
+        message: this.message,
+        userId: this.userId,
+        rootDir: this.rootDir,
         subject
       }
     );
@@ -61,7 +67,14 @@ class Email {
   }
 
   async sendWelcome() {
-    await this.send('welcome', "Welcome to Eddy's Family!");
+    if(process.env.NODE_ENV !== "test"){
+    await this.send('welcome', "🤓 Welcome to Eddy's Family!");
+    }
+  }
+  async sendNewPost() {
+    if(process.env.NODE_ENV !== "test"){
+    await this.send("newpost", "🤓 Eddy's New Post!");
+    }
   }
 
   async sendPasswordReset() {
