@@ -45,7 +45,7 @@ const userSchema = new Schema({
     default: true,
     select: false
   },
-  subscrition: {
+  subscription: {
     type: Boolean,
     default: true
   },

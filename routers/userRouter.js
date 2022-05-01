@@ -16,7 +16,8 @@ import {
   deleteMe,
   getMe,
   uploadUserImage,
-  resizeUserPhoto
+  resizeUserPhoto,
+  subscription
 } from '../controllers/userController.js';
 
 const router = express.Router();
@@ -33,6 +34,7 @@ router.get('/me', getMe);
 router.patch('/updatepassword', updatePassword);
 router.route('/updateMe').patch(uploadUserImage, resizeUserPhoto, updateUser);
 router.route('/deleteMe').delete(deleteMe);
+router.get('/subscription', subscription);
 
 router.use(restrictedTo('admin'));
 router.route('/').get(getAllUsers);
@@ -91,6 +93,17 @@ router.route('/:id').get(getUser);
  *          description: Use to request a user by ID
  *          required:
  *               -id
+ *    responses:
+ *      '200':
+ *        description: The user description
+ */
+/**
+ * @swagger
+ * /api/v1/user/subscription/:
+ *  get:
+ *    summary: Use to request subscription
+ *    tags:
+ *         - users
  *    responses:
  *      '200':
  *        description: The user description

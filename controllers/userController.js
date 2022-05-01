@@ -64,14 +64,14 @@ export const getUser = catchAsync(async (req, res, next) => {
   });
 });
 
-export const unsubscribe = catchAsync(async (req, res, next) => {
-  const user = await userModel.find({ _id: req.params.id, active: true });
-  if (!user || user.length === 0) {
-    return next(new AppError('No user found with that ID', 404));
-  }
+export const subscription = catchAsync(async (req, res, next) => {
+  const user = await userModel.findById(req.user.id);
+
+  user.subscription ? user.subscription = false : user.subscription= true;
+  await user.save({validateBeforeSave: false})
+
   res.status(200).json({
     status: 'success',
-    results: user.length,
     data: {
       user
     }

@@ -34,6 +34,9 @@
           font-size: 14px;
           vertical-align: top; 
       }
+        table td img{
+         width: 100%;
+      }
 
     
 
@@ -217,6 +220,11 @@
         text-decoration: none; 
       }
 
+      .button-table{
+          display: flex;
+          justify-content: center;
+      }
+
       hr {
         border: 0;
         border-bottom: 1px solid #f6f6f6;
@@ -320,13 +328,13 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <img src="<%= rootDir %>/img/blog/<%= message.image%>" width="300px" alt="">
-                        <h2> <%= message.title %></h2><br>
+                        <img src="<%= rootDir %>/img/blog/<%= message.image%>"  alt="">
+                        <h2> <%= message.title %></h2>
                         <p> <%= message.body.slice(0,200) %>...</p>
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                             <tbody>
                               <tr>
-                                <td align="left">
+                                <td class="button-table" align="left">
                                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                     <tbody>
                                       <tr>
@@ -338,20 +346,26 @@
                               </tr>
                             </tbody>
                           </table>
-                        <p>You elected to receive Opportunities emails. No longer interested? <a href="<%= rootDir %>/api/v1/users/unsubscribe/<%= userId%>">Unsubscribe</a></p>
-                      </td>
+                        </td>
                     </tr>
-                  </table>
-                </td>
-              </tr>
+                </table>
+            </td>
+        </tr>
+        
+        <!-- END MAIN CONTENT AREA -->
+    </table>
+    <!-- END CENTERED WHITE CONTAINER -->
+    
+    <!-- START FOOTER -->
+    <div class="footer">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="content-block">
+                    <span class="apple-link">You elected to receive Opportunities emails. No longer interested? <u><a href="<%= rootDir %>/api/v1/users/subscription/<%= userId%>">Unsubscribe</a></u></span>
+                   <br><br>
+                  </td>
+                </tr>
 
-            <!-- END MAIN CONTENT AREA -->
-            </table>
-            <!-- END CENTERED WHITE CONTAINER -->
-
-            <!-- START FOOTER -->
-            <div class="footer">
-              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block">
                     <span class="apple-link">Eddy Uwambaje, Kigali Rwanda</span>
