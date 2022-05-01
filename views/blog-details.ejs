@@ -30,7 +30,7 @@
                                let date= `${blog.date}`.split(" ");%>
                                 <div class="blog_item_b">
                                     <div class="blog_post">
-                                        <img src="/img/blog/<%= blog.image%>" alt="">
+                                        <img src="<%= blog.image.includes('http') ? blog.image : `/img/blog/${blog.image}` %>" alt="">
                                         <div class="blog_info">
                                             <ul class="blog_meta list">
                                                 <li><a href="#"><%= date[0] %> <%= date[1] %> <%= date[2] %> <%= date[3] %><i class="lnr lnr-calendar-full"></i></a></li>
