@@ -164,7 +164,7 @@ export const createBlog = catchAsync(async (req, res, next) => {
   }
   users.map(async user=>{
     try{
-      await new Email(user, url,message,rootDir).sendNewPost();
+      await new Email(user, url, message, rootDir).sendNewPost();
     }catch(err){
       console.log(err);
     }

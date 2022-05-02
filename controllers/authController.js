@@ -68,10 +68,13 @@ export const signup = catchAsync(async (req, res, next) => {
 });
 
 export const login = catchAsync(async (req, res, next) => {
+
   const { email, password } = req.body;
+
   if (!password || !email) {
     return next(new AppError('Please fill empty fields!', 400));
   }
+  
   const user = await userModel
     .findOne({ email })
     .select('+password')
@@ -85,6 +88,7 @@ export const login = catchAsync(async (req, res, next) => {
   }
 
   createSendToken(user, 200, res);
+
 });
 
 export function logout(req, res) {

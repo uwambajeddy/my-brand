@@ -30,7 +30,7 @@
             <div class=" post_item">
                 <img class="post_item_img" src="/img/blog/<%= blog.image%>" alt="post">
                 <div class="post_item_content">
-                    <a href="/blog/<%= blog._id%>"><h3><%= blog.title %></h3></a>
+                    <a href="/blog/<%= blog._id%>"><h3><%= blog.title.slice(0,25) %>... %></h3></a>
                     <p><%= date[0] %> <%= date[1] %> <%= date[2] %> <%= date[3] %></p>
                 </div>
             </div>
