@@ -126,6 +126,7 @@ export const protect = catchAsync(async (req, res, next) => {
     );
   }
   req.user = currentUser;
+  res.locals.user = currentUser;
   next();
 });
 
@@ -204,3 +205,37 @@ export const updatePassword = catchAsync(async (req, res, next) => {
 
   createSendToken(user, 200, res);
 });
+
+export const isLoggedIn = async (req,res,next) =>{
+  if(req.cookies.jwt && req.cookies.jwt !== 'loggedout' ){
+      try{
+
+          const decoded = await promisify(jwt.verify)(req.cookies.jwt,process.env.JWT_SECRET);
+          
+          
+          const currentUser =  await userModel.findById(decoded._id);
+          
+          if(!currentUser){
+              return next();
+          }
+
+          if(currentUser[0].passwordChangedAt){
+          const passwordChangedAt = parseInt(currentUser[0].passwordChangedAt/1000,10);
+          
+          if(decoded.iat < passwordChangedAt){
+              return next();
+              
+          }
+          
+      }
+      
+      res.locals.user = currentUser;
+      
+      next();
+  }catch(err){
+      next()
+  }
+  }else{
+  next();
+}
+}; 

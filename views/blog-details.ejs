@@ -1,4 +1,5 @@
 <%- include('_header')%>
+<%- include('popup')%>
        
 		<!--================Home Banner Area =================-->
 		<section class="home_banner_area_lil">
@@ -33,15 +34,16 @@
                                         <img src="/img/blog/<%= blog.image%>" alt="">
                                         <div class="blog_info">
                                             <ul class="blog_meta list">
-                                                <li><a href="#"><%= date[0] %> <%= date[1] %> <%= date[2] %> <%= date[3] %><i class="lnr lnr-calendar-full"></i></a></li>
-                                                <li><a href="#"><%= blog.likedBy.length%> Like<%= blog.likedBy.length>1 ? "s": ""%><i class="lnr lnr-heart"></i></a></li>
-                                                <li><a href="#"><%= blog.comments.length%> Comment<%= blog.comments.length >1 ? "s": ""%><i class="lnr lnr-bubble"></i></a></li>
+                                                <li><%= date[0] %> <%= date[1] %> <%= date[2] %> <%= date[3] %><i class="lnr lnr-calendar-full"></i></li>
+                                                <li onclick="handleLike('<%= blog._id%>')"><%= blog.likedBy.length%> Like<%= blog.likedBy.length>1 ? "s": ""%><i class="fa fa-heart<%= blog.likedBy.indexOf(locals.user?._id)  >=0 ? '' : '-o' %>"></i></li>
+                                                <li><%= blog.comments.length%> Comment<%= blog.comments.length >1 ? "s": ""%><i class="lnr lnr-bubble"></i></li>
                                             </ul>
                                         </div>
                                         <div class="blog_details">
                                             <h2><%= blog.title %></h2>
-                                            <p><%= blog.body %></p>
-                                            
+											<% blog.body.split("\n").map(line =>{%>
+                                            <p><%= line %></p>
+                                            <%})%>
                                         </div>
                                     </div>
 									<!--------------------------------------->
@@ -92,7 +94,7 @@
 										</div>
 									</div>
 				
-				
+				                   <% if(blog.comments.length > 0){ %>
 									<div class="comments-area">
 										<h4><%= blog.comments.length%> Comment<%= blog.comments.length >1 ? "s": ""%></h4>
 										<div class="comment-list">
@@ -116,24 +118,18 @@
                                             <%})%>
 										</div>	                                             				
 									</div>
+									<% } %>
+
 									<div class="comment-form">
 										<h4>Leave a Reply</h4>
-										<form>
+										<form class="comment_form" action="#" method="post">
 											<div class="form-group form-inline">
-											  <div class="form-group name">
-												<input type="text" class="form-control" id="name" placeholder="Enter Name" >
-											  </div>
-											  <div class="form-group  email">
-												<input type="email" class="form-control" id="email" placeholder="Enter email address" >
-											  </div>										
-											</div>
 											<div class="form-group">
-												<input type="text" class="form-control" id="subject" placeholder="Subject" >
+												<textarea class="form-control " rows="5" name="message" id="message" placeholder="Message" required=""></textarea>
 											</div>
-											<div class="form-group">
-												<textarea class="form-control " rows="5" name="message" placeholder="Messege" required=""></textarea>
-											</div>
-											<a href="#" class=" submit_btn">Post Comment</a>	
+											<div class="submit_btn_disable_comment disible-control"></div>
+											<button type="submit" value="submit" class="btn submit_btn"> Post Comment</button>	
+										
 										</form>
 									</div>
                                 </div>
@@ -151,5 +147,6 @@
             </div>
         </section>
         <!--================Blog Area =================-->
-		
+		<script src="/js/comments.js"></script>
+		<script src="/js/likes.js"></script>
 		<%- include('_footer')%>

@@ -1,4 +1,5 @@
         <%- include('_header')%>
+        <%- include('popup')%>
        
 		<!--================login Banner Area =================-->
 		<section class="login_banner_area">
@@ -15,6 +16,7 @@
                             <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
                         </div>
                         <p class="forgot-password"><a href="/forgot">Forgot password?</a></p>
+                        <div class="submit_btn_disable_reg disible-control"></div>
                         <button type="submit" value="submit" class="btn submit_btn">Login</button>
                     </div>
                    <p>Don't have an account? <a href="/signup">create one</a></p>
@@ -23,4 +25,5 @@
 		 </div>
 	 </section>
 		<!--================login Banner Area =================-->
+        <script src="/js/login.js"></script>
 		<%- include('_footer')%>

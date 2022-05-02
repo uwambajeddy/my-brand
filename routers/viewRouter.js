@@ -8,11 +8,16 @@ import {
   loginPage,
   signupPage,
   forgotPage,
-  blogPage
+  blogPage,
+  unsubscribe,
+  resetpassword
 } from '../controllers/viewController.js';
+
+import {isLoggedIn, protect} from '../controllers/authController.js';
 
 const router = express.Router();
 
+router.use(isLoggedIn);
 router.get('/', homePage);
 router.get('/about', aboutPage);
 router.get('/projects', projectPage);
@@ -22,5 +27,7 @@ router.get('/login', loginPage);
 router.get('/forgot', forgotPage);
 router.get('/signup', signupPage);
 router.get('/contact', contactPage);
+router.get('/unsubscribe', protect, unsubscribe);
+router.get('/resetpassword/:id',resetpassword);
 
 export default router;

@@ -12,14 +12,14 @@
         <aside class="single_sidebar_widget author_widget">
             <img class="author_img rounded-circle" src="<%= admin.image.includes('http') ? admin.image : `/img/users/${admin.image}` %>" alt="">
             <h4><%= admin.name%></h4>
-            <p>I am a web developer</p>
+            <p> web developer</p>
             <div class="social_icon">
                 <a href="#"><i class="fa fa-facebook"></i></a>
                 <a href="#"><i class="fa fa-twitter"></i></a>
                 <a href="#"><i class="fa fa-github"></i></a>
                 <a href="#"><i class="fa fa-behance"></i></a>
             </div>
-            <p>I am a software engineer specialized with building server side applications using nodeJs </p>
+            <p>I am a website developer specialized with building server side applications using nodeJs </p>
             <div class="br"></div>
         </aside>
         <aside class="single_sidebar_widget popular_post_widget">
@@ -30,7 +30,7 @@
             <div class=" post_item">
                 <img class="post_item_img" src="/img/blog/<%= blog.image%>" alt="post">
                 <div class="post_item_content">
-                    <a href="/blog/<%= blog.id%>"><h3><%= blog.title %></h3></a>
+                    <a href="/blog/<%= blog._id%>"><h3><%= blog.title %></h3></a>
                     <p><%= date[0] %> <%= date[1] %> <%= date[2] %> <%= date[3] %></p>
                 </div>
             </div>

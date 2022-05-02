@@ -115,6 +115,14 @@ export const projectPage = catchAsync(async (req, res, next) => {
     projects
   });
 });
+
+export const unsubscribe = catchAsync(async (req, res, next) => {
+  res.status(200).render('unsubscribe');
+});
+export const resetpassword = catchAsync(async (req, res, next) => {
+  res.status(200).render('reset-password');
+});
+
 export const forgotPage = catchAsync(async (req, res, next) => {
   res.status(200).render('forgot-password');
 });
