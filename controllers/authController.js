@@ -5,6 +5,7 @@ import catchAsync from '../util/catchAsync.js';
 import AppError from '../util/AppError.js';
 import Email from '../util/email.js';
 import userModel from '../models/userModel.js';
+import { decode } from 'punycode';
 
 const { sign, verify } = jsonwebtoken;
 
@@ -74,7 +75,7 @@ export const login = catchAsync(async (req, res, next) => {
   if (!password || !email) {
     return next(new AppError('Please fill empty fields!', 400));
   }
-  
+
   const user = await userModel
     .findOne({ email })
     .select('+password')
@@ -212,29 +213,25 @@ export const updatePassword = catchAsync(async (req, res, next) => {
 
 export const isLoggedIn = async (req,res,next) =>{
   if(req.cookies.jwt && req.cookies.jwt !== 'loggedout' ){
-      try{
+    try{
 
-          const decoded = await promisify(jwt.verify)(req.cookies.jwt,process.env.JWT_SECRET);
+      const decoded = await promisify(jsonwebtoken.verify)(req.cookies.jwt,process.env.JWT_SECRET);      
           
+      const currentUser =  await userModel.findById(decoded.id);
+      if(!currentUser){
+        return next();
+      }
+      if(currentUser.passwordChangedAt){
+        const passwordChangedAt = parseInt(currentUser.passwordChangedAt/1000,10);
+        
+        if(decoded.iat < passwordChangedAt){
+          return next();
           
-          const currentUser =  await userModel.findById(decoded._id);
-          
-          if(!currentUser){
-              return next();
-          }
-
-          if(currentUser[0].passwordChangedAt){
-          const passwordChangedAt = parseInt(currentUser[0].passwordChangedAt/1000,10);
-          
-          if(decoded.iat < passwordChangedAt){
-              return next();
-              
-          }
-          
+        }
+        
       }
       
       res.locals.user = currentUser;
-      
       next();
   }catch(err){
       next()
