@@ -36,7 +36,7 @@
                                         <div class="blog_info">
                                             <ul class="blog_meta list">
                                                 <li><%= date[0] %> <%= date[1] %> <%= date[2] %> <%= date[3] %><i class="lnr lnr-calendar-full"></i></li>
-                                                <li onclick="handleLike('<%= blog._id%>')"><%= blog.likedBy.length%> Like<%= blog.likedBy.length>1 ? "s": ""%><i class="fa fa-heart<%= newLikes.indexOf(locals.user?.id)  >=0 ? '' : '-o' %>"></i></li>
+                                                <li onclick="handleLike('<%= blog._id%>','<%= locals.user?.id %>')"><%= blog.likedBy.length%> Like<%= blog.likedBy.length>1 ? "s": ""%><i class="fa fa-heart<%= newLikes.indexOf(locals.user?.id)  >=0 ? '' : '-o' %>"></i></li>
                                                 <li><%= blog.comments.length%> Comment<%= blog.comments.length >1 ? "s": ""%><i class="lnr lnr-bubble"></i></li>
                                             </ul>
                                         </div>
@@ -50,7 +50,7 @@
 									<!--------------------------------------->
 									<div class="single-post-area">
 										<div class="navigation-area">
-
+ 
                                             <%
                                             const values = blogs.map(object => object._id.toJSON());
                                             let prevId = values.indexOf(blog._id.toJSON())-1;

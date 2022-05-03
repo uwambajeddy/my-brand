@@ -1,4 +1,11 @@
+async function handleLike(blogId, userId) {
+  if (!userId) return location.assign('/login');
 
-function handleLike(id){
-    popup(success, id);
+  try {
+    await axios.post(`/api/v1/blogs/like/${blogId}`);
+    location.reload();
+  } catch (error) {
+    console.log(error);
+    location.assign('/login');
+  }
 }

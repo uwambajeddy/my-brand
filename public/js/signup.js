@@ -1,8 +1,9 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
 const contactform = document.querySelector('.contact_form');
+const disibleControl = document.querySelector('.disible-control');
 
-contactform.addEventListener('submit', e => {
+contactform.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const email = document.querySelector('#email').value;
@@ -10,11 +11,24 @@ contactform.addEventListener('submit', e => {
   const password = document.querySelector('#password').value;
   const password_confirm = document.querySelector('#password_confirm').value;
 
-  if (name == '' || email == '' || password == '' || password_confirm =='' ) {
-   popup(warning,"Please fill empty fields !!");
-      
+  if (name == '' || email == '' || password == '' || password_confirm == '') {
+    popup(warning, 'Please fill empty fields !!');
+
     return 0;
   }
-
-  popup(success, "Account created successfully");
+  disibleControl.style.display = 'block';
+  try {
+    await axios.post('/api/v1/user/signup', {
+      name,
+      email,
+      password,
+      password_confirm,
+    });
+    disibleControl.style.display = 'none';
+    popup(success, 'Account created successfully');
+  } catch (error) {
+    console.log(error);
+    disibleControl.style.display = 'none';
+    popup(failure, `${error.response.data.message}`);
+  }
 });
