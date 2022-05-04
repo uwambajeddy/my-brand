@@ -24,7 +24,6 @@ contactform.addEventListener('submit', async (e) => {
       password,
       password_confirm,
     });
-    disibleControl.style.display = 'none';
     popup(success, 'Account created successfully');
     setTimeout(() => {
       location.assign('/blogs');

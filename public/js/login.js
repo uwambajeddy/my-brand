@@ -20,11 +20,9 @@ contactform.addEventListener('submit', async (e) => {
       email,
       password,
     });
-    disibleControl.style.display = 'none';
     popup(success, 'Logged in successfully');
     setTimeout(() => {
       location.assign('/blogs');
-      location.reload();
     }, 3000);
   } catch (error) {
     console.log(error);
