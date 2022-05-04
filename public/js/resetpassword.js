@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
 const contactform = document.querySelector('.contact_form');
+const disibleControl = document.querySelector('.disible-control');
 
 contactform.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -22,7 +23,7 @@ contactform.addEventListener('submit', async (e) => {
 
   disibleControl.style.display = 'block';
   try {
-    await axios.post(`/api/v1/user/resetpassword/${token}`, {
+    await axios.patch(`/api/v1/user/resetpassword/${token}`, {
       password,
       password_confirm,
     });

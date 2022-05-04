@@ -8,12 +8,11 @@ const filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(filename);
 
 class Email {
-  constructor(user, url, message, rootDir, resetRootURL) {
+  constructor(user, url, message, rootDir) {
     this.to = user.email;
     this.firstName = user.name;
     this.userId = user._id;
     this.url = url;
-    this.resetRootURL = resetRootURL;
     this.rootDir = rootDir;
     this.message = message;
     this.from = `Eddy Uwambaje <${process.env.EMAIL_FROM}>`;
@@ -43,13 +42,13 @@ class Email {
 
   // Send the actual email
   async send(template, subject, title) {
+    console.log(this.resetRootURL);
     // 1) Render HTML based on a ejs template
     const html = await ejs.renderFile(
       `${__dirname}/../views/email/${template}.ejs`,
       {
         firstName: this.firstName,
         url: this.url,
-        resetRootURL: this.resetRootURL,
         message: this.message,
         userId: this.userId,
         rootDir: this.rootDir,
