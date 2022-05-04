@@ -27,6 +27,10 @@ contactform.addEventListener('submit', async (e) => {
   } catch (error) {
     console.log(error);
     disibleControl.style.display = 'none';
-    popup(failure, `${error.response.data.message}`);
+    if (error.response.data.message) {
+      popup(failure, `${error.response.data.message}`);
+    } else {
+      popup(failure, `${error.message}`);
+    }
   }
 });
