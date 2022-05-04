@@ -35,7 +35,7 @@
                                         <div class="blog_info">
                                             <ul class="blog_meta list">
                                                 <li><%= date[0] %> <%= date[1] %> <%= date[2] %> <%= date[3] %><i class="lnr lnr-calendar-full"></i></li>
-                                                <li onclick="handleLike('<%= blog._id%>','<%= locals.user?.id %>')"><%= blog.likedBy.length%> Like<%= blog.likedBy.length>1 ? "s": ""%><i class="fa fa-heart<%= newLikes.indexOf(locals.user?.id)  >=0 ? '' : '-o' %>"></i></li>
+                                                <li onclick="handleLike('<%= blog._id%>')"><%= blog.likedBy.length%> Like<%= blog.likedBy.length>1 ? "s": ""%><i class="fa fa-heart<%= newLikes.indexOf(locals.user?.id)  >=0 ? '' : '-o' %>"></i></li>
                                                 <li><%= blog.comments.length%> Comment<%= blog.comments.length >1 ? "s": ""%><i class="lnr lnr-bubble"></i></li>
                                             </ul>
                                         </div>
@@ -125,6 +125,7 @@
 										<form class="comment_form" action="#" method="post">
 											<div class="form-group form-inline">
 											<div class="form-group">
+												<input type="hidden" name="id" id="userId" value="<%= blog._id%>">
 												<textarea class="form-control " rows="5" name="message" id="message" placeholder="Message" required=""></textarea>
 											</div>
 											<div class="submit_btn_disable_comment disible-control"></div>

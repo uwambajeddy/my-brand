@@ -1,17 +1,34 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
 const commentform = document.querySelector('.comment_form');
+const disibleControl = document.querySelector('.disible-control');
 
-commentform.addEventListener('submit', e => {
+commentform.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const message = document.querySelector('#message').value;
+  let comment = document.querySelector('#message').value;
+  const id = document.querySelector('#userId').value;
 
-  if ( message =='' ) {
-   popup(warning,"Please fill empty fields!!");
-      
+  if (comment.trim() == '') {
+    popup(warning, 'Please fill empty fields!!');
     return 0;
   }
 
-  popup(success, "Thanks for your comment🤓, you'll wait for approval");
+  disibleControl.style.display = 'block';
+  try {
+    await axios.post(`/api/v1/blogs/comment/${id}`, {
+      comment,
+    });
+    document.querySelector('#message').value = '';
+    popup(success, "Thanks for your comment🤓, you'll wait for approval");
+    disibleControl.style.display = 'none';
+  } catch (error) {
+    console.log(error);
+    disibleControl.style.display = 'none';
+    console.log(error);
+    if (error.request.status === 401) {
+      return location.assign('/login');
+    }
+    popup(failure, `${error.response.data.message}`);
+  }
 });

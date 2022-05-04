@@ -37,9 +37,7 @@
                         date[3] %><i class="lnr lnr-calendar-full"></i
                       ></a>
                     </li>
-                    <li
-                      onclick="handleLike('<%= blog._id%>','<%= locals.user?.id %>')"
-                    >
+                    <li onclick="handleLike('<%= blog._id%>')">
                       <%= blog.likedBy.length%> Like<%= blog.likedBy.length>1 ?
                       "s": ""%><i
                         class="fa fa-heart<%= newLikes.indexOf(locals.user?.id) >=0 ? '' : '-o' %>"
