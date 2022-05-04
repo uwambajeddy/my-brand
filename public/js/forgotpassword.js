@@ -19,6 +19,7 @@ contactform.addEventListener('submit', async (e) => {
     await axios.post('/api/v1/user/forgotpassword', {
       email,
     });
+    document.querySelector('#email').value = '';
     popup(success, 'Reset token was sent to your Email address');
     disibleControl.style.display = 'none';
   } catch (error) {
