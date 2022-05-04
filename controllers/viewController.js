@@ -117,7 +117,7 @@ export const projectPage = catchAsync(async (req, res, next) => {
   });
 });
 
-export const unsubscribe = catchAsync(async (req, res, next) => {
+export const subscription = catchAsync(async (req, res, next) => {
   res.status(200).render('unsubscribe');
 });
 export const resetpassword = catchAsync(async (req, res, next) => {

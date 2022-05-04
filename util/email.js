@@ -1,18 +1,19 @@
 import nodemailer from 'nodemailer';
 import ejs from 'ejs';
 import path from 'path';
-import {fileURLToPath} from 'url';
+import { fileURLToPath } from 'url';
 
 const filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(filename);
 
 class Email {
-  constructor(user, url, message, rootDir) {
+  constructor(user, url, message, rootDir, resetRootURL) {
     this.to = user.email;
     this.firstName = user.name;
     this.userId = user._id;
     this.url = url;
+    this.resetRootURL = resetRootURL;
     this.rootDir = rootDir;
     this.message = message;
     this.from = `Eddy Uwambaje <${process.env.EMAIL_FROM}>`;
@@ -25,8 +26,8 @@ class Email {
         service: 'SendGrid',
         auth: {
           user: process.env.SENDGRID_USERNAME,
-          pass: process.env.SENDGRID_PASSWORD
-        }
+          pass: process.env.SENDGRID_PASSWORD,
+        },
       });
     }
 
@@ -35,8 +36,8 @@ class Email {
       port: process.env.EMAIL_PORT,
       auth: {
         user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD
-      }
+        pass: process.env.EMAIL_PASSWORD,
+      },
     });
   }
 
@@ -48,10 +49,11 @@ class Email {
       {
         firstName: this.firstName,
         url: this.url,
+        resetRootURL: this.resetRootURL,
         message: this.message,
         userId: this.userId,
         rootDir: this.rootDir,
-        subject
+        subject,
       }
     );
     // 2) Define email options
@@ -60,20 +62,20 @@ class Email {
       to: this.to,
       subject,
       html,
-      text: html
+      text: html,
     };
     // 3) Create a transport and send email
     await this.newTransport().sendMail(mailOptions);
   }
 
   async sendWelcome() {
-    if(process.env.NODE_ENV !== "test"){
-    await this.send('welcome', "🤓 Welcome to Eddy's Family!");
+    if (process.env.NODE_ENV !== 'test') {
+      await this.send('welcome', "🤓 Welcome to Eddy's Family!");
     }
   }
   async sendNewPost() {
-    if(process.env.NODE_ENV !== "test"){
-    await this.send("newpost", "🤓 Eddy's New Post!");
+    if (process.env.NODE_ENV !== 'test') {
+      await this.send('newpost', "🤓 Eddy's New Post!");
     }
   }
 
