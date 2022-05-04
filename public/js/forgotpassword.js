@@ -23,6 +23,7 @@ contactform.addEventListener('submit', async (e) => {
     popup(success, 'Reset token was sent to your Email address');
     disibleControl.style.display = 'none';
   } catch (error) {
+    disibleControl.style.display = 'none';
     console.log(error);
     popup(failure, `${error.response.data.message}`);
   }
