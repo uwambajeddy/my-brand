@@ -26,6 +26,9 @@ contactform.addEventListener('submit', async (e) => {
     });
     disibleControl.style.display = 'none';
     popup(success, 'Account created successfully');
+    setTimeout(() => {
+      location.reload();
+    }, 3000);
   } catch (error) {
     console.log(error);
     disibleControl.style.display = 'none';

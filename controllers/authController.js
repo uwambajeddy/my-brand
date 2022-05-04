@@ -5,13 +5,12 @@ import catchAsync from '../util/catchAsync.js';
 import AppError from '../util/AppError.js';
 import Email from '../util/email.js';
 import userModel from '../models/userModel.js';
-import { decode } from 'punycode';
 
 const { sign, verify } = jsonwebtoken;
 
-const signToken = id => {
+const signToken = (id) => {
   return sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN
+    expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
 
@@ -22,7 +21,7 @@ const createSendToken = (user, statusCode, res) => {
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
     secure: process.env.NODE_ENV === 'production',
-    httpOnly: true
+    httpOnly: true,
   };
   res.cookie('jwt', token, cookieOptions);
 
@@ -32,8 +31,8 @@ const createSendToken = (user, statusCode, res) => {
     status: 'success',
     token,
     data: {
-      user
-    }
+      user,
+    },
   });
 };
 
@@ -52,24 +51,24 @@ export const signup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     password_confirm: req.body.password_confirm,
     // eslint-disable-next-line prettier/prettier
-    image: `https://ui-avatars.com/api/?name=${req.body.name.replace(/ /g, "%20")}`,
-    role: req.body.role
+    image: `https://ui-avatars.com/api/?name=${req.body.name.replace(
+      / /g,
+      '%20'
+    )}`,
+    role: req.body.role,
   });
   const url = `${req.protocol}://${req.get('host')}/projects`;
 
-    try{
-      
-      await new Email(newUser, url).sendWelcome();
-    }catch(err){
-      console.log(err);
-    }
-  
-  createSendToken(newUser, 201, res);
+  try {
+    await new Email(newUser, url).sendWelcome();
+  } catch (err) {
+    console.log(err);
+  }
 
+  createSendToken(newUser, 201, res);
 });
 
 export const login = catchAsync(async (req, res, next) => {
-
   const { email, password } = req.body;
 
   if (!password || !email) {
@@ -89,13 +88,12 @@ export const login = catchAsync(async (req, res, next) => {
   }
 
   createSendToken(user, 200, res);
-
 });
 
 export function logout(req, res) {
   res.cookie('jwt', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
-    httpOnly: true
+    httpOnly: true,
   });
   res.status(200).json({ status: 'success', data: null });
 }
@@ -163,7 +161,7 @@ export const forgotPassword = catchAsync(async (req, res, next) => {
     await new Email(user, resetURL).sendPasswordReset();
     res.status(200).json({
       status: 'success',
-      message: 'token send to Email'
+      message: 'token send to Email',
     });
   } catch (err) {
     user.passwordResetToken = undefined;
@@ -182,7 +180,7 @@ export const resetPassword = catchAsync(async (req, res, next) => {
 
   const user = await userModel.findOne({
     passwordResetToken: hashedToken,
-    passwordResetExpires: { $gt: Date.now() }
+    passwordResetExpires: { $gt: Date.now() },
   });
 
   if (!user) {
@@ -211,32 +209,35 @@ export const updatePassword = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, res);
 });
 
-export const isLoggedIn = async (req,res,next) =>{
-  if(req.cookies.jwt && req.cookies.jwt !== 'loggedout' ){
-    try{
+export const isLoggedIn = async (req, res, next) => {
+  if (req.cookies.jwt && req.cookies.jwt !== 'loggedout') {
+    try {
+      const decoded = await promisify(jsonwebtoken.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
 
-      const decoded = await promisify(jsonwebtoken.verify)(req.cookies.jwt,process.env.JWT_SECRET);      
-          
-      const currentUser =  await userModel.findById(decoded.id);
-      if(!currentUser){
+      const currentUser = await userModel.findById(decoded.id);
+      if (!currentUser) {
         return next();
       }
-      if(currentUser.passwordChangedAt){
-        const passwordChangedAt = parseInt(currentUser.passwordChangedAt/1000,10);
-        
-        if(decoded.iat < passwordChangedAt){
+      if (currentUser.passwordChangedAt) {
+        const passwordChangedAt = parseInt(
+          currentUser.passwordChangedAt / 1000,
+          10
+        );
+
+        if (decoded.iat < passwordChangedAt) {
           return next();
-          
         }
-        
       }
-      
+
       res.locals.user = currentUser;
       next();
-  }catch(err){
-      next()
+    } catch (err) {
+      next();
+    }
+  } else {
+    next();
   }
-  }else{
-  next();
-}
-}; 
+};

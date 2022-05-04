@@ -1,61 +1,77 @@
 <%- include('_header')%>
-<%- include('popup')%>
-		<!--================Home Banner Area =================-->
-		<section class="home_banner_area_lil">
-			<div class="container">
-			<div class="media">
-                <div class="banner_content ">
-                    <h2>Blogs</h2>
-                    <div class="page_link">
-                        <a href="/" class="page_link_a">Home</a>
-                        <a href="/blogs">Blogs</a>
-                    </div>
-                </div>
-					 </div>
-				 
-		 </div>
-	 </section>
-		<!--================Home Banner Area =================-->
+<!--================Home Banner Area =================-->
+<section class="home_banner_area_lil">
+  <div class="container">
+    <div class="media">
+      <div class="banner_content">
+        <h2>Blogs</h2>
+        <div class="page_link">
+          <a href="/" class="page_link_a">Home</a>
+          <a href="/blogs">Blogs</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================Home Banner Area =================-->
 
-         <!--================Blog Area =================-->
-         <section class="blog_area">
-            <div class="container">
-                <div class="blog_area_content">
-                    <div class="blog_area_content_a">
-                        <div class="blog_left_sidebar">
-
-                            <% blogs.reverse().map( blog =>{
-                                let date= `${blog.date}`.split(" ");
-                                %>
-                            <article class=" blog_item">
-                               <div class="blog_item_a">
-                               </div>
-                                <div class="blog_item_b">
-                                    <div class="blog_post">
-                                        <img src="/img/blog/<%= blog.image%>" alt="">
-                                        <div class="blog_info">
-                                            <ul class="blog_meta list">
-                                                <li><a href="/blog/<%= blog._id%>"><%= date[0] %> <%= date[1] %> <%= date[2] %> <%= date[3] %><i class="lnr lnr-calendar-full"></i></a></li>
-                                                <li onclick="handleLike('<%= blog._id%>')"><%= blog.likedBy.length%> Like<%= blog.likedBy.length>1 ? "s": ""%><i class="fa fa-heart-o"></i></li>
-                                                <li><a href="/blog/<%= blog._id%>"><%= blog.comments.length%> Comment<%= blog.comments.length >1 ? "s": ""%><i class="lnr lnr-bubble"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="blog_details">
-                                            <a href="/blog/<%= blog._id%>"><h2><%= blog.title %></h2></a>
-                                            <p><%= blog.body.slice(0,150) %>...</p>
-                                            <a href="/blog/<%= blog._id%>" class="white_bg_btn">View More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                            <%})%>
-                            
-                        </div>
-                    </div>
-                    <%- include('_sidebar') %>
+<!--================Blog Area =================-->
+<section class="blog_area">
+  <div class="container">
+    <div class="blog_area_content">
+      <div class="blog_area_content_a">
+        <div class="blog_left_sidebar">
+          <% blogs.reverse().map( blog =>{ const newLikes =
+          blog.likedBy.map(like => like.toJSON()); let date=
+          `${blog.date}`.split(" "); %>
+          <article class="blog_item">
+            <div class="blog_item_a"></div>
+            <div class="blog_item_b">
+              <div class="blog_post">
+                <img src="/img/blog/<%= blog.image%>" alt="" />
+                <div class="blog_info">
+                  <ul class="blog_meta list">
+                    <li>
+                      <a href="/blog/<%= blog._id%>"
+                        ><%= date[0] %> <%= date[1] %> <%= date[2] %> <%=
+                        date[3] %><i class="lnr lnr-calendar-full"></i
+                      ></a>
+                    </li>
+                    <li
+                      onclick="handleLike('<%= blog._id%>','<%= locals.user?.id %>')"
+                    >
+                      <%= blog.likedBy.length%> Like<%= blog.likedBy.length>1 ?
+                      "s": ""%><i
+                        class="fa fa-heart<%= newLikes.indexOf(locals.user?.id) >=0 ? '' : '-o' %>"
+                      ></i>
+                    </li>
+                    <li>
+                      <a href="/blog/<%= blog._id%>"
+                        ><%= blog.comments.length%> Comment<%=
+                        blog.comments.length >1 ? "s": ""%><i
+                          class="lnr lnr-bubble"
+                        ></i
+                      ></a>
+                    </li>
+                  </ul>
                 </div>
+                <div class="blog_details">
+                  <a href="/blog/<%= blog._id%>"><h2><%= blog.title %></h2></a>
+                  <p><%= blog.body.slice(0,150) %>...</p>
+                  <a href="/blog/<%= blog._id%>" class="white_bg_btn"
+                    >View More</a
+                  >
+                </div>
+              </div>
             </div>
-        </section>
-        <!--================Blog Area =================-->
-		<script src="/js/likes.js"></script>
-		<%- include('_footer')%>
+          </article>
+          <%})%>
+        </div>
+      </div>
+      <%- include('_sidebar') %>
+    </div>
+  </div>
+</section>
+<!--================Blog Area =================-->
+<script src="/js/likes.js"></script>
+<%- include('_footer')%>

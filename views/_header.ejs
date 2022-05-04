@@ -45,15 +45,16 @@
               <li><a href="/contact">CONTACT</a></li>
               <li><a href="/api-docs/v1">API</a></li>
             </ul>
-            <%if(locals.user){%>
-            <a href="/login" class="button_nav">JOIN ME</a>
+            <% if(locals.user?.id){%>
+            <a href="#" id="logout" class="button_nav">Logout</a>
             <%}else{%>
-            <button id="logout" class="button_nav">Logout</button>
+            <a href="/login" class="button_nav">JOIN ME</a>
             <%}%>
           </div>
         </div>
       </div>
     </header>
     <!--================Header Menu Area =================-->
+    <%- include('popup')%>
   </body>
 </html>

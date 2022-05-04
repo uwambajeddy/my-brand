@@ -1,4 +1,5 @@
 async function handleLike(blogId, userId) {
+  console.log(userId);
   if (!userId) return location.assign('/login');
 
   try {

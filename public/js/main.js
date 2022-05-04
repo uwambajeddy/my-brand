@@ -2,6 +2,7 @@ const bar_a = document.querySelector('.icon-bar-a');
 const bar_b = document.querySelector('.icon-bar-b');
 const navbar = document.querySelector('.navbar-toggler');
 const menu = document.querySelector('.navbar-nav');
+const logout = document.querySelector('#logout');
 const progressBara = document.querySelector('.progress-bar-a');
 const progressBarb = document.querySelector('.progress-bar-b');
 const progressBarc = document.querySelector('.progress-bar-c');
@@ -33,5 +34,19 @@ navbar.addEventListener('click', () => {
   } else {
     menu.style.opacity = '1';
     menu.style.height = '320px';
+  }
+});
+
+logout.addEventListener('click', async (e) => {
+  e.preventDefault();
+  try {
+    await axios.get('/api/v1/user/logout');
+    popup(success, 'Logged out successfully');
+    setTimeout(() => {
+      location.reload();
+    }, 3000);
+  } catch (error) {
+    console.log(error);
+    popup(failure, `${error.response.data.message}`);
   }
 });

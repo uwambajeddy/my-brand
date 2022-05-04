@@ -20,7 +20,7 @@ const multerFilter = (req, file, cb) => {
 
 const upload = multer({
   storage: multerStorage,
-  fileFilter: multerFilter
+  fileFilter: multerFilter,
 });
 
 export const uploadBlogImage = upload.single('image');
@@ -47,46 +47,33 @@ export const getBlogs = catchAsync(async (req, res, next) => {
         let: { blog: '$_id' },
         pipeline: [
           {
-            $match: { $expr: { $eq: ['$blog', '$$blog'] }, approve: true }
+            $match: { $expr: { $eq: ['$blog', '$$blog'] }, approve: true },
+          },
+          {
+            $unwind: '$user',
           },
           {
             $lookup: {
-            from: 'users',
-            as: 'user',
-            let: { user: '$_id' },
-            pipeline: [
-              {
-                $match: {
-                  $expr: { $eq: ['$user', '$$user'] }
-                }
-              },{
-                $unwind:"$user"
-             },
-             {
-                $lookup:{
-                   from:"users",
-                   localField:"user",
-                   foreignField:"_id",
-                   as:"user"
-                }
-              },
-              { $unset: 
-                [ "user.password", "user.role", "user.active", "user.email" ] 
-              }
-            ]
-          }
-        }
-        ]
-      }
-    }
+              from: 'users',
+              localField: 'user',
+              foreignField: '_id',
+              as: 'user',
+            },
+          },
+          {
+            $unset: ['user.password', 'user.role', 'user.active', 'user.email'],
+          },
+        ],
+      },
+    },
   ]);
 
   res.status(200).json({
     status: 'success',
     results: blogs.length,
     data: {
-      blogs
-    }
+      blogs,
+    },
   });
 });
 
@@ -94,7 +81,7 @@ export const getBlog = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const blog = await blogModel.aggregate([
     {
-      $match: { _id: mongoose.Types.ObjectId(id) }
+      $match: { _id: mongoose.Types.ObjectId(id) },
     },
     {
       $lookup: {
@@ -105,25 +92,26 @@ export const getBlog = catchAsync(async (req, res, next) => {
           {
             $match: {
               $expr: { $eq: ['$blog', '$$blog'] },
-              approve: true
-            }
-          },{
-            $unwind:"$user"
-         },
-         {
-            $lookup:{
-               from:"users",
-               localField:"user",
-               foreignField:"_id",
-               as:"user"
-            }
+              approve: true,
+            },
           },
-          { $unset: 
-            [ "user.password", "user.role", "user.active", "user.email" ] 
-          }
-        ]
-      }
-    }
+          {
+            $unwind: '$user',
+          },
+          {
+            $lookup: {
+              from: 'users',
+              localField: 'user',
+              foreignField: '_id',
+              as: 'user',
+            },
+          },
+          {
+            $unset: ['user.password', 'user.role', 'user.active', 'user.email'],
+          },
+        ],
+      },
+    },
   ]);
   if (!blog) {
     return next(new AppError('No Blog found with that ID', 404));
@@ -132,8 +120,8 @@ export const getBlog = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
-      blog
-    }
+      blog,
+    },
   });
 });
 
@@ -146,7 +134,7 @@ export const deleteBlog = catchAsync(async (req, res, next) => {
   }
   res.status(204).json({
     status: 'success',
-    data: null
+    data: null,
   });
 });
 
@@ -154,29 +142,28 @@ export const createBlog = catchAsync(async (req, res, next) => {
   if (req.file) req.body.image = req.file.originalname;
 
   const blog = await blogModel.create(req.body);
-  const users = await userModel.find({subscription: true});
+  const users = await userModel.find({ subscription: true });
   const url = `${req.protocol}://${req.get('host')}/blog/${blog._id}`;
   const rootDir = `${req.protocol}://${req.get('host')}`;
-  const message= {
+  const message = {
     image: blog.image,
     title: blog.title,
-    body: blog.body
-  }
-  users.map(async user=>{
-    try{
+    body: blog.body,
+  };
+  users.map(async (user) => {
+    try {
       await new Email(user, url, message, rootDir).sendNewPost();
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
-  })
-  
+  });
+
   res.status(201).json({
     status: 'success',
     data: {
-      blog
-    }
+      blog,
+    },
   });
-  
 });
 
 export const updateBlog = catchAsync(async (req, res, next) => {
@@ -184,7 +171,7 @@ export const updateBlog = catchAsync(async (req, res, next) => {
 
   const blog = await blogModel.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
-    runValidators: true
+    runValidators: true,
   });
 
   if (!blog) {
@@ -194,8 +181,8 @@ export const updateBlog = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
-      data: blog
-    }
+      data: blog,
+    },
   });
 });
 
@@ -215,22 +202,22 @@ export const handleLike = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
-      blog
-    }
+      blog,
+    },
   });
 });
 
 export const getAllComments = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  const comments = await commentModel.find({ blog: id});
+  const comments = await commentModel.find({ blog: id });
   if (!comments) {
     return next(new AppError('No Comments found with that ID', 404));
   }
   res.status(200).json({
     status: 'success',
     data: {
-      comments
-    }
+      comments,
+    },
   });
 });
 
@@ -240,7 +227,7 @@ export const deleteComment = catchAsync(async (req, res, next) => {
 
   res.status(204).json({
     status: 'success',
-    data: null
+    data: null,
   });
 });
 
@@ -261,8 +248,8 @@ export const approveComment = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
-      comment
-    }
+      comment,
+    },
   });
 });
 
@@ -274,13 +261,13 @@ export const createComment = catchAsync(async (req, res, next) => {
   const comment = await commentModel.create({
     comment: req.body.comment,
     user: req.user._id,
-    blog: req.params.id
+    blog: req.params.id,
   });
 
   res.status(201).json({
     status: 'success',
     data: {
-      comment
-    }
+      comment,
+    },
   });
 });
