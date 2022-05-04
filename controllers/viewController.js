@@ -4,13 +4,11 @@ import blogModel from '../models/blogModel.js';
 import userModel from '../models/userModel.js';
 import mongoose from 'mongoose';
 
-
 export const homePage = catchAsync(async (req, res, next) => {
-
   const projects = await projectModel.find();
 
-  res.status(200).render('index',{
-    projects
+  res.status(200).render('index', {
+    projects,
   });
 });
 
@@ -26,7 +24,7 @@ export const signupPage = catchAsync(async (req, res, next) => {
 });
 
 export const blogsPage = catchAsync(async (req, res, next) => {
-  const admin = await userModel.aggregate([{$match:{ role: 'admin' }}]);
+  const admin = await userModel.aggregate([{ $match: { role: 'admin' } }]);
   const blogs = await blogModel.aggregate([
     {
       $lookup: {
@@ -35,15 +33,16 @@ export const blogsPage = catchAsync(async (req, res, next) => {
         let: { blog: '$_id' },
         pipeline: [
           {
-            $match: { $expr: { $eq: ['$blog', '$$blog'] }, approve: true }
-          }
-        ]
-      }
-    }
+            $match: { $expr: { $eq: ['$blog', '$$blog'] }, approve: true },
+          },
+        ],
+      },
+    },
   ]);
 
   res.status(200).render('blog', {
-    blogs,admin: admin[0]
+    blogs,
+    admin: admin[0],
   });
 });
 
@@ -58,16 +57,16 @@ export const blogPage = catchAsync(async (req, res, next) => {
         let: { blog: '$_id' },
         pipeline: [
           {
-            $match: { $expr: { $eq: ['$blog', '$$blog'] }, approve: true }
-          }
-        ]
-      }
-    }
+            $match: { $expr: { $eq: ['$blog', '$$blog'] }, approve: true },
+          },
+        ],
+      },
+    },
   ]);
 
   const blog = await blogModel.aggregate([
     {
-      $match: { _id: mongoose.Types.ObjectId(id) }
+      $match: { _id: mongoose.Types.ObjectId(id) },
     },
     {
       $lookup: {
@@ -78,41 +77,43 @@ export const blogPage = catchAsync(async (req, res, next) => {
           {
             $match: {
               $expr: { $eq: ['$blog', '$$blog'] },
-              approve: true
-            }
-          },{
-            $unwind:"$user"
-         },
-         {
-            $lookup:{
-               from:"users",
-               localField:"user",
-               foreignField:"_id",
-               as:"user"
-            }
+              approve: true,
+            },
           },
-          { $unset: 
-            [ "user.password", "user.role", "user.active", "user.email" ] 
-          }
-        ]
-      }
-    }
+          {
+            $unwind: '$user',
+          },
+          {
+            $lookup: {
+              from: 'users',
+              localField: 'user',
+              foreignField: '_id',
+              as: 'user',
+            },
+          },
+          {
+            $unset: ['user.password', 'user.role', 'user.active', 'user.email'],
+          },
+        ],
+      },
+    },
   ]);
   if (!blog) {
     return next(new AppError('No Blog found with that ID', 404));
   }
 
   res.status(200).render('blog-details', {
-    blog: blog[0],blogs,admin : admin[0]
+    blog: blog[0],
+    blogs,
+    admin: admin[0],
   });
 });
 
 export const projectPage = catchAsync(async (req, res, next) => {
-
   const projects = await projectModel.find();
 
   res.status(200).render('project', {
-    projects
+    projects,
   });
 });
 
@@ -120,7 +121,10 @@ export const unsubscribe = catchAsync(async (req, res, next) => {
   res.status(200).render('unsubscribe');
 });
 export const resetpassword = catchAsync(async (req, res, next) => {
-  res.status(200).render('reset-password');
+  const { token } = req.params;
+  res.status(200).render('reset-password', {
+    token,
+  });
 });
 
 export const forgotPage = catchAsync(async (req, res, next) => {

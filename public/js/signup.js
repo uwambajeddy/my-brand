@@ -12,7 +12,7 @@ contactform.addEventListener('submit', async (e) => {
   const password_confirm = document.querySelector('#password_confirm').value;
 
   if (name == '' || email == '' || password == '' || password_confirm == '') {
-    popup(warning, 'Please fill empty fields !!');
+    popup(warning, 'Please fill empty fields!!');
 
     return 0;
   }
