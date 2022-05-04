@@ -23,6 +23,7 @@ contactform.addEventListener('submit', async (e) => {
     disibleControl.style.display = 'none';
     popup(success, 'Logged in successfully');
     setTimeout(() => {
+      location.assign('/blogs');
       location.reload();
     }, 3000);
   } catch (error) {
