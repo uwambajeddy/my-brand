@@ -29,7 +29,7 @@ commentform.addEventListener('submit', async (e) => {
     if (error.request.status === 401) {
       return location.assign('/login');
     }
-    if (error.response.data.message) {
+    if (error.response.data?.message) {
       popup(failure, `${error.response.data.message}`);
     } else {
       popup(failure, `${error.message}`);
