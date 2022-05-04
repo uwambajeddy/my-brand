@@ -10,10 +10,10 @@ import {
   forgotPage,
   blogPage,
   unsubscribe,
-  resetpassword
+  resetpassword,
 } from '../controllers/viewController.js';
 
-import {isLoggedIn, protect} from '../controllers/authController.js';
+import { isLoggedIn, protect } from '../controllers/authController.js';
 
 const router = express.Router();
 
@@ -28,6 +28,6 @@ router.get('/forgot', forgotPage);
 router.get('/signup', signupPage);
 router.get('/contact', contactPage);
 router.get('/unsubscribe', protect, unsubscribe);
-router.get('/resetpassword/:id',resetpassword);
+router.get('/resetpassword/:token', resetpassword);
 
 export default router;

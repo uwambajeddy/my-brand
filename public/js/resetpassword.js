@@ -7,6 +7,7 @@ contactform.addEventListener('submit', async (e) => {
 
   const password = document.querySelector('#password').value;
   const password_confirm = document.querySelector('#password_confirm').value;
+  const token = document.querySelector('#token').value;
 
   if (password == '' || password_confirm == '') {
     popup(warning, 'Please fill empty fields!!');
@@ -21,8 +22,9 @@ contactform.addEventListener('submit', async (e) => {
 
   disibleControl.style.display = 'block';
   try {
-    await axios.post('/api/v1/user/resetpassword', {
-      email,
+    await axios.post(`/api/v1/user/resetpassword/${token}`, {
+      password,
+      password_confirm,
     });
     document.querySelector('#password').value = '';
     document.querySelector('#password_confirm').value = '';
