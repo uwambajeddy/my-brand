@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
 const contactform = document.querySelector('.contact_form');
+const disibleControl = document.querySelector('.disible-control');
 
 contactform.addEventListener('submit', e => {
   e.preventDefault();
@@ -13,5 +14,16 @@ contactform.addEventListener('submit', e => {
     return 0;
   }
 
-  popup(success, "Reset token was sent to your Email address");
+  disibleControl.style.display = 'block';
+  try {
+    await axios.post('/api/v1/user/forgotpassword', {
+      email
+    });
+    popup(success, "Reset token was sent to your Email address");
+    disibleControl.style.display = 'none';
+  } catch (error) {
+    console.log(error);
+    popup(failure, `${error.response.data.message}`);
+  }
+
 });
