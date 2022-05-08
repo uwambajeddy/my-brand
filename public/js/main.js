@@ -38,22 +38,28 @@ if (progressBara) {
     progressBare.style.width = '75%';
   });
 }
-navbar.addEventListener('click', () => {
-  if (bar_a.style.marginLeft == '10px') {
-    bar_a.style.marginLeft = '0px';
+navbar.addEventListener("click", () => {
+  if (bar_a.style.marginLeft == "10px") {
+
+    bar_a.style.marginLeft = "0px";
   } else {
-    bar_a.style.marginLeft = '10px';
+    bar_a.style.marginLeft = "10px";
   }
-  if (bar_b.style.marginLeft == '-10px') {
-    bar_b.style.marginLeft = '0px';
+  if (bar_b.style.marginLeft == "-10px") {
+
+    bar_b.style.marginLeft = "0px";
   } else {
-    bar_b.style.marginLeft = '-10px';
+    bar_b.style.marginLeft = "-10px";
   }
-  if (menu.style.opacity == '1') {
-    menu.style.opacity = '0';
-    menu.style.height = '0px';
+  if (menu.style.opacity == "1") {
+    menu.style.opacity = "0"
+    menu.style.visibility = "hidden";
+    menu.style.height = "0px"
   } else {
-    menu.style.opacity = '1';
-    menu.style.height = '320px';
+    menu.style.visibility = "visible";
+    menu.style.opacity = "1"
+    menu.style.height = "340px"
   }
+
+
 });

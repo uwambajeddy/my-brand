@@ -75,6 +75,7 @@ export const deleteProject = catchAsync(async (req, res, next) => {
 });
 
 export const createProject = catchAsync(async (req, res, next) => {
+  console.log(req.file);
   if (req.file) req.body.image = req.file.originalname;
 
   const project = await projectModel.create(req.body);

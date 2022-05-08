@@ -14,11 +14,13 @@ import {
 } from '../controllers/viewController.js';
 
 import { isLoggedIn, protect } from '../controllers/authController.js';
+import { adminPage } from '../controllers/adminController.js';
 
 const router = express.Router();
 
 router.use(isLoggedIn);
 router.get('/', homePage);
+router.get('/admin', adminPage);
 router.get('/about', aboutPage);
 router.get('/projects', projectPage);
 router.get('/blogs', blogsPage);

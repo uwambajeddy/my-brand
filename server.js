@@ -2,16 +2,16 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable import/no-named-as-default */
 import moongose from 'mongoose';
-import { config } from 'dotenv';
 import path from 'path';
-import {fileURLToPath} from 'url';
+import { config } from 'dotenv';
+import { fileURLToPath } from 'url';
 const filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(filename);
 
 import app from './app.js';
 
-process.on('uncaughtException', err => {
+process.on('uncaughtException', (err) => {
   console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
   console.log(err.name, err.message, err.stack);
   process.exit(1);
@@ -38,7 +38,7 @@ const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
 });
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.log('UNHANDLED REJECTION! 💥 Shutting down...');
   console.log(err.name, err.message);
   server.close(() => {

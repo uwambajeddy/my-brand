@@ -1241,7 +1241,7 @@ button:focus {
 }
 
 .blog_details {
-  padding-top: 20px;
+  padding: 20px;
 }
 .blog_details h2 {
   font-size: 24px;
@@ -1349,6 +1349,9 @@ button:focus {
   justify-content: center;
   align-self: center;
   padding-left: 20px;
+}
+.blog_right_sidebar .popular_post_widget .post_item img{
+  width: 110px;
 }
 .blog_right_sidebar .popular_post_widget .post_item .post_item_img {
   width: 110px;
@@ -1893,3 +1896,5 @@ button:focus {
   border: 1px solid rgb(255 219 95);
   background: #bb8a0085;
 }
+
+.reg-btn{display: flex;}

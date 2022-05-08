@@ -1,46 +1,46 @@
 <%- include('_header')%>
-       
-		<!--================Home Banner Area =================-->
-		<section class="home_banner_area_lil">
-			<div class="container">
-			<div class="media">
-                <div class="banner_content ">
-                    <h2>Projects</h2>
-                    <div class="page_link">
-                        <a href="/" class="page_link_a">Home</a>
-                        <a href="/projects">Projects</a>
-                    </div>
-                </div>
-					 </div>
-				 
-		 </div>
-	 </section>
-		<!--================Home Banner Area =================-->
-		
-		<!--================Home Gallery Area =================-->
-        <section class="home_gallery_area">
-        	<div class="container">
-        		<div class="main_title">
-        			<h2>My Latest Featured Projects</h2>
-        			<p>Projects that I have been working on.</p>
-        		</div>
-        		<div class="main_content">
 
-					<% projects.map(project =>{%>
-        			
-					<div class="h_gallery_item">
-						<div class="g_img_item">
-							<img class="img-fluid" src="img/project/<%= project.image%>" alt="">
-						</div>
-						<div class="g_item_text">
-							<h4><%= project.title %></h4>
-							<a href="<%= project.link%>" class="main_btn">view project <i class="fa fa-long-arrow-right"></i></a>
-						</div>
-					</div>
-					<% }) %>
-        		</div>
-        	</div>
-        </section>
-		<!--================End Home Gallery Area =================-->
-		
-		<%- include('_footer')%>
+<!--================Home Banner Area =================-->
+<section class="home_banner_area_lil">
+  <div class="container">
+    <div class="media">
+      <div class="banner_content">
+        <h2>Projects</h2>
+        <div class="page_link">
+          <a href="/" class="page_link_a">Home</a>
+          <a href="/projects">Projects</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================Home Banner Area =================-->
+
+<!--================Home Gallery Area =================-->
+<section class="home_gallery_area">
+  <div class="container">
+    <div class="main_title">
+      <h2>My Latest Featured Projects</h2>
+      <p>Projects that I have been working on.</p>
+    </div>
+    <div class="main_content">
+      <% projects.map(project =>{%>
+
+      <div class="h_gallery_item">
+        <div class="g_img_item">
+          <img class="img-fluid" src="img/project/<%= project.image%>" alt="" />
+        </div>
+        <div class="g_item_text">
+          <h4><%= project.title %></h4>
+          <a href="<%= project.link%>" class="main_btn"
+            >view project <i class="fa fa-long-arrow-right"></i
+          ></a>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<!--================End Home Gallery Area =================-->
+
+<%- include('_footer')%>
