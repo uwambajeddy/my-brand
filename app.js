@@ -36,11 +36,10 @@ const swaggerOptions = {
       },
       server: [
         {
-          url: `${
-            process.env.NODE_ENV === 'development'
+          url: `${process.env.NODE_ENV === 'development'
               ? 'http://localhost:3000'
               : 'https://uwambajeeddy.herokuapp.com/'
-          }`,
+            }`,
         },
       ],
     },
@@ -60,9 +59,9 @@ app.use(cors(corsConfig));
 app.options('*', cors(corsConfig));
 app.enable('trust proxy');
 
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', req.header('origin') );
-  res.setHeader('Access-Control-Allow-Credentials',true);
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', req.header('origin'));
+  res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
 
@@ -92,12 +91,12 @@ const limit = rateLimit({
 
 app.use('/api', limit);
 
-app.use('/', viewRouter);
 app.use('/api/', apiRouter);
 app.use('/api/v1/user/', userRouter);
 app.use('/api/v1/blogs/', blogsRouter);
 app.use('/api/v1/projects/', projectsRouter);
 app.use('/api/v1/messages/', messageRouter);
+app.use('/', viewRouter);
 
 app.all('*', (req, res, next) => {
   next(
