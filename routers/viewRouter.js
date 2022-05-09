@@ -39,14 +39,13 @@ router.get('/contact', contactPage);
 router.get('/subscription', protect, subscription);
 router.get('/resetpassword/:token', resetpassword);
 
-router.use(protect, restrictedTo('admin'));
-router.get('/admin', adminPage);
-router.get('/admin/blogs', adminBlogsPage);
-router.post('/admin/blogs/:id', adminBlogsPage);
-router.get('/admin/messages', adminMessagesPage);
-router.get('/admin/subscribers', adminSubscribersPage);
-router.get('/admin/projects', adminProjectsPage);
-router.get('/admin/projects/comments/:id', adminCommentsPage);
-router.get('/admin/users', adminUsersPage);
+router.get('/admin', protect, restrictedTo('admin'), adminPage);
+router.get('/admin/blogs', protect, restrictedTo('admin'), adminBlogsPage);
+router.post('/admin/blogs/:id', protect, restrictedTo('admin'), adminBlogsPage);
+router.get('/admin/messages', protect, restrictedTo('admin'), adminMessagesPage);
+router.get('/admin/subscribers', protect, restrictedTo('admin'), adminSubscribersPage);
+router.get('/admin/projects', protect, restrictedTo('admin'), adminProjectsPage);
+router.get('/admin/projects/comments/:id', protect, restrictedTo('admin'), adminCommentsPage);
+router.get('/admin/users', protect, restrictedTo('admin'), adminUsersPage);
 
 export default router;
