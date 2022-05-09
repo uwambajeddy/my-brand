@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+    <title>MeetMe Personal</title>
+    <!-- Icons -->
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendors/flaticon/flaticon.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="/vendors/linericon/style.css">
+    <link rel="stylesheet" href="/css/style-dash.css">
+    <link rel="stylesheet" href="/css/responsive-dash.css">
+</head>
+
+<body>
+    <!--================Main Area =================-->
+    <div class="main">
+        <div class="container">
+            <!--=============modal Banner Area =================-->
+            <section class="menu_banner_area">
+                <div class="user-icon">
+                    <img src="/img/personal.jpg" alt="">
+                    <a href="/admin/profile.html">
+                        <script>
+                            document.write(localStorage.getItem("name"))
+                        </script>
+                    </a>
+                </div>
+                <div class="navbar-nav">
+                    <ul class="list basic_info">
+                        <li><a href="/admin"><i class="lnr lnr-chart-bars"></i>
+                                <p> Dashboard</p>
+                            </a></li>
+                        <li><a class="active" href="/admin/blogs"><i class="lnr lnr-license"></i>
+                                <p>Blogs</p>
+                            </a></li>
+                        <li><a href="/admin/projects"><i class="lnr lnr-rocket"></i>
+                                <p>Projects</p>
+                            </a></li>
+                        <li><a href="/admin/subscribers"><i class="lnr lnr-pushpin"></i>
+                                <p> Subscribers</p>
+                            </a></li>
+                        <li><a href="/admin/messages"><i class="lnr lnr-envelope"></i>
+                                <p>Messages</p>
+                            </a></li>
+                        <li><a href="/admin/users"><i class="lnr lnr-chart-bars"></i>
+                                <p>Users</p>
+                            </a></li>
+                    </ul>
+                </div>
+                <div class="logout_btn">
+                    <a href="#"><i class="lnr lnr-exit"></i> Logout</a>
+                </div>
+            </section>
+            <!--================Menu Banner Area =================-->

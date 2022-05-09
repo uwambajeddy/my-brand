@@ -1,152 +1,130 @@
-<!doctype html>
-<html lang="en">
-<head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" href="/img/favicon.png" type="image/png">
-        <title>MeetMe Personal</title>
-		<!-- Icons -->
-        <link rel="stylesheet" href="/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/vendors/flaticon/flaticon.css">
-        <!-- main css -->
-        <link rel="stylesheet" href="/vendors/linericon/style.css">
-        <link rel="stylesheet" href="/css/style-dash.css">
-        <link rel="stylesheet" href="/css/responsive-dash.css">
-    </head>
-    <body>
-          <!--================Main Area =================-->
-         <div class="main">
-             <div class="container">
-             <!--=============modal Banner Area =================-->
-             <section class="menu_banner_area">
-                 <div class="user-icon">
-                     <img src="/img/personal.jpg" alt="">
-                     <a href="./profile.html"><script>document.write(localStorage.getItem("name"))</script></a>
-                 </div>
-                 <div class="navbar-nav">
-                    <ul class="list basic_info">
-                        <li><a href="./index.html" ><i class="lnr lnr-chart-bars"></i><p> Dashboard</p></a></li>
-                        <li><a class="active" href="./blogs.html"><i class="lnr lnr-license"></i> <p>Blogs</p></a></li>
-                        <li><a href="./projects.html"><i class="lnr lnr-rocket"></i> <p>Projects</p></a></li>
-                        <li><a href="./comments.html"><i class="lnr lnr-bubble"></i><p> Comments</p></a></li>
-                        <li><a href="./subscribers.html"><i class="lnr lnr-pushpin"></i><p> Subscribers</p></a></li>
-                        <li><a href="./messages.html"><i class="lnr lnr-envelope"></i> <p>Messages</p></a></li>
-                    </ul>
-                 </div>
-                 <div class="logout_btn">
-                     <a href="#"><i class="lnr lnr-exit"></i> Logout</a>
-                 </div>
-             </section>
-             <!--================Menu Banner Area =================-->
-             <!--================Tables Banner Area =================-->
-             <section class="tables_banner_area">
-                <div class="main_title">
-                    <button class="navbar-toggler" >
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar icon-bar-a"></span>
-                        <span class="icon-bar icon-bar-b"></span>
-                    </button>
-                    <span class="main_text">
-					<h2>Blogs</h2>
-                    
-                </span>
-        		</div>
-				<div class="main_content">
-                    <div class="add_btn">
-                        <i class="lnr lnr-checkmark-circle"></i> Add blog
-                    </div>
-                    <div class="main_table">
-                        <div class="table_row row_header">
-                            <div class="table_column">Image</div>
-                            <div class="table_column">Title</div>
-                            <div class="table_column">Body</div>
-                            <div class="table_column">Comments</div>
-                            <div class="table_column">Likes</div>
-                            <div class="table_column">Date</div>
-                            <div class="table_column">Modify</div>
-                        </div>
-                        <div class="table_row row_dark">
-                            <div class="table_column"><img src="/img/personal.jpg" alt=""></div>
-                            <div class="table_column">If you are looking... </div>
-                            <div class="table_column">If you are looking...</div>
-                            <div class="table_column">20</div>
-                            <div class="table_column">15</div>
-                            <div class="table_column">20 jun 2021</div>
-                            <div class="table_column">
-                                <button class="mod_btn update_btn"><span class="lnr lnr-upload"></span> Update</button>
-                                <button class="mod_btn delete_btn"><span class="lnr lnr-trash"></span> Delete</button>
-                            </div>
-                        </div>
-                        <div class="table_row ">
-                            <div class="table_column"><img src="/img/personal.jpg" alt=""></div>
-                            <div class="table_column">If you are looking... </div>
-                            <div class="table_column">If you are looking...</div>
-                            <div class="table_column">20</div>
-                            <div class="table_column">15</div>
-                            <div class="table_column">20 jun 2021</div>
-                            <div class="table_column">
-                                <button class="mod_btn update_btn"><span class="lnr lnr-upload"></span> Update</button>
-                                <button class="mod_btn delete_btn"><span class="lnr lnr-trash"></span> Delete</button>
-                            </div>
-                        </div>
-                        <div class="table_row row_dark">
-                            <div class="table_column"><img src="/img/personal.jpg" alt=""></div>
-                            <div class="table_column">If you are looking... </div>
-                            <div class="table_column">If you are looking...</div>
-                            <div class="table_column">20</div>
-                            <div class="table_column">15</div>
-                            <div class="table_column">20 jun 2021</div>
-                            <div class="table_column">
-                                <button class="mod_btn update_btn"><span class="lnr lnr-upload"></span> Update</button>
-                                <button class="mod_btn delete_btn"><span class="lnr lnr-trash"></span> Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-				<div class="main_footer">
+<%- include("_sidebar")%>
 
-                </div>
+<!--================Tables Banner Area =================-->
+<section class="tables_banner_area">
+    <div class="main_title">
+        <button class="navbar-toggler">
+            <span class="icon-bar"></span>
+            <span class="icon-bar icon-bar-a"></span>
+            <span class="icon-bar icon-bar-b"></span>
+        </button>
+        <span class="main_text">
+            <h2>Blogs</h2>
 
-             </section>
-             <!--================Tables Banner Area =================-->
+        </span>
+    </div>
+    <div class="main_content">
+        <div class="add_btn">
+            <i class="lnr lnr-checkmark-circle"></i> Add blog
+        </div>
+        <div class="main_table">
+            <div class="table_row row_header">
+                <div class="table_column">Image</div>
+                <div class="table_column">Title</div>
+                <div class="table_column">Body</div>
+                <div class="table_column">Comments</div>
+                <div class="table_column">Likes</div>
+                <div class="table_column">Date</div>
+                <div class="table_column">Modify</div>
             </div>
-         </div>
-           <!--================Main Area =================-->
-           <!--================Modal Banner Area =================-->
-           <div class="model_block">
-
-           </div>
-           <section class="modal_banner_area">
-               <h2>Add Blog</h2>
-            <form class="contact_form" action="#" method="post">
-                <div class="contact_form_text">
-                    <div class="form-group">
-                        <input type="file" class="form-control" id="image" name="image" >
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Title">
-                    </div>
-                    <div class="form-group">
-                        <input type="date" class="form-control" id="date" name="date" placeholder="date">
-                    </div>
-                </div>
-
-                <div class="contact_form_message">
-                    <div class="form-group">
-                        <textarea class="form-control" name="body" id="body" rows="1" placeholder="Body"></textarea>
-                    </div>
-                    <button type="submit" value="submit" class="btn submit_btn">Add</button>
-                </div>
+            <% blogs.map( blog =>{
+                let date= `${blog.date}`.split(" ");
                 
-            </form>
-        </section>
-        <!--================Modal Banner Area =================-->
+                %>
+            <div class="table_row row_dark">
+                <div class="table_column"><img src="/img/blog/<%= blog.image%>" alt=""></div>
+                <div class="table_column"><%= blog.title.slice(0,15)%>... </div>
+                <div class="table_column"><%= blog.body.slice(0,20)%>...</div>
+                <div class="table_column"><%= blog.comments.length%></div>
+                <div class="table_column"><%= blog.likedBy.length %></div>
+                <div class="table_column"><%= date[0] %> <%= date[1] %> <%= date[2] %> <%= date[3] %></div>
+                <div class="table_column">
+                    <button class="mod_btn update_btn" onclick="updateModal('<%= blog._id%>')"><span
+                            class="lnr lnr-upload"></span> Update</button>
+                    <button class="mod_btn delete_btn"><span class="lnr lnr-trash"></span> Delete</button>
+                </div>
+            </div>
+            <% });%>
+        </div>
+    </div>
+    <div class="main_footer">
 
-		 <!--  JavaScript -->
-		 <script src="/js/main-dash.js"></script>
-         <script src="/js/session.js"></script>
-		 <!--  JavaScript -->
-    </body>
-	
-	</html>
+    </div>
+
+</section>
+<!--================Tables Banner Area =================-->
+</div>
+</div>
+<!--================Main Area =================-->
+<!--================Modal Banner Area =================-->
+<div class="model_block">
+
+</div>
+<section class="modal_banner_area">
+    <h2>Add Blog</h2>
+    <form class="contact_form" action="#" method="post">
+        <div class="contact_form_text">
+            <div class="form-group">
+                <input type="file" class="form-control" id="image" name="image">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+            </div>
+            <div class="form-group">
+                <input type="date" class="form-control" id="date" name="date" placeholder="date">
+            </div>
+        </div>
+
+        <div class="contact_form_message">
+            <div class="form-group">
+                <textarea class="form-control" name="body" id="body" rows="1" placeholder="Body"></textarea>
+            </div>
+            <button type="submit" value="submit" class="btn submit_btn">Add</button>
+        </div>
+
+    </form>
+</section>
+<!--================Modal Banner Area =================-->
+<!--================Modal Banner Area =================-->
+<% blogs.map( blog =>{
+    let yyyy= new Date(blog.date).getFullYear();
+    let mm= new Date(blog.date).getMonth();
+    let dd= new Date(blog.date).getDate();
+    let date= `${blog.date}`.split(" ");
+    %>
+<section class="modal_banner_area modal_banner_update_<%= blog._id%>">
+    <h2>Update Blog</h2>
+    <form class="contact_form" action="/admin/blog/<%= blog._id%>" method="post">
+        <div class="contact_form_text">
+            <div class="form-group">
+                <input type="file" class="form-control" id="image" name="image">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="title" name="title" value="<%= blog.title%>">
+            </div>
+            <div class="form-group">
+                <input type="date" class="form-control" id="date" name="date"
+                    value="<%= yyyy%>-<%= mm >= 10 ? mm : '0'+mm%>-<%= dd >= 10 ? dd : '0'+dd%>">
+            </div>
+        </div>
+
+        <div class="contact_form_message">
+            <div class="form-group">
+                <textarea class="form-control" name="body" id="body" rows="1"><%= blog.body%></textarea>
+            </div>
+            <button type="submit" value="submit" class="btn submit_btn">Update</button>
+        </div>
+
+    </form>
+</section>
+<% });%>
+<!--================Modal Banner Area =================-->
+
+<!--  JavaScript -->
+<script src="/js/blogs.js"></script>
+<script src="/js/main-dash.js"></script>
+<script src="/js/session.js"></script>
+<!--  JavaScript -->
+</body>
+
+</html>

@@ -2,29 +2,48 @@
 <footer class="footer_area">
     <div class="container">
         <div class="footer_inner">
-                <aside class="f_widget ab_widget">
-                    <div class="f_title">
-                        <h3>About Me</h3>
-                    </div>
-                    <p>Do you want to be even more successful? Learn to love learning and growth. The more effort you put into improving your skills,</p>
-                    <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Eddy Uwambaje</p>
-                </aside>
-                <% if(!locals.user?.id){%>
-                <aside class="f_widget news_widget">
-                    <div class="f_title">
-                        <h3>Newsletter</h3>
-                    </div>
-                    <p>Stay updated with our latest trends</p>
-                    <div id="mc_embed_signup">
-                        <form target="_blank" action="#" method="get" class="subscribe_form relative">
-                            <div class="Newsletter_form input-group">
-                                <a href="/signup"  class="btn sub-btn">Signup <span class="lnr lnr-arrow-right"></span> </a>
-                            </div>				
-                            <div class="mt-10 info"></div>
-                        </form>
-                    </div>
-                </aside>
-                <%}%>
+            <aside class="f_widget ab_widget">
+                <div class="f_title">
+                    <h3>About Me</h3>
+                </div>
+                <p>Do you want to be even more successful? Learn to love learning and growth. The more effort you put
+                    into improving your skills,</p>
+                <p>Copyright &copy;<script>
+                        document.write(new Date().getFullYear());
+                    </script> All rights reserved | Eddy Uwambaje</p>
+            </aside>
+            <% if(!locals.user?.id){%>
+            <aside class="f_widget news_widget">
+                <div class="f_title">
+                    <h3>Newsletter</h3>
+                </div>
+                <p>Stay updated with our latest trends</p>
+                <div id="mc_embed_signup">
+                    <form target="_blank" action="#" method="get" class="subscribe_form relative">
+                        <div class="Newsletter_form input-group">
+                            <a href="/signup" class="btn sub-btn">Signup <span class="lnr lnr-arrow-right"></span> </a>
+                        </div>
+                        <div class="mt-10 info"></div>
+                    </form>
+                </div>
+            </aside>
+            <%}%>
+                <% if(locals.user?.id && locals.user.role == "admin"){%>
+            <aside class="f_widget news_widget">
+                <div class="f_title">
+                    <h3>Admin</h3>
+                </div>
+                <div id="mc_embed_signup">
+                    <form target="_blank" action="#" method="get" class="subscribe_form relative">
+                        <div class="Newsletter_form input-group">
+                            <a href="/admin" class="btn sub-btn">Dashboard <span class="lnr lnr-arrow-right"></span>
+                            </a>
+                        </div>
+                        <div class="mt-10 info"></div>
+                    </form>
+                </div>
+            </aside>
+            <%}%>
                 <aside class="f_widget social_widget">
                     <div class="f_title">
                         <h3>Follow Me</h3>
