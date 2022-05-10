@@ -22,6 +22,7 @@ import {
   adminProjectsPage,
   adminSubscribersPage,
   adminUsersPage,
+  adminProfilePage,
 } from '../controllers/adminController.js';
 
 const router = express.Router();
@@ -42,10 +43,11 @@ router.get('/resetpassword/:token', resetpassword);
 router.get('/admin', protect, restrictedTo('admin'), adminPage);
 router.get('/admin/blogs', protect, restrictedTo('admin'), adminBlogsPage);
 router.post('/admin/blogs/:id', protect, restrictedTo('admin'), adminBlogsPage);
+router.get('/admin/blogs/comments/:id', protect, restrictedTo('admin'), adminCommentsPage);
 router.get('/admin/messages', protect, restrictedTo('admin'), adminMessagesPage);
 router.get('/admin/subscribers', protect, restrictedTo('admin'), adminSubscribersPage);
 router.get('/admin/projects', protect, restrictedTo('admin'), adminProjectsPage);
-router.get('/admin/projects/comments/:id', protect, restrictedTo('admin'), adminCommentsPage);
 router.get('/admin/users', protect, restrictedTo('admin'), adminUsersPage);
+router.get('/admin/profile', protect, restrictedTo('admin'), adminProfilePage);
 
 export default router;

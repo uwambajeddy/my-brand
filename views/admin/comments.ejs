@@ -8,7 +8,7 @@
             <span class="icon-bar icon-bar-b"></span>
         </button>
         <span class="main_text">
-            <h2>Comments</h2>
+            <h2>Comments for "<%= blog.title%>"</h2>
 
         </span>
     </div>
@@ -16,50 +16,31 @@
         <div class="main_table">
             <div class="table_row row_header">
                 <div class="table_column">Blog ID</div>
-                <div class="table_column">Name</div>
-                <div class="table_column">Email</div>
+                <div class="table_column">User</div>
                 <div class="table_column">Comment</div>
-                <div class="table_column">Subject</div>
+                <div class="table_column">Approved</div>
                 <div class="table_column">Date</div>
                 <div class="table_column">Modify</div>
             </div>
+            <% blog.comments.map(comment =>{
+                let date= `${comment.date}`.split(" ");
+                %>
             <div class="table_row row_dark">
-                <div class="table_column">20</div>
-                <div class="table_column">Eddy Uw...</div>
-                <div class="table_column">uwambaj...</div>
-                <div class="table_column">If you are looking...</div>
-                <div class="table_column">If you are looking...</div>
-                <div class="table_column">20 jun 2021</div>
+                <div class="table_column"><%= blog._id%></div>
+                <div class="table_column"><%= comment.user[0].email%></div>
+                <div class="table_column" onclick="readMoreModal('Comment','<%= comment.comment%>')">
+                    <%= comment.comment.slice(0.20)%>...</div>
+                <div class="table_column <%= comment.approve ? 'truthy-rec':'falsy-rec'%>"><%= comment.approve%></div>
+                <div class="table_column"><%= date[0] %> <%= date[1] %> <%= date[2] %> <%= date[3] %></div>
                 <div class="table_column">
-                    <button class="mod_btn update_btn"><i class="lnr lnr-checkmark-circle"></i> Approve</button>
-                    <button class="mod_btn delete_btn"><span class="lnr lnr-trash"></span> Delete</button>
-                </div>
-            </div>
-            <div class="table_row ">
-                <div class="table_column">20</div>
-                <div class="table_column">Eddy Uw...</div>
-                <div class="table_column">uwambaj...</div>
-                <div class="table_column">If you are looking...</div>
-                <div class="table_column">If you are looking...</div>
-                <div class="table_column">20 jun 2021</div>
-                <div class="table_column">
-                    <button class="mod_btn update_btn"><i class="lnr lnr-checkmark-circle"></i> Approve</button>
-                    <button class="mod_btn delete_btn"><span class="lnr lnr-trash"></span> Delete</button>
-                </div>
-            </div>
-            <div class="table_row row_dark">
-                <div class="table_column">20</div>
-                <div class="table_column">Eddy Uw...</div>
-                <div class="table_column">uwambaj...</div>
-                <div class="table_column">If you are looking...</div>
-                <div class="table_column">If you are looking...</div>
-                <div class="table_column">20 jun 2021</div>
-                <div class="table_column">
-                    <button class="mod_btn update_btn"><i class="lnr lnr-checkmark-circle"></i> Approve</button>
-                    <button class="mod_btn delete_btn"><span class="lnr lnr-trash"></span> Delete</button>
+                    <button class="mod_btn update_btn" onclick="approveComment('<%= comment._id%>')"><i
+                            class="lnr lnr-checkmark-circle"></i> <%= comment.approve?"Disapprove":"Approve" %></button>
+                    <button class="mod_btn delete_btn" onclick="deleteComment('<%= comment._id%>')"><span
+                            class="lnr lnr-trash"></span> Delete</button>
                 </div>
             </div>
 
+            <%})%>
         </div>
     </div>
     <div class="main_footer">
@@ -74,8 +55,8 @@
 
 
 <!--  JavaScript -->
+<script src="/js/adminComment.js"></script>
 <script src="/js/main-dash.js"></script>
-<script src="/js/session.js"></script>
 <!--  JavaScript -->
 </body>
 

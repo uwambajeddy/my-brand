@@ -15,17 +15,26 @@
     <div class="main_content">
         <div class="main_table">
             <div class="table_row row_header">
+                <div class="table_column">Image</div>
+                <div class="table_column">Name</div>
                 <div class="table_column">Email</div>
-                <div class="table_column">Joined</div>
-                <div class="table_column">Modify</div>
+                <div class="table_column">Subscription</div>
+                <div class="table_column">Role</div>
+                <div class="table_column">Active</div>
             </div>
+            <% users.map( user =>{
+                %>
             <div class="table_row row_dark">
-                <div class="table_column">uwambajeddy@gmail.com</div>
-                <div class="table_column">20 jun 2021</div>
-                <div class="table_column">
-                    <button class="mod_btn delete_btn"><span class="lnr lnr-trash"></span> Delete</button>
+                <div class="table_column"><img
+                        src="<%= user.image.includes('http') ? user.image : `/img/users/${user.image}` %>" alt=""></div>
+                <div class="table_column"><%= user.name%> </div>
+                <div class="table_column"><%= user.email%> </div>
+                <div class="table_column <%= user.subscription ? 'truthy-rec':'falsy-rec'%>"><%= user.subscription%>
                 </div>
+                <div class="table_column <%= user.role === 'admin' ? 'admin-rec':'user-rec'%>"><%= user.role%> </div>
+                <div class="table_column <%= user.active ? 'truthy-rec':'falsy-rec'%>"><%= user.active%> </div>
             </div>
+            <% });%>
 
 
         </div>
@@ -43,7 +52,6 @@
 
 <!--  JavaScript -->
 <script src="/js/main-dash.js"></script>
-<script src="/js/session.js"></script>
 <!--  JavaScript -->
 </body>
 

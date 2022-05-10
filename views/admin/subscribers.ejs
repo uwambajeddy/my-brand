@@ -15,19 +15,21 @@
     <div class="main_content">
         <div class="main_table">
             <div class="table_row row_header">
+                <div class="table_column">Image</div>
+                <div class="table_column">Name</div>
                 <div class="table_column">Email</div>
-                <div class="table_column">Joined</div>
-                <div class="table_column">Modify</div>
             </div>
+            <% subscribers.map( subscriber =>{
+                
+                %>
             <div class="table_row row_dark">
-                <div class="table_column">uwambajeddy@gmail.com</div>
-                <div class="table_column">20 jun 2021</div>
-                <div class="table_column">
-                    <button class="mod_btn delete_btn"><span class="lnr lnr-trash"></span> Delete</button>
-                </div>
+                <div class="table_column"><img
+                        src="<%= subscriber.image.includes('http') ? subscriber.image : `/img/users/${subscriber.image}` %>"
+                        alt=""></div>
+                <div class="table_column"><%= subscriber.name%> </div>
+                <div class="table_column"><%= subscriber.email%></div>
             </div>
-
-
+            <% });%>
         </div>
     </div>
     <div class="main_footer">
@@ -43,7 +45,6 @@
 
 <!--  JavaScript -->
 <script src="/js/main-dash.js"></script>
-<script src="/js/session.js"></script>
 <!--  JavaScript -->
 </body>
 

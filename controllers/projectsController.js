@@ -88,7 +88,7 @@ export const createProject = catchAsync(async (req, res, next) => {
 });
 
 export const updateProject = catchAsync(async (req, res, next) => {
-  if (req.file) req.body.image = req.file.filename;
+  if (req.file) req.body.image = req.file.originalname;
 
   const project = await projectModel.findByIdAndUpdate(req.params.id, req.body, {
     new: true,

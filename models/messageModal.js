@@ -22,6 +22,10 @@ const messageSchema = new Schema({
   message: {
     type: String,
     required: [true, 'Please Provide a message!!']
+  },
+  date: {
+    type: Date,
+    default: Date.now()
   }
 });
 

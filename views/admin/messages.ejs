@@ -22,28 +22,24 @@
                 <div class="table_column">Date</div>
                 <div class="table_column">Modify</div>
             </div>
+            <% messages.map( message =>{
+                let date= `${message.date}`.split(" ");
+                %>
             <div class="table_row row_dark">
-                <div class="table_column">Eddy Uw...</div>
-                <div class="table_column">uwambaj...</div>
-                <div class="table_column">If you are looking...</div>
-                <div class="table_column">If you are looking...</div>
-                <div class="table_column">20 jun 2021</div>
+                <div class="table_column"><%= message.name%> </div>
+                <div class="table_column"><%= message.email%> </div>
+                <div class="table_column" onclick="readMoreModal('Massage','<%= message.message%>')">
+                    <%= message.message.slice(0,15)%>... </div>
+                <div class="table_column" onclick="readMoreModal('Subject','<%= message.subject %>')">
+                    <%= message.subject.slice(0,15)%>... </div>
+                <div class="table_column"><%= date[0] %> <%= date[1] %> <%= date[2] %> <%= date[3] %></div>
                 <div class="table_column">
                     <button class="mod_btn update_btn"><i class="lnr lnr-checkmark-circle"></i> Reply</button>
-                    <button class="mod_btn delete_btn"><span class="lnr lnr-trash"></span> Delete</button>
+                    <button class="mod_btn delete_btn" onclick="deleteMessage('<%= message._id%>')"><span
+                            class="lnr lnr-trash"></span> Delete</button>
                 </div>
             </div>
-            <div class="table_row ">
-                <div class="table_column">Eddy Uw...</div>
-                <div class="table_column">uwambaj...</div>
-                <div class="table_column">If you are looking...</div>
-                <div class="table_column">If you are looking...</div>
-                <div class="table_column">20 jun 2021</div>
-                <div class="table_column">
-                    <button class="mod_btn update_btn"><i class="lnr lnr-checkmark-circle"></i> Reply</button>
-                    <button class="mod_btn delete_btn"><span class="lnr lnr-trash"></span> Delete</button>
-                </div>
-            </div>
+            <% });%>
 
         </div>
     </div>
@@ -59,8 +55,8 @@
 
 
 <!--  JavaScript -->
+<script src="/js/adminMessages.js"></script>
 <script src="/js/main-dash.js"></script>
-<script src="/js/session.js"></script>
 <!--  JavaScript -->
 </body>
 

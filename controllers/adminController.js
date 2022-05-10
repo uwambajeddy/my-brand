@@ -33,21 +33,30 @@ export const adminPage = catchAsync(async (req, res, next) => {
 });
 
 export const adminMessagesPage = catchAsync(async (req, res, next) => {
-    res.status(200).render('admin/messages');
+    const messages = await messageModel.find();
+    res.status(200).render('admin/messages', {
+        messages
+    });
 });
 export const adminProjectsPage = catchAsync(async (req, res, next) => {
-    res.status(200).render('admin/projects');
+    const projects = await projectModel.find();
+    res.status(200).render('admin/projects', {
+        projects
+    });
 });
 
-export const adminCommentsPage = catchAsync(async (req, res, next) => {
-    res.status(200).render('admin/comments');
+export const adminProfilePage = catchAsync(async (req, res, next) => {
+    res.status(200).render('admin/profile');
 });
+
 export const adminSubscribersPage = catchAsync(async (req, res, next) => {
-    res.status(200).render('admin/subscribers');
+    const subscribers = await userModel.find({ subscription: true });
+    res.status(200).render('admin/subscribers',
+        { subscribers }
+    );
 });
 
 export const adminBlogsPage = catchAsync(async (req, res, next) => {
-    const admin = await userModel.aggregate([{ $match: { role: 'admin' } }]);
     const blogs = await blogModel.aggregate([
         {
             $lookup: {
@@ -65,27 +74,11 @@ export const adminBlogsPage = catchAsync(async (req, res, next) => {
 
     res.status(200).render('admin/blogs', {
         blogs,
-        admin: admin[0],
     });
 });
 
-export const adminBlogPage = catchAsync(async (req, res, next) => {
+export const adminCommentsPage = catchAsync(async (req, res, next) => {
     const { id } = req.params;
-    const admin = await userModel.find({ role: 'admin' });
-    const blogs = await blogModel.aggregate([
-        {
-            $lookup: {
-                from: 'comments',
-                as: 'comments',
-                let: { blog: '$_id' },
-                pipeline: [
-                    {
-                        $match: { $expr: { $eq: ['$blog', '$$blog'] }, approve: true },
-                    },
-                ],
-            },
-        },
-    ]);
 
     const blog = await blogModel.aggregate([
         {
@@ -100,7 +93,6 @@ export const adminBlogPage = catchAsync(async (req, res, next) => {
                     {
                         $match: {
                             $expr: { $eq: ['$blog', '$$blog'] },
-                            approve: true,
                         },
                     },
                     {
@@ -115,7 +107,7 @@ export const adminBlogPage = catchAsync(async (req, res, next) => {
                         },
                     },
                     {
-                        $unset: ['user.password', 'user.role', 'user.active', 'user.email'],
+                        $unset: ['user.password', 'user.role', 'user.active'],
                     },
                 ],
             },
@@ -125,18 +117,16 @@ export const adminBlogPage = catchAsync(async (req, res, next) => {
         return next(new AppError('No Blog found with that ID', 404));
     }
 
-    res.status(200).render('admin/blogs', {
-        blog: blog[0],
-        blogs,
-        admin: admin[0],
+    res.status(200).render('admin/comments', {
+        blog: blog[0]
     });
 });
 
 export const adminUsersPage = catchAsync(async (req, res, next) => {
-    const projects = await projectModel.find();
+    const users = await userModel.find().select('+active');;
 
     res.status(200).render('admin/users', {
-        projects,
+        users,
     });
 });
 

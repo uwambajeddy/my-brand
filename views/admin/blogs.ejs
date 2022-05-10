@@ -33,15 +33,19 @@
                 %>
             <div class="table_row row_dark">
                 <div class="table_column"><img src="/img/blog/<%= blog.image%>" alt=""></div>
-                <div class="table_column"><%= blog.title.slice(0,15)%>... </div>
-                <div class="table_column"><%= blog.body.slice(0,20)%>...</div>
-                <div class="table_column"><%= blog.comments.length%></div>
+                <div class="table_column" onclick="readMoreModal('Title','<%= blog.title%>')">
+                    <%= blog.title.slice(0,15)%>... </div>
+                <div class="table_column" onclick="readMoreModal('Full link','<%= blog.body %>')">
+                    <%= blog.body.slice(0,20)%>...</div>
+                <div class="table_column"><a href="/admin/blogs/comments/<%= blog._id%>"
+                        class="mod_btn nav_btn"><%= blog.comments.length%></a></div>
                 <div class="table_column"><%= blog.likedBy.length %></div>
                 <div class="table_column"><%= date[0] %> <%= date[1] %> <%= date[2] %> <%= date[3] %></div>
                 <div class="table_column">
                     <button class="mod_btn update_btn" onclick="updateModal('<%= blog._id%>')"><span
                             class="lnr lnr-upload"></span> Update</button>
-                    <button class="mod_btn delete_btn"><span class="lnr lnr-trash"></span> Delete</button>
+                    <button class="mod_btn delete_btn" onclick="deleteBlog('<%= blog._id%>')"><span
+                            class="lnr lnr-trash"></span> Delete</button>
                 </div>
             </div>
             <% });%>
@@ -62,7 +66,7 @@
 </div>
 <section class="modal_banner_area modal_banner_add">
     <h2>Add Blog</h2>
-    <form class="contact_form" action="#" method="post">
+    <form class="contact_form" id="contact_form_add">
         <div class="contact_form_text">
             <div class="form-group">
                 <input type="file" class="form-control" id="image" name="image">
@@ -94,7 +98,7 @@
     %>
 <section class="modal_banner_area modal_banner_update_<%= blog._id%>">
     <h2>Update Blog</h2>
-    <form class="contact_form" action="/admin/blog/<%= blog._id%>" method="post">
+    <form class="contact_form" id="form_<%= blog._id%>">
         <div class="contact_form_text">
             <div class="form-group">
                 <input type="file" class="form-control" id="image" name="image">
@@ -123,7 +127,6 @@
 <!--  JavaScript -->
 <script src="/js/blogs.js"></script>
 <script src="/js/main-dash.js"></script>
-<script src="/js/session.js"></script>
 <!--  JavaScript -->
 </body>
 

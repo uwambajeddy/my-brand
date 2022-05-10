@@ -1,5 +1,5 @@
-let modalAddArea = document.querySelector('.modal_banner_add');
-const addBlogForm = document.querySelector('#contact_form_add');
+const modalAddArea = document.querySelector('.modal_banner_add');
+const addProjectForm = document.querySelector('#contact_form_add');
 const modalAdd = document.querySelector('.add_btn');
 const modalUpdate = document.querySelectorAll('.update_btn');
 const modalBlock = document.querySelector('.model_block');
@@ -7,7 +7,6 @@ const modalBlock = document.querySelector('.model_block');
 if (modalAdd) {
 
     modalAdd.addEventListener('click', () => {
-        modalAddArea.style.top == "" ? modalAddArea.style.top = "-500px" : "";
         if (modalAddArea.style.top == '-500px') {
             modalAddArea.style.top = '50%';
             modalBlock.style.display = 'block';
@@ -18,19 +17,19 @@ if (modalAdd) {
 
     });
 
-    addBlogForm.addEventListener("submit", async (e) => {
+    addProjectForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        popupLoading('Creating blog...');
-        const formData = new FormData(addBlogForm);
+        popupLoading('Creating project...');
+        const formData = new FormData(addProjectForm);
         try {
             await axios
-                .post(`/api/v1/blogs/`, formData, {
+                .post(`/api/v1/projects/`, formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
                 });
             popupLoadingRemove();
-            popup(success, 'Blog created successfully');
+            popup(success, 'Project created successfully');
             setTimeout(() => {
                 location.reload();
             }, 3000);
@@ -68,17 +67,17 @@ function updateModal(id) {
 
     formSubmit.addEventListener("submit", async (e) => {
         e.preventDefault();
-        popupLoading('Updating blog...');
+        popupLoading('Updating project...');
         const formData = new FormData(formSubmit);
         try {
             await axios
-                .patch(`/api/v1/blogs/${id}`, formData, {
+                .patch(`/api/v1/projects/${id}`, formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
                 });
             popupLoadingRemove();
-            popup(success, 'Blog updated successfully');
+            popup(success, 'Project updated successfully');
             setTimeout(() => {
                 location.reload();
             }, 3000);
@@ -97,13 +96,13 @@ function updateModal(id) {
 
 }
 
-async function deleteBlog(id) {
+async function deleteProject(id) {
 
-    popupLoading('Deleting blog...');
+    popupLoading('Deleting project...');
 
     try {
         await axios
-            .delete(`/api/v1/blogs/${id}`);
+            .delete(`/api/v1/projects/${id}`);
         location.reload()
 
     } catch (error) {
@@ -119,6 +118,6 @@ async function deleteBlog(id) {
 }
 
 modalBlock.addEventListener('click', () => {
-    if (modalAddArea) modalAddArea.style.top = '-500px';
+    modalAddArea.style.top = '-500px';
     modalBlock.style.display = 'none';
 });

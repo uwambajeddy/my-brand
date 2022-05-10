@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Heebo:300,400,700,900|Roboto:300,400,500,700');
+@import url("https://fonts.googleapis.com/css?family=Heebo:300,400,700,900|Roboto:300,400,500,700");
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
 ::-webkit-scrollbar {
@@ -32,7 +32,7 @@ body {
   font-size: 16px;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: normal;
   color: #777777;
 }
@@ -43,7 +43,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Heebo', sans-serif;
+  font-family: "Heebo", sans-serif;
   font-weight: bold;
 }
 
@@ -129,7 +129,7 @@ button:focus {
 
 .personal_text h6 {
   font-size: 14px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   letter-spacing: 2.1px;
   font-weight: normal;
@@ -147,14 +147,14 @@ button:focus {
 .personal_text h4 {
   font-size: 16px;
   font-weight: 500;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   margin-bottom: 20px;
   color: #222222;
 }
 
 .personal_text p {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   max-width: 540px;
   color: #777777;
   margin-bottom: 40px;
@@ -227,14 +227,14 @@ button:focus {
 
 .welcome_text h4 {
   color: #222222;
-  font-family: 'Heebo', sans-serif;
+  font-family: "Heebo", sans-serif;
   font-size: 36px;
   margin-bottom: 18px;
   text-transform: uppercase;
 }
 .welcome_text p {
   max-width: 495px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   margin-bottom: 40px;
 }
 
@@ -251,7 +251,7 @@ button:focus {
 }
 .wel_item h4 {
   font-size: 24px;
-  font-family: 'Heebo', sans-serif;
+  font-family: "Heebo", sans-serif;
   font-weight: bold;
   color: #222222;
   margin-bottom: 5px;
@@ -259,7 +259,7 @@ button:focus {
 }
 .wel_item p {
   font-size: 16px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #777777;
   margin-bottom: 0px;
 }
@@ -277,7 +277,7 @@ button:focus {
 .tools_expert .skill_main .skill_item h4 {
   text-align: none;
   font-size: 14px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 500;
   color: #222222;
   margin-bottom: 15px;
@@ -362,7 +362,7 @@ button:focus {
   transform: translateX(-50%);
 }
 .tabs_inner .tab-content .tab-pane .list li span:before {
-  content: '';
+  content: "";
   height: 7px;
   width: 7px;
   background: #fff;
@@ -374,7 +374,7 @@ button:focus {
 }
 
 .tabs_inner .tab-content .tab-pane .list:before {
-  content: '';
+  content: "";
   height: 100%;
   width: 5px;
   background: rgba(255, 255, 255, 0.2);
@@ -461,7 +461,7 @@ button:focus {
 .feature_item h4 {
   color: #222222;
   font-size: 21px;
-  font-family: 'Heebo', sans-serif;
+  font-family: "Heebo", sans-serif;
   font-weight: bold;
   margin-bottom: 20px;
   text-transform: uppercase;
@@ -484,7 +484,7 @@ button:focus {
   -webkit-text-fill-color: transparent;
 }
 .main_title h2 {
-  font-family: 'Heebo', sans-serif;
+  font-family: "Heebo", sans-serif;
   font-size: 36px;
   color: #222222;
   margin-bottom: 15px;
@@ -494,7 +494,7 @@ button:focus {
 
 .main_title p {
   font-size: 16px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: normal;
   line-height: 26px;
   color: #777777;
@@ -519,7 +519,7 @@ button:focus {
 .feature_item h4 {
   color: #222222;
   font-size: 21px;
-  font-family: 'Heebo', sans-serif;
+  font-family: "Heebo", sans-serif;
   font-weight: bold;
   margin-bottom: 20px;
   text-transform: uppercase;
@@ -590,7 +590,7 @@ button:focus {
   background-size: 200% auto;
   padding: 0px 40px;
   color: #fff;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 13px;
   font-weight: 500;
   line-height: 48px;
@@ -615,7 +615,7 @@ button:focus {
 .test_title h2 {
   color: #222222;
   font-size: 36px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: bold;
   margin-bottom: 12px;
 }
@@ -663,14 +663,14 @@ button:focus {
   color: #fff;
   font-size: 18px;
   font-weight: bold;
-  font-family: 'Heebo', sans-serif;
+  font-family: "Heebo", sans-serif;
   margin-bottom: 0px;
 }
 
 .ab_widget p {
   font-size: 14px;
   line-height: 24px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #777777;
   margin-bottom: 30px;
 }
@@ -684,7 +684,7 @@ button:focus {
 .news_widget p {
   font-size: 14px;
   line-height: 24px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #777777;
   margin-bottom: 15px;
 }
@@ -697,32 +697,32 @@ button:focus {
   padding: 0px 15px;
   border: 1px solid #1e233b;
   font-size: 14px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #cccccc;
   outline: none;
   box-shadow: none;
 }
 .news_widget .input-group input.placeholder {
   font-size: 14px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: normal;
   color: #cccccc;
 }
 .news_widget .input-group input:-moz-placeholder {
   font-size: 14px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: normal;
   color: #cccccc;
 }
 .news_widget .input-group input::-moz-placeholder {
   font-size: 14px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: normal;
   color: #cccccc;
 }
 .news_widget .input-group input::-webkit-input-placeholder {
   font-size: 14px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: normal;
   color: #cccccc;
 }
@@ -744,7 +744,7 @@ button:focus {
 .social_widget p {
   font-size: 14px;
   line-height: 24px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #777777;
   margin-bottom: 10px;
 }
@@ -808,7 +808,7 @@ button:focus {
 .home_banner_area_lil .banner_content h2 {
   color: #222222;
   font-size: 48px;
-  font-family: 'Heebo', sans-serif;
+  font-family: "Heebo", sans-serif;
   margin-bottom: 0px;
   font-weight: bold;
 }
@@ -816,7 +816,7 @@ button:focus {
 .home_banner_area_lil a {
   font-size: 14px;
   color: #222222;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   position: relative;
 }
 .home_banner_area_lil .page_link_a {
@@ -828,8 +828,8 @@ button:focus {
 }
 
 .home_banner_area_lil .page_link_a:before {
-  content: '\e87a';
-  font-family: 'Linearicons-Free';
+  content: "\e87a";
+  font-family: "Linearicons-Free";
   position: absolute;
   right: -25px;
   top: 50%;
@@ -859,7 +859,7 @@ button:focus {
 .contact_info .info_item h6 {
   font-size: 20px;
   line-height: 24px;
-  color: 'Roboto', sans-serif;
+  color: "Roboto", sans-serif;
   font-weight: bold;
   margin-bottom: 0px;
   color: #222222;
@@ -887,7 +887,7 @@ button:focus {
   line-height: 26px;
   color: #999;
   border: 1px solid #eeeeee;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   width: -webkit-fill-available;
   border-radius: 0px;
   padding-left: 20px;
@@ -1015,7 +1015,7 @@ button:focus {
   font-size: 13px;
   line-height: 26px;
   color: rgb(255, 255, 255);
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   width: -webkit-fill-available;
   border-radius: 0px;
   padding-left: 20px;
@@ -1218,7 +1218,7 @@ button:focus {
 }
 
 .blog_info .blog_meta li {
-  font: 300 14px/20px 'Roboto', sans-serif;
+  font: 300 14px/20px "Roboto", sans-serif;
   color: #777777;
   vertical-align: middle;
   padding-bottom: 12px;
@@ -1350,7 +1350,7 @@ button:focus {
   align-self: center;
   padding-left: 20px;
 }
-.blog_right_sidebar .popular_post_widget .post_item img{
+.blog_right_sidebar .popular_post_widget .post_item img {
   width: 110px;
 }
 .blog_right_sidebar .popular_post_widget .post_item .post_item_img {
@@ -1897,4 +1897,12 @@ button:focus {
   background: #bb8a0085;
 }
 
-.reg-btn{display: flex;}
+.reg-btn {
+  display: flex;
+}
+/*---------------------------------------------------- */
+/*----------------------------------------------------*/
+
+.modal_banner_area {
+  display: none;
+}
