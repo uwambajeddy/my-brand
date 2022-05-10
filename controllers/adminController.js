@@ -19,7 +19,7 @@ export const adminPage = catchAsync(async (req, res, next) => {
                 let: { blog: '$_id' },
                 pipeline: [
                     {
-                        $match: { $expr: { $eq: ['$blog', '$$blog'] }, approve: true },
+                        $match: { $expr: { $eq: ['$blog', '$$blog'] } },
                     },
                 ],
             },
