@@ -2,8 +2,9 @@
 /* eslint-disable no-undef */
 const contactform = document.querySelector('.contact_form');
 const disibleControl = document.querySelector('.disible-control');
+const login = document.querySelector('#login');
 
-contactform.addEventListener('submit', async (e) => {
+login.addEventListener('click', async (e) => {
   e.preventDefault();
 
   const email = document.querySelector('#email').value;

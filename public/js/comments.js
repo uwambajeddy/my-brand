@@ -1,9 +1,9 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
-const commentform = document.querySelector('.comment_form');
+const commentform = document.querySelector('#add-comment');
 const disibleControl = document.querySelector('.disible-control');
 
-commentform.addEventListener('submit', async (e) => {
+commentform.addEventListener('click', async (e) => {
   e.preventDefault();
 
   let comment = document.querySelector('#message').value;

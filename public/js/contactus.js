@@ -2,8 +2,9 @@
 /* eslint-disable no-undef */
 const contactform = document.querySelector('.contact_form');
 const disibleControl = document.querySelector('.disible-control');
+const sendMessage = document.querySelector('#send-message');
 
-contactform.addEventListener('submit', async (e) => {
+sendMessage.addEventListener('click', async (e) => {
   e.preventDefault();
 
   const email = document.querySelector('#email').value;
