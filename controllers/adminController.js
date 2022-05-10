@@ -9,7 +9,7 @@ import mongoose from 'mongoose';
 export const adminPage = catchAsync(async (req, res, next) => {
     const projects = await projectModel.find();
     const users = await userModel.find();
-    const subscribers = await userModel.find({ role: "admin" });
+    const subscribers = await userModel.find({ subscription: true });
     const messages = await messageModel.find();
     const blogs = await blogModel.aggregate([
         {
