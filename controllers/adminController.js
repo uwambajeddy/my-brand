@@ -63,7 +63,7 @@ export const adminBlogsPage = catchAsync(async (req, res, next) => {
         },
     ]);
 
-    res.status(200).render('blog', {
+    res.status(200).render('admin/blogs', {
         blogs,
         admin: admin[0],
     });

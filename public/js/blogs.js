@@ -4,17 +4,17 @@ const modalAdd = document.querySelector('.add_btn');
 const modalUpdate = document.querySelectorAll('.update_btn');
 const modalBlock = document.querySelector('.model_block');
 
-if (modalAdd) {
-    modalAdd.addEventListener('click', () => {
-        if (modal.style.top == '-500px') {
-            modal.style.top = '50%';
-            modalBlock.style.display = 'block';
-        } else {
-            modal.style.top = '-500px';
-            modalBlock.style.display = 'none';
-        }
-    });
-}
+modalAdd.addEventListener('click', () => {
+    if (modalAddArea.style.top == '-500px') {
+        modalAddArea.style.top = '50%';
+        modalBlock.style.display = 'block';
+    } else {
+        modalAddArea.style.top = '-500px';
+        modalBlock.style.display = 'none';
+    }
+
+});
+
 
 function updateModal(id) {
     const modalUpdateArea = document.querySelector(`.modal_banner_update_${id}`);
