@@ -1897,6 +1897,13 @@ button:focus {
   background: #bb8a0085;
 }
 
+.popup-loading {
+  color: blue;
+  transform: translate(120%, -50%);
+  border: 1px solid blue;
+  background: #e7ebff;
+}
+
 .reg-btn {
   display: flex;
 }

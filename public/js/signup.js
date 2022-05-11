@@ -5,15 +5,15 @@ const disibleControl = document.querySelector('.disible-control');
 
 signup.addEventListener('click', async (e) => {
   e.preventDefault();
-
+  popupLoading('Signing up...');
   const email = document.querySelector('#email').value;
   const name = document.querySelector('#name').value;
   const password = document.querySelector('#password').value;
   const password_confirm = document.querySelector('#password_confirm').value;
 
   if (name == '' || email == '' || password == '' || password_confirm == '') {
+    popupLoadingRemove();
     popup(warning, 'Please fill empty fields!!');
-
     return 0;
   }
   disibleControl.style.display = 'block';
@@ -24,11 +24,13 @@ signup.addEventListener('click', async (e) => {
       password,
       password_confirm,
     });
+    popupLoadingRemove();
     popup(success, 'Account created successfully');
     setTimeout(() => {
       location.assign('/blogs');
     }, 3000);
   } catch (error) {
+    popupLoadingRemove();
     console.log(error);
     disibleControl.style.display = 'none';
     if (error.response.data?.message) {

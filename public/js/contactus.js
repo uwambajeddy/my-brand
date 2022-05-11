@@ -6,7 +6,7 @@ const sendMessage = document.querySelector('#send-message');
 
 sendMessage.addEventListener('click', async (e) => {
   e.preventDefault();
-
+  popupLoading('Sending message...');
   const email = document.querySelector('#email').value;
   const name = document.querySelector('#name').value;
   const subject = document.querySelector('#subject').value;
@@ -18,6 +18,7 @@ sendMessage.addEventListener('click', async (e) => {
     subject.trim() == '' ||
     message.trim() == ''
   ) {
+    popupLoadingRemove();
     popup(warning, 'Please fill empty fields!!');
     return 0;
   }
@@ -34,11 +35,12 @@ sendMessage.addEventListener('click', async (e) => {
     document.querySelector('#name').value = '';
     document.querySelector('#subject').value = '';
     document.querySelector('#message').value = '';
-
+    popupLoadingRemove();
     popup(success, 'Thanks for your feedback 🤓');
     disibleControl.style.display = 'none';
   } catch (error) {
     console.log(error);
+    popupLoadingRemove();
     disibleControl.style.display = 'none';
     if (error.response.data?.message) {
       popup(failure, `${error.response.data.message}`);
