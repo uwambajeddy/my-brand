@@ -28,7 +28,7 @@
                 %>
             <div class="table_row row_dark">
                 <div class="table_column"><img src="/img/project/<%= project.image%>" alt=""></div>
-                <div class="table_column" onclick="readMoreModal('Title','<%= project.title%>')">
+                <div class="table_column" onclick="readMoreModal('Project name','<%= project.title%>')">
                     <%= project.title.slice(0,15)%>... </div>
                 <div class="table_column" onclick="readMoreModal('Full link','<%= project.link%>')">
                     <%= project.link.slice(0,20)%>...</div>

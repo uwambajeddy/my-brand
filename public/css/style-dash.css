@@ -293,6 +293,12 @@ button:focus {
   min-width: 400px;
   z-index: 2;
 }
+
+.modal_banner_read {
+  overflow-x: scroll;
+  max-height: 250px;
+}
+
 .model_block {
   position: absolute;
   content: "";

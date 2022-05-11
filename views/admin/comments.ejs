@@ -28,7 +28,7 @@
             <div class="table_row row_dark">
                 <div class="table_column"><%= blog._id%></div>
                 <div class="table_column"><%= comment.user[0]?.email%></div>
-                <div class="table_column" onclick="readMoreModal('Comment','<%= comment.comment%>')">
+                <div class="table_column" onclick="readMoreModal('Comment',`<%= comment.comment%>`)">
                     <%= comment.comment.slice(0,20)%>...</div>
                 <div class="table_column <%= comment.approve ? 'truthy-rec':'falsy-rec'%>"><%= comment.approve%></div>
                 <div class="table_column"><%= date[0] %> <%= date[1] %> <%= date[2] %> <%= date[3] %></div>

@@ -57,9 +57,9 @@
                 %>
             <div class="table_row row_dark">
                 <div class="table_column"><img src="/img/blog/<%= blog.image%>" alt=""></div>
-                <div class="table_column" onclick="readMoreModal('Title','<%= blog.title%>')">
+                <div class="table_column" onclick="readMoreModal('Title',`<%= blog.title%>`)">
                     <%= blog.title.slice(0,15)%>... </div>
-                <div class="table_column" onclick="readMoreModal('Full link','<%= blog.body %>')">
+                <div class="table_column" onclick="readMoreModal('Content',`<%= blog.body %>`)">
                     <%= blog.body.slice(0,20)%>...</div>
                 <div class="table_column"><a href="/admin/blogs/comments/<%= blog._id%>"
                         class="mod_btn nav_btn"><%= blog.comments.length%></a></div>

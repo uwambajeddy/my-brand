@@ -26,7 +26,6 @@ function popupLoadingRemove() {
 }
 
 function readMoreModal(title, content) {
-  console.log(loading.children[1]);
   readMore.children[0].innerHTML = title;
   readMore.children[1].children[0].innerHTML = content;
   readMore.classList.add('upwards-read');
