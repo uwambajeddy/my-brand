@@ -1,9 +1,9 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
-const contactform = document.querySelector('.contact_form');
+const contactform = document.querySelector('#send-reset');
 const disibleControl = document.querySelector('.disible-control');
 
-contactform.addEventListener('submit', async (e) => {
+contactform.addEventListener('click', async (e) => {
   e.preventDefault();
 
   const password = document.querySelector('#password').value;

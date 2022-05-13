@@ -1,7 +1,6 @@
 import express, { json as _json } from 'express';
 import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
-import helmet from 'helmet';
 import xss from 'xss-clean';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
@@ -37,8 +36,8 @@ const swaggerOptions = {
       server: [
         {
           url: `${process.env.NODE_ENV === 'development'
-              ? 'http://localhost:3000'
-              : 'https://uwambajeeddy.herokuapp.com/'
+            ? 'http://localhost:3000'
+            : 'https://uwambajeeddy.herokuapp.com/'
             }`,
         },
       ],
