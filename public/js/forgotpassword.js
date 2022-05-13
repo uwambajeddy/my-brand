@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
-const contactform = document.querySelector('.send-forgot');
+const contactform = document.querySelector('#send-forgot');
 const disibleControl = document.querySelector('.disible-control');
 
 contactform.addEventListener('click', async (e) => {
