@@ -5,10 +5,11 @@ const disibleControl = document.querySelector('.disible-control');
 
 contactform.addEventListener('click', async (e) => {
   e.preventDefault();
-
+  popupLoading('Sending token...');
   const email = document.querySelector('#email').value;
 
   if (email == '') {
+    popupLoadingRemove();
     popup(warning, 'Please fill empty field !!');
 
     return 0;
@@ -19,10 +20,12 @@ contactform.addEventListener('click', async (e) => {
     await axios.post('/api/v1/user/forgotpassword', {
       email,
     });
+    popupLoadingRemove();
     document.querySelector('#email').value = '';
     popup(success, 'Reset token was sent to your Email address');
     disibleControl.style.display = 'none';
   } catch (error) {
+    popupLoadingRemove();
     disibleControl.style.display = 'none';
     console.log(error);
     if (error.response.data?.message) {

@@ -5,12 +5,14 @@ const disibleControl = document.querySelector('.disible-control');
 
 contactform.addEventListener('click', async (e) => {
   e.preventDefault();
+  popupLoading('Resetting password...');
 
   const password = document.querySelector('#password').value;
   const password_confirm = document.querySelector('#password_confirm').value;
   const token = document.querySelector('#token').value;
 
   if (password == '' || password_confirm == '') {
+    popupLoadingRemove();
     popup(warning, 'Please fill empty fields!!');
 
     return 0;
@@ -27,6 +29,7 @@ contactform.addEventListener('click', async (e) => {
       password,
       password_confirm,
     });
+    popupLoadingRemove();
     document.querySelector('#password').value = '';
     document.querySelector('#password_confirm').value = '';
     popup(success, 'Password reset successfully');
@@ -34,6 +37,7 @@ contactform.addEventListener('click', async (e) => {
       location.assign('/blogs');
     }, 3000);
   } catch (error) {
+    popupLoadingRemove();
     disibleControl.style.display = 'none';
     console.log(error);
     if (error.response.data?.message) {
