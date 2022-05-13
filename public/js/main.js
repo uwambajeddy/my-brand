@@ -12,13 +12,16 @@ const progressBare = document.querySelector('.progress-bar-e');
 if (logout) {
   logout.addEventListener('click', async (e) => {
     e.preventDefault();
+    popupLoading('Logging out...');
     try {
       await axios.get('/api/v1/user/logout');
+      popupLoadingRemove();
       popup(success, 'Logged out successfully');
       setTimeout(() => {
         location.reload();
       }, 3000);
     } catch (error) {
+      popupLoadingRemove();
       console.log(error);
       if (error.response.data?.message) {
         popup(failure, `${error.response.data.message}`);
