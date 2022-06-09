@@ -8,6 +8,11 @@ const progressBarb = document.querySelector('.progress-bar-b');
 const progressBarc = document.querySelector('.progress-bar-c');
 const progressBard = document.querySelector('.progress-bar-d');
 const progressBare = document.querySelector('.progress-bar-e');
+const progressBarf = document.querySelector('.progress-bar-f');
+const progressBarg = document.querySelector('.progress-bar-g');
+const progressBarh = document.querySelector('.progress-bar-h');
+const progressBari = document.querySelector('.progress-bar-i');
+const progressBarj = document.querySelector('.progress-bar-j');
 
 if (logout) {
   logout.addEventListener('click', async (e) => {
@@ -34,11 +39,16 @@ if (logout) {
 
 if (progressBara) {
   window.addEventListener('scroll', () => {
-    progressBara.style.width = '85%';
-    progressBarb.style.width = '90%';
-    progressBarc.style.width = '70%';
-    progressBard.style.width = '95%';
-    progressBare.style.width = '75%';
+    progressBara.style.width = '90%';
+    progressBarb.style.width = '85%';
+    progressBarc.style.width = '90%';
+    progressBard.style.width = '85%';
+    progressBare.style.width = '91%';
+    progressBarf.style.width = '65%';
+    progressBarg.style.width = '60%';
+    progressBarh.style.width = '70%';
+    progressBari.style.width = '40%';
+    progressBarj.style.width = '80%';
   });
 }
 navbar.addEventListener("click", () => {
